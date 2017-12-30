@@ -105,16 +105,14 @@
                 <li class="header">功能栏</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li><a href="packet.html"><i class="fa fa-link"></i> <span>套餐管理</span></a></li>
-                <li class="active"><a href="service.html"><i class="fa fa-link"></i> <span>服务管理</span></a></li>
+                <li><a href="service.html"><i class="fa fa-link"></i> <span>服务管理</span></a></li>
                 <li><a href="consume.html"><i class="fa fa-link"></i> <span>消费管理</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>充值管理</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>会员管理</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>员工管理</span></a></li>
+                <li><a href="recharge.html"><i class="fa fa-link"></i> <span>充值管理</span></a></li>
+                <li><a href="users.html"><i class="fa fa-link"></i> <span>会员管理</span></a></li>
+                <li class="active"><a href="staff.html"><i class="fa fa-link"></i> <span>员工管理</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>统计</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#">店充值统计</a></li>
@@ -135,7 +133,7 @@
         <section class="content-header">
             <h1>
                 可道信息管理
-                <small>服务管理</small>
+                <small>员工管理</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
@@ -150,39 +148,22 @@
             <div class="box">
                 <div class="box-body">
                     <div class="input-group">
-                        <div class="row">
-                            <!-- <div class="col-lg-4">
-                                 <select class="form-control select2" style="width:100%;">
-                                     <option selected="selected">洗漱</option>
-                                     <option>美发</option>
-                                     <option>烫染</option>
-                                 </select>
-                             </div>-->
-                            <div class="col-lg-7">
-                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                        data-target="#add-service-type" style="width:100%;">
-                                    添加服务类型
-                                </button>
-                            </div>
-                            <div class="col-lg-5">
-                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                        data-target="#add-service-info" style="width:100%;">
-                                    添加服务
-                                </button>
-                            </div>
 
-                        </div>
+                        <button type="button" class="btn btn-info" data-toggle="modal"
+                                data-target="#add-service-type" style="width:100%;">
+                            增加员工
+                        </button>
+
                     </div>
                 </div>
                 <div class="box-body no-padding">
                     <table id="packet-list" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>服务类型</th>
-                            <th>服务名称</th>
-                            <th>服务价格</th>
-                            <th>服务提成</th>
-                            <th>操作</th>
+                            <th>姓名</th>
+                            <th>手机</th>
+                            <th>性别</th>
+                            <th>年龄</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -191,14 +172,7 @@
                             <td ng-bind="item.name"></td>
                             <td ng-bind="item.money|MoneyFilters"></td>
                             <td ng-bind="item.retain|MoneyFilters"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-warning"> 更新</button>
-                                    <button type="button" class="btn btn-warning">删除</button>
-                                </div>
-                                <!--
-                                <a href="hair-packet-update.html?id={{item.id}}&name={{item.name}}&discount={{item.discount}}&money={{item.money}}&given={{item.given}}&retain={{item.retain}}">详情</a>-->
-                            </td>
+                            <td ng-bind="item.money|MoneyFilters"></td>
                         </tr>
                         </tfoot>
                     </table>
@@ -206,30 +180,7 @@
             </div>
 
 
-            <!--添加服务分类 start-->
-            <div class="modal fade" id="add-service-type">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">新增服务类型</h4>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" class="form-control" placeholder="请输入服务类型"/>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">添加</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!--添加服务分类 end-->
-
-            <!--添加服务内容 start-->
+            <!--添加员工 start-->
             <div class="modal fade" id="add-service-info">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -272,7 +223,7 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
-            <!--添加服务内容 end-->
+            <!--添加充值 end-->
 
 
         </section>

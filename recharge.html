@@ -27,7 +27,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="starter.html" class="logo">
+        <a href="index.html" class="logo">
             <span class="logo-mini"><b>道</b></span>
             <span class="logo-lg"><b>可</b>道</span>
         </a>
@@ -106,8 +106,8 @@
                 <!-- Optionally, you can add icons to the links -->
                 <li><a href="packet.html"><i class="fa fa-link"></i> <span>套餐管理</span></a></li>
                 <li><a href="service.html"><i class="fa fa-link"></i> <span>服务管理</span></a></li>
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>消费管理</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>充值管理</span></a></li>
+                <li><a href="consume.html"><i class="fa fa-link"></i> <span>消费管理</span></a></li>
+                <li class="active"><a href="recharge.html"><i class="fa fa-link"></i> <span>充值管理</span></a></li>
                 <li><a href="#"><i class="fa fa-link"></i> <span>会员管理</span></a></li>
                 <li><a href="#"><i class="fa fa-link"></i> <span>员工管理</span></a></li>
                 <li class="treeview">
@@ -153,7 +153,7 @@
 
                         <button type="button" class="btn btn-info" data-toggle="modal"
                                 data-target="#add-service-type" style="width:100%;">
-                            增加消费
+                            增加充值
                         </button>
                            
                     </div>
@@ -162,10 +162,9 @@
                     <table id="packet-list" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>消费服务</th>
-                            <th>消费类型</th>
-                            <th>消费金额</th>
-                            <th>实收金额</th>
+                            <th>充值金额</th>
+                            <th>赠送金额</th>
+                            <th>套餐类型</th>
                             <th>服务提成</th>
                         </tr>
                         </thead>
@@ -175,8 +174,6 @@
                             <td ng-bind="item.name"></td>
                             <td ng-bind="item.money|MoneyFilters"></td>
                             <td ng-bind="item.retain|MoneyFilters"></td>
-                            <td>
-                            </td>
                         </tr>
                         </tfoot>
                     </table>
@@ -184,30 +181,8 @@
             </div>
 
 
-            <!--添加服务分类 start-->
-            <div class="modal fade" id="add-service-type">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">新增服务类型</h4>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" class="form-control" placeholder="请输入服务类型"/>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">添加</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!--添加服务分类 end-->
 
-            <!--添加服务内容 start-->
+            <!--添加充值 start-->
             <div class="modal fade" id="add-service-info">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -250,7 +225,7 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
-            <!--添加服务内容 end-->
+            <!--添加充值 end-->
 
 
         </section>

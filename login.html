@@ -15,28 +15,50 @@
     <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/blue.css">
     <![endif]-->
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script data-main="scripts/register" src="scripts/vendor/require.js"></script>
+
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
+<div class="login-box" ng-controller="LoginCtrl">
     <div class="login-logo">
-        <a href="starter.html"><b>可</b>道</a>
+        <a href="index.html"><b>可</b>道</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
+        <!--错误信息-->
+        <!--    <div class="modal-dialog modal-sm" role="document" id="alert-msg" style="display: none;">
+                <div class="alert alert-warning alert-dismissible">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="false">×</button>
+                    <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                    Warning alert preview. This alert is dismissable.
+                </div>
+            </div>-->
         <p class="login-box-msg">输入手机号、密码登录系统</p>
 
-        <form action="../../index2.html" method="post">
+        <form>
             <div class="form-group has-feedback">
-                <input type="number" class="form-control" placeholder="手机号">
+                <input type="number" class="form-control" id="phone" placeholder="手机号">
                 <span class="glyphicon glyphicon-phone form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码">
+                <input type="password" class="form-control" id="password" placeholder="密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
+            <div class="row"  ng-show="showIdentifying.show">
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" id="identifying" placeholder="验证码">
+                </div>
+                <label for="identifying" class="col-xs-3 control-label">
+                    <img id="img-identify"/>
+                </label>
+                <div class="col-xs-4">
+                    <button type="button" id="captcha" class="btn btn-block btn-success" ng-click="onImageVerify()">
+                        换一张
+                    </button>
+                </div>
+            </div>
+            <br/>
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
@@ -47,32 +69,35 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+                    <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onLogin();">登录</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <div class="social-auth-links text-center">
-            <p>- 或者 -</p>
-            <a href="#" class="btn btn-block btn-social btn-info btn-flat"><i class="fa fa-weixin"></i> 使用微信登陆</a>
-            <!--   <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-                 Google+</a>-->
-        </div>
+        <!--    <div class="social-auth-links text-center">
+                <p>- 或者 -</p>
+                <a href="#" class="btn btn-block btn-social btn-info btn-flat"><i class="fa fa-weixin"></i> 使用微信登陆</a>
+                &lt;!&ndash;   <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+                     Google+</a>&ndash;&gt;
+            </div>-->
         <!-- /.social-auth-links -->
         <div class="row">
             <div class="col-md-3">
-                <a href="#">忘记密码</a><br>
+                <a href="pass-forget.html">忘记密码</a><br>
             </div>
             <div class="col-md-6">
                 <a href="register.html" class="text-center">注册</a>
             </div>
         </div>
 
+
     </div>
     <!-- /.login-box-body -->
+
 </div>
 <!-- /.login-box -->
+
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/jquery.min.js"></script>
