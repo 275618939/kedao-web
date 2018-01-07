@@ -32,7 +32,7 @@ define(['interceptors/interceptors', 'services/commonService'],
                         }
                         if (data.state == 3) {
                             //用户需重新登录
-                            window.location.href = "hair-login.html";
+                            window.location.href = "login.html";
                         }
                         return response;
                     },
