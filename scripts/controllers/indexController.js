@@ -1,4 +1,4 @@
-define(['controllers/controllers', 'services/memberService', 'services/productService', 'services/commonService'],
+define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService'],
     function (controllers) {
 
         /*消费*/
@@ -112,7 +112,228 @@ define(['controllers/controllers', 'services/memberService', 'services/productSe
 
 
             }]);
+        /*充值*/
+        controllers.controller('IndexRechargeCtrl', ['$scope', 'MemberService', 'PacketService', 'ProductService', 'CommonService',
+            function ($scope, memberService, packetService, productService, commonService) {
+
+                //查询套餐信息
+                $scope.packetItemInfo = null;
+                $scope.queryPacketInfo = function () {
+                    var promise = packetService.getPacketList();
+                    promise.then(function (data) {
+                        $scope.packetItems = data.value;
+                    });
+                };
+                $scope.queryPacketInfo();
+                //选择套餐信息
+                $scope.selectPacketInfo = function () {
+                    if (null == $scope.packetItemInfo) {
+                        return;
+                    }
+                    $scope.packetItem = JSON.parse($scope.packetItemInfo)
+                    if (null != $scope.packetItem && $scope.packetItem.money != "undefined") {
+                        $("#rechargeMoney").val(commonService.getYuan($scope.packetItem.money));
+                        $("#rechargeGiven").val(commonService.getYuan($scope.packetItem.given));
+                        $("#rechargeDiscount").val(commonService.getDiscountConvert($scope.packetItem.discount));
+                    }
+
+                };
+                //查询会员信息
+                $scope.queryMemberInfo = function () {
+                    var phone = $("#rechargePhone").val();
+                    if (isNaN(phone) || (phone.length != 11)) {
+                        alert("手机号码为11位数字！请正确填写！");
+                        return;
+                    }
+                    var promise = memberService.queryMemberInfo(phone);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            alert(data.desc);
+                            return;
+                        }
+                        if (data.value == null || data.value == "undefined") {
+                            alert("会员不存在!");
+                            return;
+                        }
+                        //会员信息
+                        $scope.memberInfo = data.value;
+                    });
+
+                };
+                //用户充值
+                $scope.onRecharge = function () {
+                    var payType = $("#rechargePayType").val();
+                    var money = $("#rechargeMoney").val();
+                    var given = $("#rechargeGiven").val();
+                    if (null == $scope.memberInfo || $scope.memberInfo.id == "undefined") {
+                        alert("请选择一个会员!");
+                        return;
+                    }
+                    if (payType == null || payType == "undefined") {
+                        alert("请选择一种支付方式!");
+                        return;
+                    }
+                    if (null == $scope.packetItem || $scope.packetItem.id == "undefined") {
+                        alert("请选择一个套餐!");
+                        return;
+                    }
+                    if (money == null || money.trim() == "" || money == "undefined") {
+                        alert("充值金额不能为空!");
+                        return;
+                    }
+                    if (money > commonService.max_money) {
+                        alert("充值金额不合法!");
+                        return;
+                    }
+                    try {
+                        if (given != null && given.trim() != "" && given != "undefined") {
+                            if (given > commonService.max_money) {
+                                alert("充值赠送金额不合法!");
+                                return;
+                            }
+                            given = parseInt(given);
+                        } else {
+                            given = 0;
+                        }
+
+                    } catch (error) {
+                        given = 0;
+                    }
+                    var data = {
+                        id: $scope.memberInfo.id,
+                        payType: payType,
+                        packetId: $scope.packetItem.id,
+                        money: commonService.getFen(money),
+                        given: commonService.getFen(given)
+                    };
+                    var promise = memberService.memberRecharge(data);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            alert(data.desc);
+                            return;
+                        }
+                        alert("充值成功");
+
+                    });
 
 
-    });
+                };
+
+
+            }
+        ]);
+        /*添加会员*/
+        controllers.controller('IndexMemberCtrl', ['$scope', 'MemberService', 'PacketService', 'ProductService', 'CommonService',
+            function ($scope, memberService, packetService, productService, commonService) {
+
+                //查询套餐信息
+                $scope.packetItemInfo = null;
+                $scope.queryPacketInfo = function () {
+                    var promise = packetService.getPacketList();
+                    promise.then(function (data) {
+                        $scope.packetItems = data.value;
+                    });
+                };
+                $scope.queryPacketInfo();
+                //选择套餐信息
+                $scope.selectPacketInfo = function () {
+                    if (null == $scope.packetItemInfo) {
+                        return;
+                    }
+                    $scope.packetItem = JSON.parse($scope.packetItemInfo)
+                    if (null != $scope.packetItem && $scope.packetItem.money != "undefined") {
+                        $("#rechargeMoney").val(commonService.getYuan($scope.packetItem.money));
+                        $("#rechargeGiven").val(commonService.getYuan($scope.packetItem.given));
+                        $("#rechargeDiscount").val(commonService.getDiscountConvert($scope.packetItem.discount));
+                    }
+
+                };
+                //查询会员信息
+                $scope.queryMemberInfo = function () {
+                    var phone = $("#rechargePhone").val();
+                    if (isNaN(phone) || (phone.length != 11)) {
+                        alert("手机号码为11位数字！请正确填写！");
+                        return;
+                    }
+                    var promise = memberService.queryMemberInfo(phone);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            alert(data.desc);
+                            return;
+                        }
+                        if (data.value == null || data.value == "undefined") {
+                            alert("会员不存在!");
+                            return;
+                        }
+                        //会员信息
+                        $scope.memberInfo = data.value;
+                    });
+
+                };
+                //用户充值
+                $scope.onRecharge = function () {
+                    var payType = $("#rechargePayType").val();
+                    var money = $("#rechargeMoney").val();
+                    var given = $("#rechargeGiven").val();
+                    if (null == $scope.memberInfo || $scope.memberInfo.id == "undefined") {
+                        alert("请选择一个会员!");
+                        return;
+                    }
+                    if (payType == null || payType == "undefined") {
+                        alert("请选择一种支付方式!");
+                        return;
+                    }
+                    if (null == $scope.packetItem || $scope.packetItem.id == "undefined") {
+                        alert("请选择一个套餐!");
+                        return;
+                    }
+                    if (money == null || money.trim() == "" || money == "undefined") {
+                        alert("充值金额不能为空!");
+                        return;
+                    }
+                    if (money > commonService.max_money) {
+                        alert("充值金额不合法!");
+                        return;
+                    }
+                    try {
+                        if (given != null && given.trim() != "" && given != "undefined") {
+                            if (given > commonService.max_money) {
+                                alert("充值赠送金额不合法!");
+                                return;
+                            }
+                            given = parseInt(given);
+                        } else {
+                            given = 0;
+                        }
+
+                    } catch (error) {
+                        given = 0;
+                    }
+                    var data = {
+                        id: $scope.memberInfo.id,
+                        payType: payType,
+                        packetId: $scope.packetItem.id,
+                        money: commonService.getFen(money),
+                        given: commonService.getFen(given)
+                    };
+                    var promise = memberService.memberRecharge(data);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            alert(data.desc);
+                            return;
+                        }
+                        alert("充值成功");
+
+                    });
+
+
+                };
+
+
+            }
+        ]);
+
+
+    })
+;
 

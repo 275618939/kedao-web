@@ -33,10 +33,10 @@ define(['services/services', 'services/commonService'],
                         return deferred.promise;
                     },
                     /*获取套餐信息*/
-                    getPacketList: function (page) {
+                    getPacketList: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/packet",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/packet",
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
