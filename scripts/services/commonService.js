@@ -287,6 +287,14 @@ define(['services/services'],
                         return year + "-" + month + "-" + date + " " + hour + ":" + minute;
                     }
                     ,
+                    dateStringShort: function () {
+                        var datetime = new Date();
+                        var year = datetime.getFullYear();
+                        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                        //var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                        return year + "-" + month;
+                    }
+                    ,
                     strToTime: function (str) {
                         if (str.length != 8) {
                             return str;

@@ -16,9 +16,7 @@
     <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
     <![endif]-->
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script data-main="scripts/packet" src="scripts/vendor/require.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -154,7 +152,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="box-body no-padding">
+                <div class="box-body no-padding" ng-controller="PacketListCtrl">
                     <table id="packet-list" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -177,9 +175,16 @@
                                 <a href="hair-packet-update.html?id={{item.id}}&name={{item.name}}&discount={{item.discount}}&money={{item.money}}&given={{item.given}}&retain={{item.retain}}">详情</a>
                             </td>
                         </tr>
-                        </tfoot>
+
+                        </tbody>
                     </table>
                 </div>
+               <!-- <div class="box-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning"> 上一页</button>
+                        <button type="button" class="btn btn-warning">下一页</button>
+                    </div>
+                </div>-->
             </div>
 
 
@@ -224,40 +229,6 @@
 
 </div>
 <!-- ./wrapper -->
-
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="bower_components/jquery/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="bower_components/dist/js/adminlte.min.js"></script>
-<script src="bower_components/dist/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/dist/js/dataTables.bootstrap.js"></script>
-<script>
-    $(function () {
-        $('#packet-list').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            "emptyTable": "没有数据",
-            "info": "数据 _START_ to _END_ of _TOTAL_",
-            "infoEmpty": "总数 0 第 0 到 0 页",
-            "language": {
-                "paginate": {
-                    "last": "第一页",
-                    "previous": "上一页",
-                    "next": "下一页"
-
-                }
-            }
-        })
-    })
-</script>
 
 
 </body>

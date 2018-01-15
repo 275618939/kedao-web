@@ -44,6 +44,27 @@ define(['services/services', 'services/commonService'],
                             deferred.reject(data);
                         });
                         return deferred.promise;
+                    },
+                    /*添加会员*/
+                    memberCreate: function (data) {
+                        var deferred = $q.defer();
+                        var info = "cellNumber=" + data.cellNumber + "&name=" + data.name;
+                        if (data.password != null && data.password.trim() != "" && data.password != "undefined") {
+                            info += "&password=" + data.password;
+                        }
+                        if (data.card != null && data.card.trim() != "" && data.card != "undefined") {
+                            info += "&card=" + data.card;
+                        }
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/member",
+                            method: "put",
+                            data: info
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
                     }
                 };
             }]);

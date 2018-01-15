@@ -30,7 +30,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                     }
                     var data = {
                         name: name,
-                        discount:commonService.getDiscount(discount),
+                        discount: commonService.getDiscount(discount),
                         money: commonService.getFen(money),
                         given: commonService.getFen(given),
                         retain: commonService.getFen(retain)
@@ -54,12 +54,11 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
             }
         ]);
         /*加载套餐信息*/
-        controllers.controller('PacketListCtrl', ['$scope', 'PacketService', 'ParamService',
-            function ($scope, packetService, paramService) {
-                $scope.query = paramService.getValue("query");
-                if (null != $scope.query && $scope.query == true) {
-                    $scope.load();
-                }
+        controllers.controller('PacketListCtrl', ['$scope', 'PacketService',
+            function ($scope, packetService) {
+
+                $scope.totalItems = 64;
+                $scope.currentPage = 4;
                 $scope.currentPage = 0;
                 $scope.dataLen = -1;
                 $scope.load = function () {
@@ -69,17 +68,43 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                     });
                 };
                 $scope.load();
-                $(window).scroll(function () {
-                    var bot = 50; //bot是底部距离的高度
-                    if ((bot + $(window).scrollTop()) >= ($(document).height() - $(window).height())) {
-                        $scope.currentPage += 1;
-                        if ($scope.dataLen <= 0) {
-                            $scope.currentPage -= 1;
-                            return;
-                        }
-                        $scope.load();
-                    }
-                });
+
+                /* $scope.$watch('$packet-list', function () {
+                 $('#packet-list').DataTable({
+                 'paging': true,
+                 'lengthChange': false,
+                 'searching': false,
+                 'ordering': true,
+                 'info': true,
+                 'autoWidth': false,
+                 "emptyTable": "没有数据",
+                 "processing": true,
+                 "info": "数据 _START_ to _END_ of _TOTAL_",
+                 "infoEmpty": "总数 0 第 0 到 0 页",
+                 "columns": [
+                 {"data": "name"},
+                 {"data": "discount"},
+                 {"data": "money"},
+                 {"data": "given"},
+                 {"data": "retain"}
+                 ],
+                 "language": {
+                 "paginate": {
+                 "last": "第一页",
+                 "previous": "上一页",
+                 "next": "下一页"
+
+                 }
+                 },
+                 "data": $scope.packetItems,
+                 //当处理大数据时，延迟渲染数据，有效提高Datatables处理能力
+                 "deferRender": true,
+                 "initComplete": function () {
+                 $scope.load();
+                 }
+                 });
+                 });*/
+
 
             }
         ]);
