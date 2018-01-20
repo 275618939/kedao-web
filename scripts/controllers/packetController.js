@@ -1,11 +1,38 @@
 define(['controllers/controllers', 'services/packetService', 'services/commonService', 'services/paramService'],
     function (controllers) {
-        //创建套餐信息
-        controllers.controller('PacketCreateCtrl', ['$scope', 'PacketService', 'CommonService', 'ParamService',
-            function ($scope, packetService, commonService, paramService) {
 
+        /*套餐信息管理*/
+        controllers.controller('PacketManagerCtrl', ['$scope', 'PacketService', 'CommonService',
+            function ($scope, packetService, commonService) {
+                $scope.create = {"show": true};
+                $scope.update = {"show": false};
+                $scope.title = "新增套餐";
+                //关闭套餐信息
+                $scope.onClose = function () {
+                    $("#packet-add").modal('hide');
+                }
+                $scope.onShow = function () {
+                    $("#packet-add").modal('show');
+                }
+
+                $scope.onUpdateShow = function () {
+                    $("#packet-update").modal('show');
+                }
+                $scope.onUpdateClose = function () {
+                    $("#packet-update").modal('hide');
+                }
+                //查询套餐信息
+                $scope.load = function () {
+                    var promise = packetService.getPacketList($scope.currentPage);
+                    promise.then(function (data) {
+                        $scope.packetItems = data.value;
+                    });
+                };
+                $scope.load();
                 //创建套餐信息
                 $scope.onCreate = function () {
+                    $scope.create = {"show": true};
+                    $scope.update = {"show": false};
                     var name = $("#name").val();
                     var discount = $("#discount").val();
                     var money = $("#money").val();
@@ -41,35 +68,81 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                             alert(data.desc)
                             return;
                         }
-                        window.location.href = "hair-packet-list.html?query=true";
+                        //关闭添加面板
+                        $scope.onClose();
+                        //todo 脏数据更新
+                        window.location.href = "packet.html";
                     });
                 };
-                //选择权限
-                $scope.selectPowerAction = function () {
-                    //$scope.powerInfo;
-                    //console.log($scope.powerInfo.id);
-                };
+                //更新套餐信息
+                $scope.onUpdateQuery = function (data) {
+                    $scope.onUpdateShow();
+                    $("#packetName").val(data.name);
+                    $("#packetDiscount").val(commonService.getDiscountConvert(data.discount));
+                    $("#packetMoney").val(commonService.getYuan(data.money));
+                    $("#packetGiven").val(commonService.getYuan(data.given));
+                    $("#packetRetain").val(commonService.getYuan(data.retain));
+                    $("#packetId").val(data.id);
+                }
+                //更新套餐
+                $scope.onUpdate = function (data) {
+                    var name = $("#packetName").val();
+                    var discount = $("#packetDiscount").val();
+                    var money = $("#packetMoney").val();
+                    var given = $("#packetGiven").val();
+                    var retain = $("#packetRetain").val();
+                    var packetId = $("#packetId").val();
+                    if (packetId == null) {
+                        alert("请选择一个套餐！");
+                        return;
+                    }
+                    if (name.trim() == "" || name == null) {
+                        alert("请输入套餐名！");
+                        return;
+                    }
+                    if (isNaN(discount) || discount > 10 || discount < 0) {
+                        alert("请输入正确的折扣！");
+                        return;
+                    }
+                    if (isNaN(money)) {
+                        money = 0;
+                    }
+                    if (isNaN(given)) {
+                        given = 0;
+                    }
+                    if (isNaN(discount) || discount > 100 || discount < 0) {
+                        alert("请输入正确的提成！");
+                        return;
+                    }
 
-
-            }
-        ]);
-        /*加载套餐信息*/
-        controllers.controller('PacketListCtrl', ['$scope', 'PacketService',
-            function ($scope, packetService) {
-
-                $scope.totalItems = 64;
-                $scope.currentPage = 4;
-                $scope.currentPage = 0;
-                $scope.dataLen = -1;
-                $scope.load = function () {
-                    var promise = packetService.getPacketList($scope.currentPage);
+                    if (isNaN(retain) || retain == null || retain.trim().length <= 0) {
+                        retain = 0;
+                    }
+                    var info = {
+                        id: packetId,
+                        name: name,
+                        discount: commonService.getDiscount(discount),
+                        money: commonService.getFen(money),
+                        given: parseInt(commonService.getFen(given)),
+                        retain: parseInt(commonService.getFen(retain))
+                    };
+                    var promise = packetService.packetUpdate(info);
                     promise.then(function (data) {
-                        $scope.packetItems = data.value;
+                        if (data.state != 1) {
+                            alert(data.desc)
+                            return;
+                        }
+                        window.location.href = "packet.html";
                     });
                 };
-                $scope.load();
 
-                /* $scope.$watch('$packet-list', function () {
+
+                /*
+                 $scope.totalItems = 64;
+                 $scope.currentPage = 4;
+                 $scope.currentPage = 0;
+                 $scope.dataLen = -1;
+                 $scope.$watch('$packet-list', function () {
                  $('#packet-list').DataTable({
                  'paging': true,
                  'lengthChange': false,

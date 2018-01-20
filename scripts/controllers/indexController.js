@@ -57,6 +57,9 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     });
 
                 };
+                $scope.onConsumeClose = function () {
+                    $("#user-consume").modal('hide');
+                }
                 //用户消费
                 $scope.onConsumeInfo = function () {
                     var payType = $("#payType").val();
@@ -104,7 +107,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                             return;
                         }
                         alert("消费成功");
-
+                        $scope.onConsumeClose();
                     });
 
 
@@ -160,6 +163,9 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     });
 
                 };
+                $scope.onRechargeClose = function () {
+                    $("#user-recharge").modal('hide');
+                }
                 //用户充值
                 $scope.onRecharge = function () {
                     var payType = $("#rechargePayType").val();
@@ -213,7 +219,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                             return;
                         }
                         alert("充值成功");
-
+                        $scope.onRechargeClose();
                     });
 
 
@@ -226,6 +232,9 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
         controllers.controller('IndexMemberCtrl', ['$scope', 'MemberService', 'PacketService', 'ProductService', 'CommonService',
             function ($scope, memberService, packetService, productService, commonService) {
 
+                $scope.onCreateClose = function () {
+                    $("#user-create").modal('hide');
+                }
                 //添加会员
                 $scope.onAddMember = function () {
                     var memberPhone = $("#memberPhone").val();
@@ -260,7 +269,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                             return;
                         }
                         alert("充值成功");
-
+                        $scope.onCreateClose();
                     });
 
 

@@ -6,6 +6,8 @@ require.config({
         md5: 'vendor/jQuery.md5',
         chart: '../bower_components/dist/js/Chart',
         select: '../bower_components/dist/js/select2.min',
+        bootstrap: 'vendor/bootstrap3.3.4',
+        adminlte: '../bower_components/dist/js/adminlte.min',
         domReady: 'vendor/domReady'
 
     },
@@ -14,6 +16,7 @@ require.config({
             exports: 'jquery'
         },
         md5: {
+            deps: ['jquery'],
             exports: 'md5'
         },
         chart: {
@@ -22,6 +25,14 @@ require.config({
         select: {
             deps: ['jquery'],
             exports: 'select'
+        },
+        bootstrap: {
+            deps: ['jquery'],
+            exports: 'bootstrap'
+        },
+        adminlte: {
+            deps: ['jquery', 'bootstrap'],
+            exports: 'adminlte'
         },
         angular: {
             deps: ['jquery'],
@@ -35,7 +46,7 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart','select',
+        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte',
         'filters/intervalFilters',
         'controllers/indexController',
         'controllers/commonController',
@@ -48,7 +59,6 @@ require([
                 $httpProvider.interceptors.push('RequestInterceptors');
             }
         ]);
-
         domReady(function () {
             angular.bootstrap(document, ['zhwApp']);
             // The following is required if you want AngularJS Scenario tests to work

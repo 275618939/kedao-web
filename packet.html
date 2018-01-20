@@ -143,16 +143,16 @@
         </section>
 
         <!-- Main content -->
-        <section class="content container-fluid">
+        <section class="content container-fluid" ng-controller="PacketManagerCtrl">
             <div class="box">
                 <div class="box-body">
                     <div class="input-group">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#packet-add">
                             添加套餐
                         </button>
                     </div>
                 </div>
-                <div class="box-body no-padding" ng-controller="PacketListCtrl">
+                <div class="box-body no-padding">
                     <table id="packet-list" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -172,43 +172,135 @@
                             <td ng-bind="item.given|MoneyFilters"></td>
                             <td ng-bind="item.retain|MoneyFilters"></td>
                             <td>
-                                <a href="hair-packet-update.html?id={{item.id}}&name={{item.name}}&discount={{item.discount}}&money={{item.money}}&given={{item.given}}&retain={{item.retain}}">详情</a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-warning" ng-click=onUpdateQuery(item)> 更新
+                                    </button>
+                                    <button type="button" class="btn btn-warning">删除</button>
+                                </div>
+                                <!--            <a href="hair-packet-update.html?id={{item.id}}&name={{item.name}}&discount={{item.discount}}&money={{item.money}}&given={{item.given}}&retain={{item.retain}}">详情</a>-->
                             </td>
                         </tr>
 
                         </tbody>
                     </table>
                 </div>
-               <!-- <div class="box-footer">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-warning"> 上一页</button>
-                        <button type="button" class="btn btn-warning">下一页</button>
-                    </div>
-                </div>-->
+                <!-- <div class="box-footer">
+                     <div class="btn-group">
+                         <button type="button" class="btn btn-warning"> 上一页</button>
+                         <button type="button" class="btn btn-warning">下一页</button>
+                     </div>
+                 </div>-->
             </div>
 
+            <!--添加套餐 start-->
+            <div class="modal fade" id="packet-add">
 
-            <!--添加套餐-->
-            <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" ng-click="onClose();" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">新增套餐</h4>
                         </div>
                         <div class="modal-body">
-                            <p>One fine body&hellip;</p>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label>套餐名称</label>
+                                    <input type="text" class="form-control" id="name"
+                                           placeholder="请输入套餐名称"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>享受折扣</label>
+                                    <input type="number" class="form-control" id="discount"
+                                           placeholder="10" value="10"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>充值金额</label>
+                                    <input type="number" class="form-control" id="money" placeholder="请输入消费金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>赠送金额</label>
+                                    <input type="number" class="form-control" id="given"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>套餐提成</label>
+                                    <input type="number" class="form-control" id="retain"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                            </form>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">添加</button>
+                            <button type="button" class="btn btn-default pull-left"
+                                    ng-click="onClose();">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="onCreate();">
+                                添加
+                            </button>
+
                         </div>
                     </div>
                     <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
+            <!--添加套餐 end-->
+
+            <!--更新套餐 start-->
+            <div class="modal fade" id="packet-update">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="onClose();" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">更新套餐</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <input type="text" id="packetId" hidden="hidden"/>
+                                <div class="form-group">
+                                    <label>套餐名称</label>
+                                    <input type="text" class="form-control" id="packetName"
+                                           placeholder="请输入套餐名称"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>享受折扣</label>
+                                    <input type="number" class="form-control" id="packetDiscount"
+                                           placeholder="10" value="10"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>充值金额</label>
+                                    <input type="number" class="form-control" id="packetMoney" placeholder="请输入消费金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>赠送金额</label>
+                                    <input type="number" class="form-control" id="packetGiven"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>套餐提成</label>
+                                    <input type="number" class="form-control" id="packetRetain"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left"
+                                    ng-click="onUpdateClose();">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="onUpdate();">
+                                更新
+                            </button>
+
+                        </div>
+                    </div>
+                    /.modal-content
+                </div>
+            </div>
+            <!-- 更新套餐 end-->
+
 
         </section>
     </div>

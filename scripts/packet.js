@@ -6,7 +6,7 @@ require.config({
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
         adminlte: '../bower_components/dist/js/adminlte.min',
-  /*      'ui.bootstrap': 'vendor/ui-bootstrap-tpls.min',*/
+        /*      'ui.bootstrap': 'vendor/ui-bootstrap-tpls.min',*/
         domReady: 'vendor/domReady'
     },
     shim: {
@@ -32,16 +32,16 @@ require.config({
             deps: ['angular'],
             exports: 'angularRoute'
         }/*,
-        'ui.bootstrap': {
-            deps: ['angular', 'bootstrap'],
-            exports: 'ui.bootstrap'
-        }*/
+         'ui.bootstrap': {
+         deps: ['angular', 'bootstrap'],
+         exports: 'ui.bootstrap'
+         }*/
     },
     deps: ['bootstrap']//先加载bootstrap文件
 });
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', /*'ui.bootstrap',*/ 'select', 'bootstrap', 'adminlte',
+        'app', 'domReady', 'jquery', 'select', 'bootstrap', 'adminlte',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'filters/discountFilters',

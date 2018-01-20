@@ -184,36 +184,38 @@ define(['services/services'],
                     }
                     ,
                     getFen: function (money) {
-                        if (money <= 0) {
-                            return money;
-                        }
-                        var data = 0;
-                        var dotCount = 0; //小数点个数
-                        var floatCount = 0; //小数点后数据位数
-                        if (money == null)return -1;
-                        money = money.toString();
-                        var size = money.length;
-                        for (var i = 0; i < size; i++) {
-                            var c = money.charCodeAt(i);
-                            if (c >= 0x30 && c <= 0x39) {
-                                if (dotCount > 0) {
-                                    floatCount++;
-                                }
-                                if (floatCount > 2)return -1;
-                                data = data * 10 + (c - 0x30);
-                            }
-                            else if (c == 0x2e) {
-                                dotCount++;
-                                if (dotCount > 1)return -1;
-                            }
-                            else {
-                                return -1;
-                            }
-                        }
-                        for (var i = 2; i > floatCount; i--) {
-                            data = data * 10;
-                        }
-                        return data;
+                        var yuan = money * 100.0;
+                        return yuan.toFixed(0);
+                        /*               if (money <= 0) {
+                         return money;
+                         }
+                         var data = 0;
+                         var dotCount = 0; //小数点个数
+                         var floatCount = 0; //小数点后数据位数
+                         if (money == null)return -1;
+                         money = money.toString();
+                         var size = money.length;
+                         for (var i = 0; i < size; i++) {
+                         var c = money.charCodeAt(i);
+                         if (c >= 0x30 && c <= 0x39) {
+                         if (dotCount > 0) {
+                         floatCount++;
+                         }
+                         if (floatCount > 2)return -1;
+                         data = data * 10 + (c - 0x30);
+                         }
+                         else if (c == 0x2e) {
+                         dotCount++;
+                         if (dotCount > 1)return -1;
+                         }
+                         else {
+                         return -1;
+                         }
+                         }
+                         for (var i = 2; i > floatCount; i--) {
+                         data = data * 10;
+                         }
+                         return data;*/
                     }
                     ,
                     getYuan: function (money) {
