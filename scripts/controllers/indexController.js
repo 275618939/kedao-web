@@ -272,7 +272,6 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         $scope.onCreateClose();
                     });
 
-
                 };
 
 

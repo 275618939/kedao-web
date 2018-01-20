@@ -117,7 +117,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $scope.dataLen = -1;
                 //查询当日消费记录
                 $scope.onQueryRechargeInfo = function () {
-                    var promise = rechargeService.queryMonthRechargeInfo($scope.date, $scope.currentPage);
+                    var promise = rechargeService.queryMyRechargeInfo($scope.date, $scope.currentPage);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             $scope.rechargeItems = null;

@@ -106,14 +106,15 @@
                 <li><a href="service.html"><i class="fa fa-link"></i> <span>服务管理</span></a></li>
                 <li><a href="consume.html"><i class="fa fa-link"></i> <span>消费管理</span></a></li>
                 <li class="active"><a href="recharge.html"><i class="fa fa-link"></i> <span>充值管理</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>会员管理</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>员工管理</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>统计</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
+                <li><a href="users.html"><i class="fa fa-link"></i> <span>会员管理</span></a></li>
+                <li><a href="staff.html"><i class="fa fa-link"></i> <span>员工管理</span></a></li>
+                <li class="treeview"><a href="#"><i class="fa fa-link"></i>
+                    <span>统计</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right">
+                </i>
               </span>
-                    </a>
+                </a>
                     <ul class="treeview-menu">
                         <li><a href="#">店充值统计</a></li>
                         <li><a href="#">店服务统计</a></li>
@@ -199,6 +200,12 @@
                         </tr>
                         </tfoot>
                     </table>
+                </div>
+                <div class="box-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning" ng-click="onUpPage();"> 上一页</button>
+                        <button type="button" class="btn btn-warning" ng-click="onNextPage();">下一页</button>
+                    </div>
                 </div>
             </div>
 
