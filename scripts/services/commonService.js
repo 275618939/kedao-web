@@ -297,6 +297,30 @@ define(['services/services'],
                         return year + "-" + month;
                     }
                     ,
+                    dateNextMonthShort: function () {
+                        var datetime = new Date();
+                        var year = datetime.getFullYear();
+                        var month = 0;
+                        if (datetime.getMonth() + 1 + 1 >= 12) {
+                            month = 12;
+                        } else {
+                            month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1 + 1) : datetime.getMonth() + 1 + 1;
+                        }
+                        return year + "-" + month;
+                    }
+                    ,
+                    dateUpMonthShort: function () {
+                        var datetime = new Date();
+                        var year = datetime.getFullYear();
+                        var month = 0;
+                        if (datetime.getMonth() <= 1) {
+                            month = "01";
+                        } else {
+                            month = datetime.getMonth() < 10 ? "0" + (datetime.getMonth()) : datetime.getMonth();
+                        }
+                        return year + "-" + month;
+                    }
+                    ,
                     strToTime: function (str) {
                         if (str.length != 8) {
                             return str;
