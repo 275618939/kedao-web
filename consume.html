@@ -171,6 +171,7 @@
                     <table id="packet-list" class="table table-bordered table-striped">
                         <thead>
                         <tr>
+                            <th>消费会员</th>
                             <th>消费服务</th>
                             <th>消费金额</th>
                             <th>实收金额</th>
@@ -180,6 +181,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="item in consumeItems">
+                            <td ng-bind="item.memberName"></td>
                             <td ng-bind="item.productName"></td>
                             <td ng-bind="item.price|MoneyFilters"></td>
                             <td ng-bind="item.money|MoneyFilters"></td>
