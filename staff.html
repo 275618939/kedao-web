@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
     <![endif]-->
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script data-main="scripts/staff" src="scripts/vendor/require.js"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -136,23 +136,26 @@
                 <small>员工管理</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li><a href="index.html"><i class="fa fa-dashboard"></i>首页</a></li>
                 <li class="active">Here</li>
             </ol>
         </section>
 
         <!-- Main content -->
-        <section class="content container-fluid">
+        <section class="content container-fluid" ng-controller="StaffManagerCtrl">
 
 
             <div class="box">
                 <div class="box-body">
                     <div class="input-group">
-
-                        <button type="button" class="btn btn-info" data-toggle="modal"
-                                data-target="#add-service-type" style="width:100%;">
-                            增加员工
-                        </button>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <button type="button" class="btn btn-info" data-toggle="modal"
+                                        data-target="#add-staff">
+                                    增加员工
+                                </button>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -161,69 +164,114 @@
                         <thead>
                         <tr>
                             <th>姓名</th>
-                            <th>手机</th>
-                            <th>性别</th>
-                            <th>年龄</th>
+                            <!--  <th>权限</th>-->
+                            <th>手机号</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in packetItems">
+                        <tr ng-repeat="item in staffItems">
                             <td ng-bind="item.name"></td>
-                            <td ng-bind="item.name"></td>
-                            <td ng-bind="item.money|MoneyFilters"></td>
-                            <td ng-bind="item.retain|MoneyFilters"></td>
-                            <td ng-bind="item.money|MoneyFilters"></td>
+                            <!--             <td ng-bind="item.power|PowerFilters"></td>-->
+                            <td ng-bind="item.cellNumber"></td>
+                            <td ng-bind="item.createdTime"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-warning" ng-click=onUpdateStaffQuery(item)>
+                                        更新
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                         </tfoot>
                     </table>
+                </div>
+                <div class="box-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning" ng-click="onUpPage();"> 上一页</button>
+                        <button type="button" class="btn btn-warning" ng-click="onNextPage();">下一页</button>
+                    </div>
                 </div>
             </div>
 
 
             <!--添加员工 start-->
-            <div class="modal fade" id="add-service-info">
+            <div class="modal fade" id="add-staff">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">新增服务信息</h4>
+                            <h4 class="modal-title">新增员工</h4>
                         </div>
                         <div class="modal-body">
                             <form role="form">
                                 <div class="form-group">
-                                    <label>请选择服务类型</label>
-                                    <select class="form-control select2" style="width:100%;">
-                                        <option selected="selected">洗漱</option>
-                                        <option>美发</option>
-                                        <option>烫染</option>
-                                    </select>
+                                    <label>员工手机</label>
+                                    <input type="number" class="form-control" id="phone" placeholder="请输入员工手机号"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>服务名称</label>
-                                    <input type="text" class="form-control" placeholder="请输入服务名称"/>
+                                    <label>姓名</label>
+                                    <input type="text" class="form-control" id="name" placeholder="请输入会员姓名"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>服务价格</label>
-                                    <input type="number" class="form-control" placeholder="请输入服务价格"/>
+                                    <label>密码</label>
+                                    <input type="password" class="form-control" id="password"
+                                           placeholder="请输入卡号密码"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>服务提成</label>
-                                    <input type="number" class="form-control" placeholder="请输入服务提成"/>
+                                    <label>确认密码</label>
+                                    <input type="password" class="form-control" id="checkPassword"
+                                           placeholder="请确认卡号密码"/>
                                 </div>
                             </form>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">添加</button>
+                            <button type="button" class="btn btn-primary" ng-click="onCreate();">添加</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
                 </div>
                 <!-- /.modal-dialog -->
             </div>
-            <!--添加充值 end-->
+            <!--添加员工 end-->
+
+            <!--更新员工 start-->
+            <div class="modal fade" id="update-staff">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">更新员工</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <input type="text" id="staffId" hidden="hidden"/>
+                                <div class="form-group">
+                                    <label>员工手机</label>
+                                    <input type="number" class="form-control" id="updatePhone" placeholder="请输入员工手机号"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>姓名</label>
+                                    <input type="text" class="form-control" id="updateName" placeholder="请输入会员姓名"/>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="onUpdateStaff();">更新</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!--更新员工 end-->
 
 
         </section>
@@ -247,38 +295,6 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="bower_components/jquery/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="bower_components/dist/js/adminlte.min.js"></script>
-<script src="bower_components/dist/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/dist/js/dataTables.bootstrap.js"></script>
-<script>
-    $(function () {
-        $('#packet-list').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            "emptyTable": "没有数据",
-            "info": "数据 _START_ to _END_ of _TOTAL_",
-            "infoEmpty": "总数 0 第 0 到 0 页",
-            "language": {
-                "paginate": {
-                    "last": "第一页",
-                    "previous": "上一页",
-                    "next": "下一页"
-
-                }
-            }
-        })
-    })
-</script>
 
 
 </body>

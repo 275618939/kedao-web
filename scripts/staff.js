@@ -1,34 +1,38 @@
-
 require.config({
     paths: {
         angular: 'vendor/angular',
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
-        iscroll: 'vendor/iscroll-lite',
-        play: 'vendor/play',
-        touchslider: 'vendor/jquery.touchslider.min',
-        iosOverlay: 'vendor/iosOverlay',
+        md5: 'vendor/jQuery.md5',
+        chart: '../bower_components/dist/js/Chart',
+        select: '../bower_components/dist/js/select2.min',
+        bootstrap: 'vendor/bootstrap3.3.4',
+        adminlte: '../bower_components/dist/js/adminlte.min',
         domReady: 'vendor/domReady'
+
     },
     shim: {
         jquery: {
             exports: 'jquery'
         },
-        iosOverlay: {
+        md5: {
             deps: ['jquery'],
-            exports: 'iosOverlay'
+            exports: 'md5'
         },
-        touchslider: {
-            deps: ['jquery'],
-            exports: 'touchslider'
+        chart: {
+            exports: 'chart'
         },
-        play: {
+        select: {
             deps: ['jquery'],
-            exports: 'play'
+            exports: 'select'
         },
-        iscroll: {
+        bootstrap: {
             deps: ['jquery'],
-            exports: 'iscroll'
+            exports: 'bootstrap'
+        },
+        adminlte: {
+            deps: ['jquery', 'bootstrap'],
+            exports: 'adminlte'
         },
         angular: {
             deps: ['jquery'],
@@ -39,13 +43,16 @@ require.config({
         }
     }
 });
+//
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', "iscroll", "touchslider", "play", "iosOverlay",
+        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte',
         'filters/intervalFilters',
-        'filters/numberNullFilters',
+        'filters/moneyFilters',
         'filters/powerFilters',
+        'filters/sexFilters',
         'controllers/staffController',
+        'controllers/commonController',
         'interceptors/requestInterceptors'
     ],
     function (angular, angularRoute, app, domReady) {
@@ -55,7 +62,6 @@ require([
                 $httpProvider.interceptors.push('RequestInterceptors');
             }
         ]);
-
         domReady(function () {
             angular.bootstrap(document, ['zhwApp']);
             // The following is required if you want AngularJS Scenario tests to work

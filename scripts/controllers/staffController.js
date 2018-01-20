@@ -1,45 +1,58 @@
 define(['controllers/controllers', 'services/staffService', 'services/commonService', 'services/paramService'],
     function (controllers) {
-        //创建员工信息
-        controllers.controller('StaffCreateCtrl', ['$scope', 'StaffService', 'CommonService', 'ParamService',
+        //员工信息
+        controllers.controller('StaffManagerCtrl', ['$scope', 'StaffService', 'CommonService', 'ParamService',
             function ($scope, staffService, commonService, paramService) {
 
-                $scope.shopId = paramService.getValue("shopId");
-                if ($scope.shopId == null || $scope.shopId.trim().length <= 0 || $scope.shopId == "undefined") {
-                    alert("请先选择店");
-                    window.location.href = "hair-shop-list.html";
-                    return
-                }
                 $scope.powers = commonService.powerInfo.powerOptions;
                 $scope.powerInfo = commonService.defaultPower;
+                $scope.onCreateClose = function () {
+                    $("#add-staff").modal('hide');
+                }
+                $scope.onUpdateShow = function () {
+                    $("#update-staff").modal('show');
+                }
+                $scope.onUpdateClose = function () {
+                    $("#update-staff").modal('hide');
+                }
                 //创建员工信息
                 $scope.onCreate = function () {
-                    //店名
                     var name = $("#name").val();
-                    //电话信息
-                    var telephone = $("#telephone").val();
+                    var phone = $("#phone").val();
+                    var password = $("#password").val();
+                    var checkPassword = $("#checkPassword").val();
                     if (name.trim() == "" || name == null) {
                         alert("请输入店名！");
                         return;
                     }
-                    if (isNaN(telephone) || (telephone.length != 11)) {
+                    if (isNaN(phone) || (phone.length != 11)) {
                         alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
-                    //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(telephone))) {
+                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
                         $("#telephone").focus();
                         alert("请输入正确的手机号!");
                         return;
                     }
-                    var data = {name: name, cellNumber: telephone, shopId: $scope.shopId, power: $scope.powerInfo};
+                    if (password.trim() == "" || password == null) {
+                        alert("请输入密码！");
+                        return;
+                    }
+                    if (password != checkPassword) {
+                        alert("两次密码输入不一致！");
+                        return;
+                    }
+                    var pass = phone + $.md5(phone + password);
+                    pass = $.md5(pass);
+                    var data = {cellNumber: phone, name: name, password: pass, power: commonService.defaultClerkPower};
                     var promise = staffService.staffCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             alert(data.desc)
                             return;
                         }
-                        window.location.href = "hair-staff-list.html?shopId=" + $scope.shopId + "&query=true";
+                        $scope.onCreateClose();
+                        $scope.onQueryStaffInfo();
                     });
                 };
                 //选择权限
@@ -47,41 +60,78 @@ define(['controllers/controllers', 'services/staffService', 'services/commonServ
                     //$scope.powerInfo;
                     //console.log($scope.powerInfo.id);
                 };
-
-
-            }
-        ]);
-        /*加载员工信息*/
-        controllers.controller('StaffListCtrl', ['$scope', 'StaffService', 'ParamService',
-            function ($scope, staffService, paramService) {
-                $scope.shopId = paramService.getValue("shopId");
-                $scope.query = paramService.getValue("query");
-                if (null != $scope.query && $scope.query == true) {
-                    $scope.load();
-                }
                 $scope.currentPage = 0;
                 $scope.dataLen = -1;
-                $scope.load = function () {
-                    var promise = staffService.getStaffList($scope.shopId, $scope.currentPage);
-                    promise.then(function (data) {
-                        $scope.staffItems = data.value;
-                    });
+                //更新员工信息
+                $scope.onUpdateStaffQuery = function (data) {
+                    $scope.onUpdateShow();
+                    $("#updateName").val(data.name);
+                    $("#updatePhone").val(data.cellNumber);
+                    $("#staffId").val(data.id);
+                }
+                //更新员工
+                $scope.onUpdateStaff = function () {
+                    var name = $("#updateName").val();
+                    var phone = $("#updatePhone").val();
+                    var staffId = $("#staffId").val();
+                    if (name.trim() == "" || name == null) {
+                        alert("员工名称不能为空！");
+                        return;
+                    }
+                    if (isNaN(phone) || (phone.length != 11)) {
+                        alert("手机号码为11位数字！请正确填写！");
+                        return;
+                    }
+                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                        $("#phone").focus();
+                        alert("请输入正确的手机号!");
+                        return;
+                    }
+                    var data = {
+                        id: staffId,
+                        cellNumber: phone,
+                        name: name
+                    };
+                    staffService.staffUpdate(data);
+                    //关闭更新面板
+                    $scope.onUpdateClose();
+                    //刷新会员信息
+                    $scope.onQueryStaffInfo();
+
                 };
-                $scope.load();
-                $(window).scroll(function () {
-                    var bot = 50; //bot是底部距离的高度
-                    if ((bot + $(window).scrollTop()) >= ($(document).height() - $(window).height())) {
-                        $scope.currentPage += 1;
-                        if ($scope.dataLen <= 0) {
-                            $scope.currentPage -= 1;
+
+                //查询会员信息
+                $scope.onQueryStaffInfo = function () {
+                    var promise = staffService.getShopStaffList($scope.currentPage);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            $scope.staffItems = null;
                             return;
                         }
-                        $scope.load();
+                        $scope.staffItems = data.value;
+                        $scope.dataLen = $scope.staffItems.length;
+                    });
+                };
+                $scope.onQueryStaffInfo();
+                //翻页
+                $scope.onNextPage = function () {
+                    if ($scope.dataLen > 0) {
+                        $scope.currentPage += 1;
                     }
-                });
+                    $scope.onQueryStaffInfo();
+                }
+                $scope.onUpPage = function () {
+                    $scope.currentPage -= 1;
+                    if ($scope.currentPage <= 0) {
+                        $scope.currentPage = 0;
+                    }
+                    $scope.onQueryStaffInfo();
+                }
+
 
             }
         ]);
+
 
         /*显示员工详情信息*/
         controllers.controller('StaffDetailCtrl', ['$scope', 'StaffService', 'CommonService', 'ParamService',

@@ -4,13 +4,13 @@ define(['services/services', 'services/commonService'],
         services.factory('StaffService', ['$http', '$q', 'CommonService',
             function ($http, $q, commonService) {
                 return {
-                    /*更新员工信息*/
+                    /*创建员工信息*/
                     staffCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/staff",
+                            url: "http://" + commonService.getServerUrl() + "/app/shop/staff",
                             method: "put",
-                            data: "shopId=" + data.shopId + "&name=" + data.name + "&cellNumber=" + data.cellNumber + "&power=" + data.power
+                            data: "cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -22,9 +22,23 @@ define(['services/services', 'services/commonService'],
                     staffUpdate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/staff",
+                            url: "http://" + commonService.getServerUrl() + "/app/staff",
                             method: "post",
-                            data: "id=" + data.id + "&shopId=" + data.shopId + "&name=" + data.name + "&cellNumber=" + data.cellNumber + "&power=" + data.power
+                            data: "id=" + data.id + "&name=" + data.name + "&cellNumber=" + data.cellNumber
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*获取店员工信息*/
+                    getShopStaffList: function (page) {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getServerUrl() + "/app/shop/staff/" + page + "/" + commonService.getMessageCount() + "",
+                            method: "get",
+                            data: {}
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
