@@ -16,9 +16,8 @@
     <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
     <![endif]-->
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script data-main="scripts/product" src="scripts/vendor/require.js"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -144,29 +143,31 @@
         </section>
 
         <!-- Main content -->
-        <section class="content container-fluid">
+        <section class="content container-fluid" ng-controller="ProductManagerCtrl">
 
 
             <div class="box">
                 <div class="box-body">
                     <div class="input-group">
                         <div class="row">
-                            <!-- <div class="col-lg-4">
-                                 <select class="form-control select2" style="width:100%;">
-                                     <option selected="selected">洗漱</option>
-                                     <option>美发</option>
-                                     <option>烫染</option>
-                                 </select>
-                             </div>-->
-                            <div class="col-lg-7">
+                            <div class="col-lg-4">
+                                <select class="form-control" ng-change="selectClassfyInfo()"
+                                        ng-model="classItemInfo"
+                                        ng-options="value.id as value.name for value in classItems"
+                                        id="classItem"
+                                        data-placeholder="选择消费类别">
+                                    <option value="" selected="selected">选择服务类型</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
                                 <button type="button" class="btn btn-info" data-toggle="modal"
-                                        data-target="#add-service-type" style="width:100%;">
+                                        data-target="#add-service-type">
                                     添加服务类型
                                 </button>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-4">
                                 <button type="button" class="btn btn-info" data-toggle="modal"
-                                        data-target="#add-service-info" style="width:100%;">
+                                        data-target="#add-service-info">
                                     添加服务
                                 </button>
                             </div>
@@ -178,31 +179,38 @@
                     <table id="packet-list" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>服务类型</th>
                             <th>服务名称</th>
                             <th>服务价格</th>
                             <th>服务提成</th>
+                            <th>更新时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in packetItems">
+                        <tr ng-repeat="item in productItems">
                             <td ng-bind="item.name"></td>
-                            <td ng-bind="item.name"></td>
-                            <td ng-bind="item.money|MoneyFilters"></td>
+                            <td ng-bind="item.price|MoneyFilters"></td>
                             <td ng-bind="item.retain|MoneyFilters"></td>
+                            <td ng-bind="item.updatedTime"></td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-warning"> 更新</button>
-                                    <button type="button" class="btn btn-warning">删除</button>
+                                    <button type="button" class="btn btn-warning" ng-click=onUpdateProductQuery(item)>
+                                        更新
+                                    </button>
+                                    <button type="button" class="btn btn-warning" ng-click="onProductDelete(item)">删除
+                                    </button>
                                 </div>
-                                <!--
-                                <a href="hair-packet-update.html?id={{item.id}}&name={{item.name}}&discount={{item.discount}}&money={{item.money}}&given={{item.given}}&retain={{item.retain}}">详情</a>-->
                             </td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
+                <!--    <div class="box-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning"> 上一页</button>
+                            <button type="button" class="btn btn-warning">下一页</button>
+                        </div>
+                    </div>-->
             </div>
 
 
@@ -216,11 +224,11 @@
                             <h4 class="modal-title">新增服务类型</h4>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" placeholder="请输入服务类型"/>
+                            <input type="text" class="form-control" id="className" placeholder="请输入服务类型"/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">添加</button>
+                            <button type="button" class="btn btn-primary" ng-click="onClassCreate();">添加</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -242,30 +250,32 @@
                             <form role="form">
                                 <div class="form-group">
                                     <label>请选择服务类型</label>
-                                    <select class="form-control select2" style="width:100%;">
-                                        <option selected="selected">洗漱</option>
-                                        <option>美发</option>
-                                        <option>烫染</option>
+                                    <select class="form-control" ng-change="selectClassfyInfo()"
+                                            ng-model="classItemInfo"
+                                            id="classItemInfo"
+                                            ng-options="value.id as value.name for value in classItems"
+                                            data-placeholder="选择消费类别">
+                                        <option value="" selected="selected">选择服务类型</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>服务名称</label>
-                                    <input type="text" class="form-control" placeholder="请输入服务名称"/>
+                                    <input type="text" class="form-control" id="productName" placeholder="请输入服务名称"/>
                                 </div>
                                 <div class="form-group">
                                     <label>服务价格</label>
-                                    <input type="number" class="form-control" placeholder="请输入服务价格"/>
+                                    <input type="number" class="form-control" id="productPrice" placeholder="请输入服务价格"/>
                                 </div>
                                 <div class="form-group">
                                     <label>服务提成</label>
-                                    <input type="number" class="form-control" placeholder="请输入服务提成"/>
+                                    <input type="number" class="form-control" id="productRetain" placeholder="请输入服务提成"/>
                                 </div>
                             </form>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">添加</button>
+                            <button type="button" class="btn btn-primary" ng-click="onProductCreate();">添加</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -273,6 +283,47 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--添加服务内容 end-->
+
+            <!--更新服务内容 start-->
+            <div class="modal fade" id="update-service-info">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">更新服务信息</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <input type="text" id="productId" hidden="hidden"/>
+                                <div class="form-group">
+                                    <label>服务名称</label>
+                                    <input type="text" class="form-control" id="updateProductName"
+                                           placeholder="请输入服务名称"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>服务价格</label>
+                                    <input type="number" class="form-control" id="updateProductPrice"
+                                           placeholder="请输入服务价格"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>服务提成</label>
+                                    <input type="number" class="form-control" id="updateProductRetain"
+                                           placeholder="请输入服务提成"/>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="onProductUpdate();">更新</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!--更新服务内容 end-->
 
 
         </section>
@@ -298,10 +349,11 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
+<!--
 <script src="bower_components/jquery/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
+&lt;!&ndash; Bootstrap 3.3.7 &ndash;&gt;
 <script src="bower_components/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
+&lt;!&ndash; AdminLTE App &ndash;&gt;
 <script src="bower_components/dist/js/adminlte.min.js"></script>
 <script src="bower_components/dist/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/dist/js/dataTables.bootstrap.js"></script>
@@ -328,6 +380,7 @@
         })
     })
 </script>
+-->
 
 
 </body>
