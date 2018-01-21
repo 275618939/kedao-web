@@ -1,12 +1,12 @@
-define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/consumeService'],
+define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/consumeService', 'services/paramService'],
     function (controllers) {
 
         /*消费*/
-        controllers.controller('ConsumeManagerCtrl', ['$scope', 'MemberService', 'ProductService', 'CommonService', 'ConsumeService',
-            function ($scope, memberService, productService, commonService, consumeService) {
+        controllers.controller('ConsumeManagerCtrl', ['$scope', 'MemberService', 'ProductService', 'CommonService', 'ConsumeService', 'ParamService',
+            function ($scope, memberService, productService, commonService, consumeService, paramService) {
                 //初始化消费项目信息
                 $('.select2').select2();
-                $("#discount").val("不打折")
+                $("#discount").val("不打折");
                 //查询消费类别信息
                 $scope.classItemInfo = 0;
                 $scope.queryClassfyInfo = function () {
@@ -116,45 +116,70 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $scope.date = commonService.dateStringShort();
                 $scope.currentPage = 0;
                 $scope.dataLen = -1;
-                //查询当日消费记录
-                $scope.onQueryConsumeInfo = function () {
-                    var promise = consumeService.queryMyConsumeInfo($scope.date, $scope.currentPage);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            $scope.consumeItems = null;
-                            return;
-                        }
-                        $scope.consumeItems = data.value;
-                        $scope.dataLen = $scope.consumeItems.length;
-                    });
-                };
-                $scope.onQueryConsumeInfo();
+                $scope.queryId = paramService.getValue("queryId");
+                if ($scope.queryId != null && $scope.queryId != "undefined") {
+                    //查询用户消费记录信息
+                    $scope.onQueryMemberConsumeInfo = function () {
+                        var promise = consumeService.queryMemberConsumeInfo($scope.queryId, $scope.date, $scope.currentPage);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                $scope.consumeItems = null;
+                                return;
+                            }
+                            $scope.consumeItems = data.value;
+                            $scope.dataLen = $scope.consumeItems.length;
+                        });
+                    }
+                    $scope.onQueryMemberConsumeInfo();
+                } else {
+
+                    //查询当日消费记录
+                    $scope.onQueryConsumeInfo = function () {
+                        var promise = consumeService.queryMyConsumeInfo($scope.date, $scope.currentPage);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                $scope.consumeItems = null;
+                                return;
+                            }
+                            $scope.consumeItems = data.value;
+                            $scope.dataLen = $scope.consumeItems.length;
+                        });
+                    };
+                    $scope.onQueryConsumeInfo();
+                }
                 //翻月
                 $scope.onNextMonth = function () {
                     $scope.date = commonService.dateNextMonthShort();
                     $scope.currentPage = 0;
-                    $scope.onQueryConsumeInfo();
+                    $scope.onQueryInfo();
                 }
                 $scope.onUpMonth = function () {
                     $scope.date = commonService.dateUpMonthShort();
                     $scope.currentPage = 0;
-                    $scope.onQueryConsumeInfo();
+                    $scope.onQueryInfo();
                 }
                 //翻页
                 $scope.onNextPage = function () {
                     if ($scope.dataLen > 0) {
                         $scope.currentPage += 1;
                     }
-                    $scope.onQueryConsumeInfo();
+                    $scope.onQueryInfo();
                 }
                 $scope.onUpPage = function () {
                     $scope.currentPage -= 1;
                     if ($scope.currentPage <= 0) {
                         $scope.currentPage = 0;
                     }
-                    $scope.onQueryConsumeInfo();
+                    $scope.onQueryInfo();
                 }
+                $scope.onQueryInfo = function () {
+                    if ($scope.queryId != null && $scope.queryId != "undefined") {
+                        $scope.onQueryMemberConsumeInfo();
+                    } else {
+                        $scope.onQueryConsumeInfo();
+                    }
 
+                }
 
             }]);
 

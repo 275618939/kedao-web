@@ -1,9 +1,9 @@
-define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/rechargeService'],
+define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/rechargeService', 'services/paramService'],
     function (controllers) {
 
         /*充值*/
-        controllers.controller('RechargeManagerCtrl', ['$scope', 'MemberService', 'PacketService', 'CommonService', 'RechargeService',
-            function ($scope, memberService, packetService, commonService, rechargeService) {
+        controllers.controller('RechargeManagerCtrl', ['$scope', 'MemberService', 'PacketService', 'CommonService', 'RechargeService', 'ParamService',
+            function ($scope, memberService, packetService, commonService, rechargeService, paramService) {
 
                 //查询套餐信息
                 $scope.packetItemInfo = null;
@@ -115,43 +115,68 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $scope.date = commonService.dateStringShort();
                 $scope.currentPage = 0;
                 $scope.dataLen = -1;
-                //查询当日消费记录
-                $scope.onQueryRechargeInfo = function () {
-                    var promise = rechargeService.queryMyRechargeInfo($scope.date, $scope.currentPage);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            $scope.rechargeItems = null;
-                            return;
-                        }
-                        $scope.rechargeItems = data.value;
-                        $scope.dataLen = $scope.rechargeItems.length;
-                    });
-                };
-                $scope.onQueryRechargeInfo();
+                $scope.queryId = paramService.getValue("queryId");
+                if ($scope.queryId != null && $scope.queryId != "undefined") {
+                    //查询用户消费记录信息
+                    $scope.onQueryMemberRechargeInfo = function () {
+                        var promise = rechargeService.queryMemberRechargeInfo($scope.queryId, $scope.date, $scope.currentPage);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                $scope.rechargeItems = null;
+                                return;
+                            }
+                            $scope.rechargeItems = data.value;
+                            $scope.dataLen = $scope.rechargeItems.length;
+                        });
+                    }
+                    $scope.onQueryMemberRechargeInfo();
+                } else {
+                    //查询当日消费记录
+                    $scope.onQueryRechargeInfo = function () {
+                        var promise = rechargeService.queryMyRechargeInfo($scope.date, $scope.currentPage);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                $scope.rechargeItems = null;
+                                return;
+                            }
+                            $scope.rechargeItems = data.value;
+                            $scope.dataLen = $scope.rechargeItems.length;
+                        });
+                    };
+                    $scope.onQueryRechargeInfo();
+                }
                 //翻月
                 $scope.onNextMonth = function () {
                     $scope.date = commonService.dateNextMonthShort();
                     $scope.currentPage = 0;
-                    $scope.onQueryRechargeInfo();
+                    $scope.onQueryInfo();
                 }
                 $scope.onUpMonth = function () {
                     $scope.date = commonService.dateUpMonthShort();
                     $scope.currentPage = 0;
-                    $scope.onQueryRechargeInfo();
+                    $scope.onQueryInfo();
                 }
                 //翻页
                 $scope.onNextPage = function () {
                     if ($scope.dataLen > 0) {
                         $scope.currentPage += 1;
                     }
-                    $scope.onQueryRechargeInfo();
+                    $scope.onQueryInfo();
                 }
                 $scope.onUpPage = function () {
                     $scope.currentPage -= 1;
                     if ($scope.currentPage <= 0) {
                         $scope.currentPage = 0;
                     }
-                    $scope.onQueryRechargeInfo();
+                    $scope.onQueryInfo();
+                }
+                $scope.onQueryInfo = function () {
+                    if ($scope.queryId != null && $scope.queryId != "undefined") {
+                        $scope.onQueryMemberRechargeInfo();
+                    } else {
+                        $scope.onQueryRechargeInfo();
+                    }
+
                 }
 
 

@@ -130,7 +130,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" ng-controller="MemberManagerCtrl">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -144,7 +144,7 @@
         </section>
 
         <!-- Main content -->
-        <section class="content container-fluid" ng-controller="MemberManagerCtrl">
+        <section class="content container-fluid">
 
 
             <div class="box">
@@ -152,155 +152,332 @@
                     <div class="input-group">
                         <div class="row">
                             <div class="col-lg-3">
-                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                        data-target="#add-member">
-                                    增加会员
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="box-body no-padding">
-                    <table id="packet-list" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>卡号</th>
-                            <th>姓名</th>
-                            <th>手机</th>
-                            <th>性别</th>
-                            <th>余额</th>
-                            <th>赠送</th>
-                            <th>创建时间</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="item in memberItems">
-                            <td ng-bind="item.card"></td>
-                            <td ng-bind="item.name"></td>
-                            <td ng-bind="item.cellNumber"></td>
-                            <td ng-bind="item.subscribe|SexFilters"></td>
-                            <td ng-bind="item.money|MoneyFilters"></td>
-                            <td ng-bind="item.given|MoneyFilters"></td>
-                            <td ng-bind="item.createdTime"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-warning" ng-click=onUpdateMemberQuery(item)>
-                                        更新
+                                <div class="input-group margin">
+                                    <button type="button" class="btn btn-info" data-toggle="modal"
+                                            data-target="#add-member">
+                                        增加会员
                                     </button>
                                 </div>
-                            </td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="box-footer">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-warning" ng-click="onUpPage();"> 上一页</button>
-                        <button type="button" class="btn btn-warning" ng-click="onNextPage();">下一页</button>
-                    </div>
-                </div>
-            </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="input-group margin">
+                                    <input type="number" class="form-control" id="searchPhone" placeholder="请输入会员手机号">
+                                    <span class="input-group-btn">
+                                         <button type="button" class="btn btn-info btn-flat"
+                                                 ng-click="onQueryByMemberInfo();">点击查询</button>
+                                      </span>
+                                </div>
+                            </div>
 
-
-            <!--添加会员 start-->
-            <div class="modal fade" id="add-member">
-
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">新增会员</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form role="form">
-                                <div class="form-group">
-                                    <label>会员手机</label>
-                                    <input type="number" class="form-control" id="memberPhone" placeholder="请输入会员手机号"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>姓名</label>
-                                    <input type="text" class="form-control" id="memberName" placeholder="请输入会员姓名"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>密码</label>
-                                    <input type="password" class="form-control" id="memberPassword"
-                                           placeholder="请输入卡号密码"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>确认密码</label>
-                                    <input type="password" class="form-control" id="memberCheckPassword"
-                                           placeholder="请确认卡号密码"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>卡号</label>
-                                    <input type="number" class="form-control" id="memberCard" placeholder="请输入卡号"/>
-                                </div>
-                            </form>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" ng-click="onAddMember();">添加</button>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
+
                 </div>
             </div>
-            <!--添加会员 end-->
+            <div class="box-body no-padding">
+                <table id="packet-list" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>卡号</th>
+                        <th>姓名</th>
+                        <th>手机</th>
+                        <th>性别</th>
+                        <th>余额</th>
+                        <th>赠送</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in memberItems">
+                        <td ng-bind="item.card"></td>
+                        <td ng-bind="item.name"></td>
+                        <td ng-bind="item.cellNumber"></td>
+                        <td ng-bind="item.subscribe|SexFilters"></td>
+                        <td ng-bind="item.money|MoneyFilters"></td>
+                        <td ng-bind="item.given|MoneyFilters"></td>
+                        <td ng-bind="item.createdTime"></td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning" ng-click=onUpdateMemberQuery(item)>
+                                    更新
+                                </button>
+                                <button type="button" class="btn btn-warning" ng-click=onMemberConsumeQuery(item)>消费
+                                </button>
+                                <button type="button" class="btn btn-warning" ng-click=onUpdateMemberQuery(item)>充值
+                                </button>
+                                <button type="button" class="btn btn-success">记录查询</button>
+                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="consume.html?queryId={{item.id}}">消费记录</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="recharge.html?queryId={{item.id}}">充值记录</a></li>
+                                </ul>
 
-            <!--更新会员 start-->
-            <div class="modal fade" id="update-member">
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning" ng-click="onUpPage();"> 上一页</button>
+                    <button type="button" class="btn btn-warning" ng-click="onNextPage();">下一页</button>
+                </div>
+            </div>
+        </section>
 
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">更新会员</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form role="form">
-                                <input type="text" id="memberId" hidden="hidden"/>
-                                <div class="form-group">
-                                    <label>会员手机</label>
-                                    <input type="number" class="form-control" id="updateMemberPhone"
-                                           placeholder="请输入会员手机号"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>姓名</label>
-                                    <input type="text" class="form-control" id="updateMemberName"
-                                           placeholder="请输入会员姓名"/>
-                                </div>
-                     <!--           <div class="form-group">
-                                    <label>密码</label>
-                                    <input type="password" class="form-control" id="updateMemberPassword"
-                                           placeholder="请输入卡号密码"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>确认密码</label>
-                                    <input type="password" class="form-control" id="updateMemberCheckPassword"
-                                           placeholder="请确认卡号密码"/>
-                                </div>-->
-                                <div class="form-group">
-                                    <label>卡号</label>
-                                    <input type="number" class="form-control" id="updateMemberCard"
-                                           placeholder="请输入卡号"/>
-                                </div>
-                            </form>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" ng-click="onMemberUpdate();">更新</button>
-                        </div>
+        <!--添加会员 start-->
+        <div class="modal fade" id="add-member">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">新增会员</h4>
                     </div>
-                    <!-- /.modal-content -->
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>会员手机</label>
+                                <input type="number" class="form-control" id="memberPhone" placeholder="请输入会员手机号"/>
+                            </div>
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input type="text" class="form-control" id="memberName" placeholder="请输入会员姓名"/>
+                            </div>
+                            <div class="form-group">
+                                <label>密码</label>
+                                <input type="password" class="form-control" id="memberPassword"
+                                       placeholder="请输入卡号密码"/>
+                            </div>
+                            <div class="form-group">
+                                <label>确认密码</label>
+                                <input type="password" class="form-control" id="memberCheckPassword"
+                                       placeholder="请确认卡号密码"/>
+                            </div>
+                            <div class="form-group">
+                                <label>卡号</label>
+                                <input type="number" class="form-control" id="memberCard" placeholder="请输入卡号"/>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" ng-click="onAddMember();">添加</button>
+                    </div>
                 </div>
+                <!-- /.modal-content -->
             </div>
-            <!--更新会员 end-->
+        </div>
+        <!--添加会员 end-->
+
+        <!--更新会员 start-->
+        <div class="modal fade" id="update-member">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">更新会员</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <input type="text" id="memberId" hidden="hidden"/>
+                            <div class="form-group">
+                                <label>会员手机</label>
+                                <input type="number" class="form-control" id="updateMemberPhone"
+                                       placeholder="请输入会员手机号"/>
+                            </div>
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input type="text" class="form-control" id="updateMemberName"
+                                       placeholder="请输入会员姓名"/>
+                            </div>
+                            <div class="form-group">
+                                <label>卡号</label>
+                                <input type="number" class="form-control" id="updateMemberCard"
+                                       placeholder="请输入卡号"/>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" ng-click="onMemberUpdate();">更新</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+        <!--更新会员 end-->
+
+        <!--会员消费 start-->
+        <div class="modal fade" id="user-consume" ng-controller="MemberConsumeCtrl">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">会员消费</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>会员手机</label>
+                                <input type="number" class="form-control" id="phone" placeholder="默认消费"
+                                       ng-blur="queryMemberInfo();"/>
+                            </div>
+                            <!--会员账户信息 start-->
+                            <div class="form-group">
+                                <div class="col-md-3 text-light-blue">剩余余额</div>
+                                <div class="col-md-3" id="money">0</div>
+                                <div class="col-md-3 text-light-blue">剩余赠送</div>
+                                <div class="col-md-3" id="given">0</div>
+                            </div>
+                            <!--end-->
+                            <br/>
+                            <div class="form-group">
+                                <label>当前折扣</label>
+                                <input type="text" class="form-control" disabled="disabled" id="discount">
+                            </div>
+                            <div class="form-group">
+                                <label>付款方式</label>
+                                <select class="form-control select2" style="width:100%;" id="payType">
+                                    <option selected="selected" value="1">现金</option>
+                                    <option value="6">余额</option>
+                                    <option value="2">支付宝</option>
+                                    <option value="3">微信</option>
+                                    <option value="4">POS刷卡</option>
+                                    <option value="5">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>消费类别</label>
+                                <select class="form-control" ng-change="selectClassfyInfo()"
+                                        ng-model="classItemInfo"
+                                        ng-options="value.id as value.name for value in classItems" id="classItem"
+                                        data-placeholder="选择消费类别"
+                                        style="width: 100%;">
+                                    <option value="" selected="selected">请选择消费类别</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>消费项目</label>
+                                <!-- <select class="form-control select2 select2-hidden-accessible"
+                                         ng-change="selectProductInfo()"
+                                         ng-model="productItemInfo"
+                                         ng-options="value as value.name for value in productItems" id="productItem"
+                                         multiple=""
+                                         data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
+                                         aria-hidden="true">
+                                     <option value="" selected="selected">请选择消费项目</option>
+                                 </select>-->
+                                <select class="form-control select2 select2-hidden-accessible"
+                                        ng-change="selectProductInfo()"
+                                        ng-model="productItemInfo"
+                                        multiple=""
+                                        data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
+                                        aria-hidden="true">
+                                    <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>消费金额</label>
+                                <input type="number" class="form-control" placeholder="请输入消费金额" id="cunsumeMoney"/>
+                            </div>
+                            <div class="form-group">
+                                <label>消费赠送金额</label>
+                                <input type="number" class="form-control" placeholder="请输入消费赠送金额"
+                                       id="cunsumeGiven"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" ng-click="onConsumeInfo();">消费</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+        <!--会员消费 end-->
+
+        <!--会员充值 start-->
+        <div class="modal fade" id="user-recharge" ng-controller="IndexRechargeCtrl">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">会员充值</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>会员手机</label>
+                                <input type="number" class="form-control" id="rechargePhone"
+                                       placeholder="请输入会员手机号" ng-blur="queryMemberInfo();"/>
+                            </div>
+                            <div class="form-group">
+                                <label>付款方式</label>
+                                <select class="form-control select2" style="width:100%;" id="rechargePayType">
+                                    <option selected="selected" value="1">现金</option>
+                                    <option value="6">余额</option>
+                                    <option value="2">支付宝</option>
+                                    <option value="3">微信</option>
+                                    <option value="4">POS刷卡</option>
+                                    <option value="5">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>套餐类型</label>
+                                <select class="form-control select2"
+                                        ng-change="selectPacketInfo()"
+                                        ng-model="packetItemInfo"
+                                        data-placeholder="请选择套餐类型" style="width: 100%;" tabindex="-1"
+                                        aria-hidden="true">
+                                    <option ng-repeat="x in packetItems" value="{{x}}">{{x.name}}</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group">
+                                <label>当前折扣</label>
+                                <input type="text" class="form-control" disabled="disabled" id="rechargeDiscount"
+                                       placeholder="不打折"/>
+                            </div>
+                            <div class="form-group">
+                                <label>充值金额</label>
+                                <input type="number" class="form-control" id="rechargeMoney" placeholder="请输入消费金额"/>
+                            </div>
+                            <div class="form-group">
+                                <label>赠送金额</label>
+                                <input type="number" class="form-control" id="rechargeGiven"
+                                       placeholder="请输入消费赠送金额"/>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" ng-click="onRecharge();">充值</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+        <!--会员充值 end-->
 
 
         </section>
