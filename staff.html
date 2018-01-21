@@ -14,6 +14,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
+    <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
     <![endif]-->
     <!-- Google Font -->
     <script data-main="scripts/staff" src="scripts/vendor/require.js"></script>
@@ -172,6 +173,17 @@
                                     <button type="button" class="btn btn-warning" ng-click=onUpdateStaffQuery(item)>
                                         更新
                                     </button>
+                                    <button type="button" class="btn btn-success">信息统计</button>
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="staff-stat.html?queryId={{item.id}}&queryType=0">日消费统计</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="staff-stat.html?queryId={{item.id}}&queryType=1">月消费统计</a></li>
+                                    </ul>
                                 </div>
                             </td>
                         </tr>

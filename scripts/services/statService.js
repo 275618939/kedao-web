@@ -61,7 +61,34 @@ define(['services/services', 'services/commonService'],
                         });
                         return deferred.promise;
                     },
-                    /*会员消费*/
+                    /*员工日消费信息统计*/
+                    queryDayStaffServiceInfo: function (id, page) {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/staffServiceDate/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            method: "get",
+                            data: {}
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*员工月消费信息统计*/
+                    queryMonthStaffServiceInfo: function (id, page) {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/staffServiceMonth/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            method: "get",
+                            data: {}
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    }
 
                 };
             }]);
