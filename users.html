@@ -11,12 +11,11 @@
     <link rel="stylesheet" href="bower_components/font-awesome/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="bower_components/Ionicons/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/dist/css/select2.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
-    <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
     <![endif]-->
-    <!-- Google Font -->
     <script data-main="scripts/member" src="scripts/vendor/require.js"></script>
 
 </head>
@@ -204,7 +203,7 @@
                                 </button>
                                 <button type="button" class="btn btn-warning" ng-click=onMemberConsumeQuery(item)>消费
                                 </button>
-                                <button type="button" class="btn btn-warning" ng-click=onUpdateMemberQuery(item)>充值
+                                <button type="button" class="btn btn-warning" ng-click=onMemberRechargeQuery(item)>充值
                                 </button>
                                 <button type="button" class="btn btn-success">记录查询</button>
                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
@@ -335,8 +334,7 @@
                         <form role="form">
                             <div class="form-group">
                                 <label>会员手机</label>
-                                <input type="number" class="form-control" id="phone" placeholder="默认消费"
-                                       ng-blur="queryMemberInfo();"/>
+                                <input type="number" class="form-control" id="phone" placeholder="默认消费"/>
                             </div>
                             <!--会员账户信息 start-->
                             <div class="form-group">
@@ -374,15 +372,6 @@
                             </div>
                             <div class="form-group">
                                 <label>消费项目</label>
-                                <!-- <select class="form-control select2 select2-hidden-accessible"
-                                         ng-change="selectProductInfo()"
-                                         ng-model="productItemInfo"
-                                         ng-options="value as value.name for value in productItems" id="productItem"
-                                         multiple=""
-                                         data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
-                                         aria-hidden="true">
-                                     <option value="" selected="selected">请选择消费项目</option>
-                                 </select>-->
                                 <select class="form-control select2 select2-hidden-accessible"
                                         ng-change="selectProductInfo()"
                                         ng-model="productItemInfo"
@@ -414,7 +403,7 @@
         <!--会员消费 end-->
 
         <!--会员充值 start-->
-        <div class="modal fade" id="user-recharge" ng-controller="IndexRechargeCtrl">
+        <div class="modal fade" id="user-recharge" ng-controller="MemberRechargeCtrl">
 
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -428,7 +417,7 @@
                             <div class="form-group">
                                 <label>会员手机</label>
                                 <input type="number" class="form-control" id="rechargePhone"
-                                       placeholder="请输入会员手机号" ng-blur="queryMemberInfo();"/>
+                                       placeholder="请输入会员手机号"/>
                             </div>
                             <div class="form-group">
                                 <label>付款方式</label>

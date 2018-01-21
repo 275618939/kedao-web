@@ -14,6 +14,9 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $scope.onConsumeShow = function () {
                     $("#user-consume").modal('show');
                 }
+                $scope.onRechargeShow = function () {
+                    $("#user-recharge").modal('show');
+                }
                 $scope.onUpdateClose = function () {
                     $("#update-member").modal('hide');
                 }
@@ -71,11 +74,37 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 //会员消费信息
                 $scope.onMemberConsumeQuery = function (data) {
                     $scope.onConsumeShow();
-                    $("#updateMemberPhone").val(data.cellNumber);
-                    $("#updateMemberName").val(data.name);
-                    $("#updateMemberCard").val(data.card);
                     $("#memberId").val(data.id);
+                    $scope.queryMemberInfo(data.cellNumber);
                 }
+                //会员充值信息
+                $scope.onMemberRechargeQuery = function (data) {
+                    $scope.onRechargeShow();
+                    $("#memberId").val(data.id);
+                    $("#rechargePhone").val(data.cellNumber);
+                }
+                //查询会员信息
+                $scope.queryMemberInfo = function (phone) {
+                    var promise = memberService.queryMemberInfo(phone);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            alert(data.desc);
+                            return;
+                        }
+                        if (data.value == null || data.value == "undefined") {
+                            alert("会员不存在!");
+                            return;
+                        }
+                        //会员信息
+                        $scope.memberInfo = data.value;
+                        $("#phone").val(phone);
+                        $("#money").text(commonService.getYuan(data.value.money));
+                        $("#given").text(commonService.getYuan(data.value.given));
+                        $("#discount").val(commonService.getDiscountConvert(data.value.discount));
+
+                    });
+
+                };
 
 
                 //更新会员
@@ -190,7 +219,6 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
             function ($scope, memberService, productService, commonService) {
                 //初始化消费项目信息
                 $('.select2').select2();
-                //$("#phone").val(commonService.defualt_consumer_name);
                 $("#discount").val("不打折")
                 //查询消费类别信息
                 $scope.classItemInfo = 0;
@@ -214,33 +242,6 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     $scope.productItem = JSON.parse($scope.productItemInfo)
                     $("#cunsumeMoney").val(commonService.getYuan($scope.productItem.price));
                 };
-                //查询会员信息
-                $scope.queryMemberInfo = function () {
-                    var phone = $("#phone").val();
-                    if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
-                        return;
-                    }
-                    var promise = memberService.queryMemberInfo(phone);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            alert(data.desc);
-                            return;
-                        }
-                        if (data.value == null || data.value == "undefined") {
-                            alert("会员不存在!");
-                            return;
-                        }
-                        //会员信息
-                        $scope.memberInfo = data.value;
-                        var money = data.value.money;
-                        $("#money").text(commonService.getYuan(data.value.money));
-                        $("#given").text(commonService.getYuan(data.value.given));
-                        $("#discount").val(commonService.getDiscountConvert(data.value.discount));
-
-                    });
-
-                };
                 $scope.onConsumeClose = function () {
                     $("#user-consume").modal('hide');
                 }
@@ -249,6 +250,11 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var payType = $("#payType").val();
                     var money = $("#cunsumeMoney").val();
                     var given = $("#cunsumeGiven").val();
+                    var memberId = $("#memberId").val();
+                    if (memberId == null) {
+                        alert("请选择一个会员");
+                        return;
+                    }
                     if (payType == null || payType == "undefined") {
                         alert("请选择一种支付方式!");
                         return;
@@ -272,10 +278,6 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         }
                     } else {
                         given = 0;
-                    }
-                    var memberId = commonService.defualt_consumer_id;
-                    if (null != $scope.memberInfo && $scope.memberInfo.id != "undefined") {
-                        memberId = $scope.memberInfo.id;
                     }
                     var data = {
                         id: memberId,
@@ -325,28 +327,6 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     }
 
                 };
-                //查询会员信息
-                $scope.queryMemberInfo = function () {
-                    var phone = $("#rechargePhone").val();
-                    if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
-                        return;
-                    }
-                    var promise = memberService.queryMemberInfo(phone);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            alert(data.desc);
-                            return;
-                        }
-                        if (data.value == null || data.value == "undefined") {
-                            alert("会员不存在!");
-                            return;
-                        }
-                        //会员信息
-                        $scope.memberInfo = data.value;
-                    });
-
-                };
                 $scope.onRechargeClose = function () {
                     $("#user-recharge").modal('hide');
                 }
@@ -355,8 +335,9 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var payType = $("#rechargePayType").val();
                     var money = $("#rechargeMoney").val();
                     var given = $("#rechargeGiven").val();
-                    if (null == $scope.memberInfo || $scope.memberInfo.id == "undefined") {
-                        alert("请选择一个会员!");
+                    var memberId = $("#memberId").val();
+                    if (memberId == null) {
+                        alert("请选择一个会员");
                         return;
                     }
                     if (payType == null || payType == "undefined") {
@@ -390,7 +371,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         given = 0;
                     }
                     var data = {
-                        id: $scope.memberInfo.id,
+                        id: memberId,
                         payType: payType,
                         packetId: $scope.packetItem.id,
                         money: commonService.getFen(money),
