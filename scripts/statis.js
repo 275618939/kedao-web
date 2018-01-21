@@ -41,8 +41,7 @@ require.config({
             deps: ['angular'],
             exports: 'angularRoute'
         }
-    },
-    deps: ['jquery', 'bootstrap', 'adminlte']
+    }
 });
 //
 require([
@@ -50,9 +49,8 @@ require([
         'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte',
         'filters/intervalFilters',
         'filters/moneyFilters',
-        'filters/powerFilters',
         'filters/sexFilters',
-        'controllers/staffController',
+        'controllers/statController',
         'controllers/commonController',
         'interceptors/requestInterceptors'
     ],
