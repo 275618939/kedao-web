@@ -11,7 +11,7 @@ define(['services/services', 'services/commonService'],
                     shopCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/shop",
+                            url: "http://" + commonService.getServerUrl() + "/app/shop",
                             method: "put",
                             data: "name=" + data.name + "&description=" + data.description + "&address=" + data.address + "&telephone=" + data.telephone + "&longitude =" + data.longitude + "&latitude =" + data.latitude
                         }).success(function (data, status, headers, config) {
@@ -87,7 +87,7 @@ define(['services/services', 'services/commonService'],
                     forgetPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/worker/forget",
+                            url: "http://" + commonService.getServerUrl() + "/app/worker/forget",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify
                         }).success(function (data, status, headers, config) {
@@ -101,9 +101,9 @@ define(['services/services', 'services/commonService'],
                     setPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/worker/setpwd",
+                            url: "http://" + commonService.getServerUrl() + "/app/staff/setpwd",
                             method: "post",
-                            data: "account=" + data.account + "&verify=" + data.verify + "&newpwd=" + data.newpwd
+                            data: "account=" + data.account + "&verify=" + data.verify + "&newpwd=" + data.newpwd + "&oldpwd=" + data.oldpwd
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {

@@ -1,4 +1,3 @@
-
 require.config({
     paths: {
         angular: 'vendor/angular',
@@ -45,6 +44,7 @@ require([
         'filters/intervalFilters',
         'filters/numberNullFilters',
         'controllers/shopController',
+        'controllers/commonController',
         'interceptors/requestInterceptors'
     ],
     function (angular, angularRoute, app, domReady) {

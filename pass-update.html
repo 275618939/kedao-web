@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>可道管理系统登陆</title>
+    <title>可道管理系统</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.min.css">
@@ -19,33 +19,31 @@
 
 </head>
 <body class="hold-transition login-page">
-<div class="login-box" ng-controller="LoginCtrl">
+<div class="login-box" ng-controller="UpdatePassCtrl">
     <div class="login-logo">
         <a href="index.html"><b>可</b>道</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <!--错误信息-->
-        <!--    <div class="modal-dialog modal-sm" role="document" id="alert-msg" style="display: none;">
-                <div class="alert alert-warning alert-dismissible">
-
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="false">×</button>
-                    <h4><i class="icon fa fa-warning"></i> Alert!</h4>
-                    Warning alert preview. This alert is dismissable.
-                </div>
-            </div>-->
-        <p class="login-box-msg">输入手机号、密码登录系统</p>
-
+        <p class="login-box-msg">修改密码</p>
         <form>
             <div class="form-group has-feedback">
-                <input type="number" class="form-control" id="phone" placeholder="手机号">
+                <input type="number" class="form-control" id="phone" placeholder="手机号" ng-blur="onImageVerify()">
                 <span class="glyphicon glyphicon-phone form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" id="password" placeholder="密码">
+                <input type="password" class="form-control" id="nowPassword" placeholder="当前密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-            <div class="row"  ng-show="showIdentifying.show">
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="password" placeholder="新密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="checkPassword" placeholder="确认密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row" ng-show="showIdentifying.show">
                 <div class="col-xs-5">
                     <input type="text" class="form-control" id="identifying" placeholder="验证码">
                 </div>
@@ -59,37 +57,19 @@
                 </div>
             </div>
             <br/>
-            <div class="row">
-                <div class="col-xs-8">
-                   <!-- <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> 记住登录信息
-                        </label>
-                    </div>-->
+            <div class="row" ng-controller="CommonCtrl">
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block btn-warning" ng-click="goBack();">返回
+                    </button>
                 </div>
                 <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onLogin();">登录</button>
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onSetPwd();">修改
+                    </button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
-
-        <!--    <div class="social-auth-links text-center">
-                <p>- 或者 -</p>
-                <a href="#" class="btn btn-block btn-social btn-info btn-flat"><i class="fa fa-weixin"></i> 使用微信登陆</a>
-                &lt;!&ndash;   <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-                     Google+</a>&ndash;&gt;
-            </div>-->
-        <!-- /.social-auth-links -->
-        <div class="row">
-            <div class="col-md-3">
-                <a href="pass-forget.html">忘记密码</a><br>
-            </div>
-            <div class="col-md-6">
-                <a href="register.html" class="text-center">注册</a>
-            </div>
-        </div>
 
 
     </div>
@@ -106,14 +86,5 @@
 <!-- AdminLTE App -->
 <script src="bower_components/dist/js/adminlte.min.js"></script>
 <script src="bower_components/dist/js/icheck.min.js"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
 </body>
 </html>

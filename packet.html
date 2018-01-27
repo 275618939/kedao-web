@@ -47,33 +47,23 @@
                             <span class="hidden-xs">个人信息</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- Menu Body -->
-                            <li>
-                                <ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i>
-                                            我的消费记录
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i>
-                                            我的充值记录
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <!-- /.row -->
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">退出</a>
+                            <div class="box box-widget widget-user-2">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header bg-light-blue-active">
+                                    <div class="widget-user-image">
+                                        <img class="img-circle" src="dist/img/kedao.png" alt="User Avatar">
                                     </div>
+                                    <!-- /.widget-user-image -->
+                                    <h3 class="widget-user-username">信息</h3>
                                 </div>
-                            </li>
+                                <div class="box-footer no-padding" ng-controller="CommonCtrl">
+                                    <ul class="nav nav-stacked">
+                                        <li><a href="pass-update.html" style="color: #001a35">修改密码</a></li>
+                                        <li><a href="#" ng-click="onLogout();" style="color: #001a35">退出</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
                         </ul>
                     </li>
                 </ul>

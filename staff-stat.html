@@ -53,12 +53,10 @@
                                     <!-- /.widget-user-image -->
                                     <h3 class="widget-user-username">信息</h3>
                                 </div>
-                                <div class="box-footer no-padding">
+                                <div class="box-footer no-padding" ng-controller="CommonCtrl">
                                     <ul class="nav nav-stacked">
-                                        <li><a href="#" style="color: #001a35">消费记录</a></li>
-                                        <li><a href="#" style="color: #001a35">充值记录</a></li>
-                                        <li><a href="#" style="color: #001a35">个人信息</a></li>
-                                        <li><a href="#" style="color: #001a35">退出</a></li>
+                                        <li><a href="pass-update.html" style="color: #001a35">修改密码</a></li>
+                                        <li><a href="#" ng-click="onLogout();" style="color: #001a35">退出</a></li>
                                     </ul>
                                 </div>
                             </div>

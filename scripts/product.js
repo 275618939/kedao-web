@@ -41,6 +41,7 @@ require([
         'filters/moneyFilters',
         'filters/discountFilters',
         'controllers/productController',
+        'controllers/commonController',
         'interceptors/requestInterceptors'
     ],
     function (angular, angularRoute, app, domReady) {

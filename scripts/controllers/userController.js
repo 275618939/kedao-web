@@ -151,7 +151,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                             return;
                         }
                         //跳转至密码重置页
-                        window.location.href = "pass-reset.html";
+                        window.location.href = "pass-update.html";
                     });
                 };
                 //获得图片验证码
@@ -181,6 +181,12 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         $("#img-identify").attr("src", "data:image/png;base64," + rimage);
                     }
                 };
+                $(document).keypress(function (e) {
+                    // 回车键事件
+                    if (e.which == 13) {
+                        $scope.onLogin();
+                    }
+                });
                 //登录
                 $scope.onLogin = function () {
                     var phone = $("#phone").val();
@@ -203,9 +209,9 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                     //构造加密参数
                     var pass = phone + $.md5(phone + password);
                     if (identifying != null && identifying.trim().length > 0 && identifying != "undefined") {
-                       pass += identifying.trim();
+                        pass += identifying.trim();
                     }
-                    pass=$.md5(pass);
+                    pass = $.md5(pass);
                     var data = {account: phone, verify: identifying, password: pass};
                     var promise = userService.userLogin(data);
                     promise.then(function (data) {
@@ -229,10 +235,39 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
         controllers.controller('UpdatePassCtrl', ['$scope', 'UserService', 'CommonService',
             function ($scope, userService, commonService) {
                 $scope.showIdentifying = {"show": false};
+                //获得图片验证码
+                $scope.onImageVerify = function (rimage) {
+                    $scope.showIdentifying = {"show": true};
+                    var phone = $("#phone").val();
+                    if (isNaN(phone) || (phone.length != 11)) {
+                        $("#phone").focus();
+                        return;
+                    }
+                    //发送请求道服务端
+                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                        $("#phone").focus();
+                        return;
+                    }
+                    if (rimage == null || rimage.trim() == "" || rimage == "undefined") {
+                        //获取图片验证码
+                        var promise = userService.getImageVerify(phone);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                return;
+                            }
+                            $("#img-identify").attr("src", "data:image/png;base64," + data.value);
+                        });
+
+                    } else {
+                        $("#img-identify").attr("src", "data:image/png;base64," + rimage);
+                    }
+                };
                 //重置密码
                 $scope.onSetPwd = function () {
                     var phone = $("#phone").val();
+                    var nowPassword = $("#nowPassword").val();
                     var password = $("#password").val();
+                    var checkPassword = $("#checkPassword").val();
                     var identifying = $("#identifying").val();
                     if (isNaN(phone) || (phone.length != 11)) {
                         alert("手机号码为11位数字！请正确填写！");
@@ -244,8 +279,16 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         alert("请输入正确的手机号!");
                         return;
                     }
+                    if (nowPassword.trim() == "" || nowPassword == null) {
+                        alert("请输入当前密码！");
+                        return;
+                    }
                     if (password.trim() == "" || password == null) {
                         alert("请输入密码！");
+                        return;
+                    }
+                    if (password != checkPassword) {
+                        alert("两次密码输入不一致！");
                         return;
                     }
                     if (identifying.trim() == "" || identifying == null) {
@@ -253,8 +296,9 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //构造加密参数
-                    var pass = $.md5(phone + password);
-                    var data = {account: phone, verify: identifying, newpwd: pass};
+                    var newPass = $.md5(phone + password);
+                    var oldPass = $.md5(phone + password + identifying);
+                    var data = {account: phone, verify: identifying, newpwd: newPass, oldpwd: oldPass};
                     var promise = userService.setPass(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
@@ -265,7 +309,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                             }
                             return;
                         }
-                        window.location.href = "hair-login.html";
+                        window.history.back();
                     });
 
                 };
