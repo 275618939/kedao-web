@@ -4,6 +4,10 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
         /*服务信息管理*/
         controllers.controller('ProductManagerCtrl', ['$scope', 'ProductService', 'CommonService',
             function ($scope, productService, commonService) {
+
+                $scope.onClassShow = function () {
+                    $("#add-service-type").modal('show');
+                }
                 //关闭服务类别信息
                 $scope.onServiceClose = function () {
                     $("#add-service-type").modal('hide');
@@ -23,12 +27,19 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                     var promise = productService.queryClassfyInfo();
                     promise.then(function (data) {
                         $scope.classItems = data.value;
+                        //增加添加服务选项
+                        var addServiceItem = {id: 99, name: "点击添加服务类别"};
+                        $scope.classItems.push(addServiceItem);
                     });
                 };
                 $scope.loadService();
                 //查询产品信息
                 $scope.productItemInfo = 0;
                 $scope.selectClassfyInfo = function () {
+                    if ($scope.classItemInfo == 99) {
+                        $scope.onClassShow();
+                        return;
+                    }
                     var promise = productService.queryProductInfo($scope.classItemInfo);
                     promise.then(function (data) {
                         $scope.productItems = data.value;

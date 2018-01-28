@@ -95,8 +95,6 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">功能栏</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="packet.html"><i class="fa fa-link"></i> <span>套餐管理</span></a></li>
-                <li><a href="service.html"><i class="fa fa-link"></i> <span>服务管理</span></a></li>
                 <li><a href="consume.html"><i class="fa fa-link"></i> <span>消费管理</span></a></li>
                 <li><a href="recharge.html"><i class="fa fa-link"></i> <span>充值管理</span></a></li>
                 <li class="active"><a href="users.html"><i class="fa fa-link"></i> <span>会员管理</span></a></li>
@@ -104,6 +102,8 @@
                 <li><a href="shop-day-stat.html"><i class="fa fa-link"></i> <span>店日统计</span></a>
                 </li>
                 <li><a href="shop-month-stat.html"><i class="fa fa-link"></i> <span>店月统计</span></a></li>
+                <li><a href="packet.html"><i class="fa fa-link"></i> <span>套餐管理</span></a></li>
+                <li><a href="service.html"><i class="fa fa-link"></i> <span>服务管理</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -181,7 +181,7 @@
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-warning" ng-click=onUpdateMemberQuery(item)>
-                                    更新
+                                    修改
                                 </button>
                                 <button type="button" class="btn btn-warning" ng-click=onMemberConsumeQuery(item)>消费
                                 </button>
@@ -236,13 +236,13 @@
                             </div>
                             <div class="form-group">
                                 <label>密码</label>
-                                <input type="password" class="form-control" id="memberPassword"
+                                <input type="password" class="form-control" id="memberPassword" value="123456"
                                        placeholder="请输入卡号密码"/>
                             </div>
                             <div class="form-group">
                                 <label>确认密码</label>
                                 <input type="password" class="form-control" id="memberCheckPassword"
-                                       placeholder="请确认卡号密码"/>
+                                       placeholder="请确认卡号密码" value="123456"/>
                             </div>
                             <div class="form-group">
                                 <label>卡号</label>
@@ -269,7 +269,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">更新会员</h4>
+                        <h4 class="modal-title">修改会员</h4>
                     </div>
                     <div class="modal-body">
                         <form role="form">
@@ -294,7 +294,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" ng-click="onMemberUpdate();">更新</button>
+                        <button type="button" class="btn btn-primary" ng-click="onMemberUpdate();">修改</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
