@@ -1,7 +1,7 @@
-define(['controllers/controllers', 'services/commonService'],
+define(['controllers/controllers', 'services/commonService', 'services/userService'],
     function (controllers) {
-        controllers.controller('CommonCtrl', ['$scope', 'CommonService',
-            function ($scope, commonService) {
+        controllers.controller('CommonCtrl', ['$scope', 'CommonService', 'UserService',
+            function ($scope, commonService, userService) {
 
                 //返回到上一步
                 $scope.goBack = function () {
@@ -23,6 +23,7 @@ define(['controllers/controllers', 'services/commonService'],
                 };
                 //登出
                 $scope.onLogout = function () {
+                    userService.userLogout();
                     commonService.delCookie("hair-sessionId");
                     window.location.href = "login.html";
                 };

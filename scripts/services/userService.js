@@ -31,10 +31,24 @@ define(['services/services', 'services/commonService'],
                             info = "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password;
                         }
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/staff/login",
+                            url: "http://" + commonService.getServerUrl() + "/app/worker/login",
                             method: "POST",
                             data: info
                             //data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*用户登出*/
+                    userLogout: function () {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getServerUrl() + "/app/worker/logout",
+                            method: "DELETE",
+                            data: {}
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -46,8 +60,8 @@ define(['services/services', 'services/commonService'],
                     userCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/staff/register",
-                            method: "post",
+                            url: "http://" + commonService.getServerUrl() + "/app/worker/register",
+                            method: "put",
                             data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
@@ -101,7 +115,7 @@ define(['services/services', 'services/commonService'],
                     setPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/staff/setpwd",
+                            url: "http://" + commonService.getServerUrl() + "/app/worker/modpwd",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify + "&newpwd=" + data.newpwd + "&oldpwd=" + data.oldpwd
                         }).success(function (data, status, headers, config) {
