@@ -1,16 +1,16 @@
 /*店业务处理*/
 define(['services/services', 'services/commonService'],
     function (services) {
-        services.factory('ShopService', ['$http', '$q', 'CommonService',
+        services.factory('WorkStaffService', ['$http', '$q', 'CommonService',
             function ($http, $q, commonService) {
                 return {
-                    /*创建店面*/
-                    shopCreate: function (data) {
+                    /*创建员工信息*/
+                    staffCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/shop",
-                            method: "PUT",
-                            data: "id=" + data.id + "&name=" + data.name + "&description=" + data.description + "&address=" + data.address + "&telephone=" + data.telephone + "&longitude =" + data.longitude + "&latitude =" + data.latitude
+                            url: "http://" + commonService.getServerUrl() + "/business/waiter",
+                            method: "put",
+                            data: "shopId=" + data.shopId + "&cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -18,13 +18,13 @@ define(['services/services', 'services/commonService'],
                         });
                         return deferred.promise;
                     },
-                    /*更新店面*/
-                    shopUpdate: function (data) {
+                    /*更新员工信息*/
+                    staffUpdate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/shop",
+                            url: "http://" + commonService.getServerUrl() + "/business/waiter",
                             method: "post",
-                            data: "id=" + data.id + "&name=" + data.name + "&description=" + data.description + "&address=" + data.address + "&telephone=" + data.telephone
+                            data: "id=" + data.id + "&name=" + data.name + "&shopId=" + data.shopId + "&power=" + data.power
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -32,11 +32,11 @@ define(['services/services', 'services/commonService'],
                         });
                         return deferred.promise;
                     },
-                    /*获取店信息*/
-                    getShopList: function (page) {
+                    /*获取店员工信息*/
+                    getShopStaffList: function (shopId, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/shop/" + page + "/" + commonService.getMessageCount() + "",
+                            url: "http://" + commonService.getServerUrl() + "/business/waiter/" + shopId + "/" + page + "/" + commonService.getMessageCount() + "",
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -45,11 +45,6 @@ define(['services/services', 'services/commonService'],
                             deferred.reject(data);
                         });
                         return deferred.promise;
-                    },
-                    getDownName: function (url) {
-                        var index = url.lastIndexOf("/");
-                        var str = url.substring(index + 1, url.length);
-                        return str;
                     }
 
                 };

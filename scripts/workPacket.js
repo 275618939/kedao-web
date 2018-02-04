@@ -3,24 +3,15 @@ require.config({
         angular: 'vendor/angular',
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
-        md5: 'vendor/jQuery.md5',
-        chart: '../bower_components/dist/js/Chart',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
         adminlte: '../bower_components/dist/js/adminlte.min',
+        /*      'ui.bootstrap': 'vendor/ui-bootstrap-tpls.min',*/
         domReady: 'vendor/domReady'
-
     },
     shim: {
         jquery: {
             exports: 'jquery'
-        },
-        md5: {
-            deps: ['jquery'],
-            exports: 'md5'
-        },
-        chart: {
-            exports: 'chart'
         },
         select: {
             deps: ['jquery'],
@@ -40,16 +31,21 @@ require.config({
         }, angularRoute: {
             deps: ['angular'],
             exports: 'angularRoute'
-        }
-    }
+        }/*,
+         'ui.bootstrap': {
+         deps: ['angular', 'bootstrap'],
+         exports: 'ui.bootstrap'
+         }*/
+    },
+    deps: ['bootstrap']//先加载bootstrap文件
 });
-//
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte',
+        'app', 'domReady', 'jquery', 'select', 'bootstrap', 'adminlte',
         'filters/intervalFilters',
         'filters/moneyFilters',
-        'controllers/shopController',
+        'filters/discountFilters',
+        'controllers/workPacketController',
         'controllers/commonController',
         'interceptors/requestInterceptors'
     ],

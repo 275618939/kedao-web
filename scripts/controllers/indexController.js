@@ -1,5 +1,18 @@
-define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/consumeService'],
+define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/consumeService', 'services/paramService'],
     function (controllers) {
+
+        /*初始化*/
+        controllers.controller('IndexInitCtrl', ['$scope', 'MemberService', 'ProductService', 'CommonService', 'ParamService',
+            function ($scope, memberService, productService, commonService, paramService) {
+                $scope.first = paramService.getValue("first");
+                //第一次进入系统
+                if ($scope.first == true) {
+                    //跳转到店管理页
+                    //window.location.href = "shop.html?addShop=true";
+                }
+
+
+            }]);
 
         /*消费*/
         controllers.controller('IndexConsumeCtrl', ['$scope', 'MemberService', 'ProductService', 'CommonService',

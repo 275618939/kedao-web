@@ -8,7 +8,7 @@ define(['services/services', 'services/commonService'],
                     packetCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/packet",
+                            url: "http://" + commonService.getServerUrl() + "/business/packet",
                             method: "put",
                             data: "discount=" + data.discount + "&name=" + data.name + "&money=" + data.money + "&given=" + data.given + "&retain=" + data.retain
                         }).success(function (data, status, headers, config) {
@@ -22,7 +22,7 @@ define(['services/services', 'services/commonService'],
                     packetUpdate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/packet",
+                            url: "http://" + commonService.getServerUrl() + "/business/packet",
                             method: "post",
                             data: "id=" + data.id + "&discount=" + data.discount + "&name=" + data.name + "&money=" + data.money + "&given=" + data.given + "&retain=" + data.retain
                         }).success(function (data, status, headers, config) {
@@ -36,7 +36,7 @@ define(['services/services', 'services/commonService'],
                     getPacketList: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/packet",
+                            url: "http://" + commonService.getAppServerUrl() + "/business/packet",
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

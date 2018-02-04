@@ -8,7 +8,7 @@ define(['services/services', 'services/commonService'],
                     staffCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/shop/staff",
+                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter",
                             method: "put",
                             data: "cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power
                         }).success(function (data, status, headers, config) {
@@ -22,7 +22,7 @@ define(['services/services', 'services/commonService'],
                     staffUpdate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/staff",
+                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter",
                             method: "post",
                             data: "id=" + data.id + "&name=" + data.name + "&cellNumber=" + data.cellNumber
                         }).success(function (data, status, headers, config) {
@@ -36,21 +36,7 @@ define(['services/services', 'services/commonService'],
                     getShopStaffList: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/shop/staff/" + page + "/" + commonService.getMessageCount() + "",
-                            method: "get",
-                            data: {}
-                        }).success(function (data, status, headers, config) {
-                            deferred.resolve(data);
-                        }).error(function (data, status, headers, config) {
-                            deferred.reject(data);
-                        });
-                        return deferred.promise;
-                    },
-                    /*获取员工信息*/
-                    getStaffList: function (shopId, page) {
-                        var deferred = $q.defer();
-                        $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/staff/" + shopId + "/" + page + "/" + commonService.getMessageCount() + "",
+                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter/" + page + "/" + commonService.getMessageCount() + "",
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

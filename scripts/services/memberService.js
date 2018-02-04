@@ -39,7 +39,7 @@ define(['services/services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getAppServerUrl() + "/app/consume",
                             method: "post",
-                            data: "id=" + data.id + "&payType=" + data.payType + "&productId=" + data.productId + "&money=" + data.money + "&given=" + data.given
+                            data: "id=" + data.id + "&payType=" + data.payType + "&items=" + data.items + "&money=" + data.money + "&given=" + data.given + "&productName=" + data.productName
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -118,6 +118,50 @@ define(['services/services', 'services/commonService'],
                             url: "http://" + commonService.getAppServerUrl() + "/app/member",
                             method: "put",
                             data: info
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*查询最近关注的微信会员*/
+                    queryWxRecent: function () {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/recent",
+                            method: "get",
+                            data: {}
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*绑定微信会员*/
+                    bindMember: function (data) {
+                        var deferred = $q.defer();
+                        var info = "id=" + data.id + "&openId=" + data.openId;
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/member/bind",
+                            method: "post",
+                            data: info
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*查询会员关注二维码*/
+                    queryWxQrcode: function (data) {
+                        var deferred = $q.defer();
+                        var info = "id=" + data.id + "&openId=" + data.openId;
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/qrcode",
+                            method: "get",
+                            data: {}
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {

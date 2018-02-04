@@ -1,6 +1,6 @@
 define(['services/services', 'services/commonService'],
     function (services) {
-        services.factory('UserService', ['$http', '$q', 'CommonService',
+        services.factory('WorkService', ['$http', '$q', 'CommonService',
             function ($http, $q, commonService) {
                 return {
                     downCourse: 2,
@@ -11,7 +11,7 @@ define(['services/services', 'services/commonService'],
                     shopCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/shop",
+                            url: "http://" + commonService.getServerUrl() + "/business/shop",
                             method: "put",
                             data: "name=" + data.name + "&description=" + data.description + "&address=" + data.address + "&telephone=" + data.telephone + "&longitude =" + data.longitude + "&latitude =" + data.latitude
                         }).success(function (data, status, headers, config) {
@@ -31,7 +31,7 @@ define(['services/services', 'services/commonService'],
                             info = "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password;
                         }
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/login",
+                            url: "http://" + commonService.getServerUrl() + "/business/worker/login",
                             method: "POST",
                             data: info
                             //data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password
@@ -46,7 +46,7 @@ define(['services/services', 'services/commonService'],
                     userLogout: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/logout",
+                            url: "http://" + commonService.getServerUrl() + "/business/worker/logout",
                             method: "DELETE",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -60,8 +60,8 @@ define(['services/services', 'services/commonService'],
                     userCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/register",
-                            method: "put",
+                            url: "http://" + commonService.getServerUrl() + "/business/worker/register",
+                            method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
@@ -74,7 +74,7 @@ define(['services/services', 'services/commonService'],
                     getImageVerify: function (account) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/image/verify/" + account,
+                            url: "http://" + commonService.getServerUrl() + "/business/image/verify/" + account,
                             method: "get"
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
@@ -87,7 +87,7 @@ define(['services/services', 'services/commonService'],
                     sendVerify: function (mobile) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/sms/verify",
+                            url: "http://" + commonService.getServerUrl() + "/business/sms/verify",
                             method: "post",
                             data: "account=" + mobile
                         }).success(function (data, status, headers, config) {
@@ -101,7 +101,7 @@ define(['services/services', 'services/commonService'],
                     forgetPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/forget",
+                            url: "http://" + commonService.getServerUrl() + "/business/worker/forget",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify
                         }).success(function (data, status, headers, config) {
@@ -115,7 +115,7 @@ define(['services/services', 'services/commonService'],
                     setPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/modpwd",
+                            url: "http://" + commonService.getServerUrl() + "/business/worker/modpwd",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify + "&newpwd=" + data.newpwd + "&oldpwd=" + data.oldpwd
                         }).success(function (data, status, headers, config) {

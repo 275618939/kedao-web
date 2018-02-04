@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>可道管理系统用户注册</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../bower_components/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../bower_components/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../bower_components/dist/css/blue.css">
+    <![endif]-->
+    <script data-main="scripts/work" src="../scripts/vendor/require.js"></script>
+
+</head>
+<body class="hold-transition login-page">
+<div class="login-box" ng-controller="RegisterCtrl">
+    <div class="login-logo">
+        <a href="../index.html"><b>可</b>道</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">可道会员管理系统注册</p>
+
+        <form>
+            <div class="form-group has-feedback">
+                <input type="number" class="form-control" id="phone" placeholder="手机号">
+                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="password" placeholder="密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <input type="text" class="form-control" id="identifying" placeholder="验证码">
+                </div>
+                <div class="col-xs-4">
+                    <button type="button" id="captcha" class="btn btn-block btn-success" ng-click="sendCaptcha()">
+                        点击发送
+                    </button>
+                </div>
+            </div>
+            <br/>
+            <div class="row" ng-controller="CommonCtrl">
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block btn-warning" ng-click="goBack();">返回</button>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onRegister();">注册
+                    </button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+
+    </div>
+    <!-- /.login-box-body -->
+
+</div>
+<!-- /.login-box -->
+
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../bower_components/dist/js/adminlte.min.js"></script>
+<script src="../bower_components/dist/js/icheck.min.js"></script>
+</body>
+</html>

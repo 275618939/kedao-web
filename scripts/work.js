@@ -3,36 +3,16 @@ require.config({
         angular: 'vendor/angular',
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
-        md5: 'vendor/jQuery.md5',
-        chart: '../bower_components/dist/js/Chart',
-        select: '../bower_components/dist/js/select2.min',
-        bootstrap: 'vendor/bootstrap3.3.4',
-        adminlte: '../bower_components/dist/js/adminlte.min',
+        jqueryMd5: 'vendor/jQuery.md5',
         domReady: 'vendor/domReady'
-
     },
     shim: {
         jquery: {
             exports: 'jquery'
         },
-        md5: {
+        jqueryMd5: {
             deps: ['jquery'],
-            exports: 'md5'
-        },
-        chart: {
-            exports: 'chart'
-        },
-        select: {
-            deps: ['jquery'],
-            exports: 'select'
-        },
-        bootstrap: {
-            deps: ['jquery'],
-            exports: 'bootstrap'
-        },
-        adminlte: {
-            deps: ['jquery', 'bootstrap'],
-            exports: 'adminlte'
+            exports: 'jqueryMd5'
         },
         angular: {
             deps: ['jquery'],
@@ -41,17 +21,22 @@ require.config({
             deps: ['angular'],
             exports: 'angularRoute'
         }
-    }
+    },
+    waitSeconds: 0
+    //deps:['angular'],//angular
+    /* urlArgs: "bust=" + (new Date()).getTime()  //∑¿÷π∂¡»°ª∫¥Ê£¨µ˜ ‘”√*/
 });
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte',
+        'app', 'domReady', 'jquery', 'jqueryMd5',
         'filters/intervalFilters',
-        'filters/moneyFilters',
-        'controllers/shopController',
+        'controllers/workController',
         'controllers/commonController',
         'interceptors/requestInterceptors'
+        /*  'directives/ngbkFocus'*/
+        // Any individual controller, service, directive or filter file
+        // that you add will need to be pulled in here.
     ],
     function (angular, angularRoute, app, domReady) {
         'use strict';
@@ -60,6 +45,7 @@ require([
                 $httpProvider.interceptors.push('RequestInterceptors');
             }
         ]);
+
         domReady(function () {
             angular.bootstrap(document, ['zhwApp']);
             // The following is required if you want AngularJS Scenario tests to work

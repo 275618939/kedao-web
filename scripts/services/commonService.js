@@ -43,6 +43,10 @@ define(['services/services'],
                              "label": "员工权限"
                              },*/
                             {
+                                "id": 0xf0,
+                                "label": "员工权限"
+                            },
+                            {
                                 "id": 0xff7,
                                 "label": "店长权限"
                             }/*,

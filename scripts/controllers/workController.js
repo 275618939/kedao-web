@@ -1,8 +1,8 @@
-define(['controllers/controllers', 'services/userService', 'services/commonService', 'services/paramService'],
+define(['controllers/controllers', 'services/workService', 'services/commonService', 'services/paramService'],
     function (controllers) {
         /*用户注册*/
-        controllers.controller('RegisterCtrl', ['$scope', 'UserService', 'CommonService',
-            function ($scope, userService, commonService) {
+        controllers.controller('RegisterCtrl', ['$scope', 'WorkService', 'CommonService',
+            function ($scope, workService, commonService) {
                 $scope.InterValObj; // timer变量，控制时间
                 $scope.curCount = 0;	  // 当前剩余秒数
                 $scope.count = 30;     // 倒计时长度
@@ -32,14 +32,14 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                     //构造加密参数
                     var pass = $.md5(phone + password);
                     var data = {account: phone, verify: identifying, password: pass};
-                    var promise = userService.userCreate(data);
+                    var promise = workService.userCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             alert(data.desc)
                             return;
                         }
                         //成功后调转到店创建页，提示用户新增店信息
-                        window.location.href = "login.html?first=true";
+                        window.location.href = "work-login.html?first=true";
                     });
                 };
                 //发送验证码
@@ -55,7 +55,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         alert("请输入正确的手机号!");
                         return;
                     }
-                    var promise = userService.sendVerify(phone);
+                    var promise = workService.sendVerify(phone);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             alert(data.desc)
@@ -82,52 +82,9 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                 };
 
             }]);
-        //用户创建店面
-        controllers.controller('ShopCtrl', ['$scope', 'UserService', 'CommonService',
-            function ($scope, userService, commonService) {
-                //创建店面
-                $scope.onCreate = function () {
-                    //店名
-                    var name = $("#name").val();
-                    //店描述信息
-                    var description = $("#description").val();
-                    //店地址信息
-                    var address = $("#address").val();
-                    //电话信息
-                    var telephone = $("#telephone").val();
-                    if (name.trim() == "" || name == null) {
-                        alert("请输入店名！");
-                        return;
-                    }
-                    if (address.trim() == "" || address == null) {
-                        alert("请输入店地址信息！");
-                        return;
-                    }
-                    if (isNaN(telephone) || (telephone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
-                        return;
-                    }
-                    //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(telephone))) {
-                        $("#telephone").focus();
-                        alert("请输入正确的手机号!");
-                        return;
-                    }
-                    var data = {name: name, description: description, address: address, telephone: telephone};
-                    var promise = userService.shopCreate(data);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            alert(data.desc)
-                            return;
-                        }
-                        window.location.href = "hair-index.html";
-                    });
-                };
-            }
-        ]);
         //用户登录
-        controllers.controller('LoginCtrl', ['$scope', 'UserService', 'CommonService', 'ParamService',
-            function ($scope, userService, commonService, paramService) {
+        controllers.controller('LoginCtrl', ['$scope', 'WorkService', 'CommonService', 'ParamService',
+            function ($scope, workService, commonService, paramService) {
                 $scope.showIdentifying = {"show": false};
                 $scope.first = paramService.getValue("first");
                 //忘记密码
@@ -146,7 +103,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                     }
                     //构造加密参数
                     var data = {account: phone, verify: identifying,};
-                    var promise = userService.forgetPass(data);
+                    var promise = workService.forgetPass(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             alert(data.desc)
@@ -171,7 +128,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                     }
                     if (rimage == null || rimage.trim() == "" || rimage == "undefined") {
                         //获取图片验证码
-                        var promise = userService.getImageVerify(phone);
+                        var promise = workService.getImageVerify(phone);
                         promise.then(function (data) {
                             if (data.state != 1) {
                                 return;
@@ -215,7 +172,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                     }
                     pass = $.md5(pass);
                     var data = {account: phone, verify: identifying, password: pass};
-                    var promise = userService.userLogin(data);
+                    var promise = workService.userLogin(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             alert(data.desc);
@@ -226,7 +183,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                             return;
                         }
                         commonService.addCookie("hair-sessionId", data.value);
-                        window.location.href = "index.html?first=" + $scope.first;
+                        //window.location.href = "work/shop.html?first=" + $scope.first;
                     });
 
                 };
@@ -316,6 +273,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                 };
             }
         ]);
+
 
     });
 
