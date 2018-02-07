@@ -155,11 +155,10 @@ define(['services/services', 'services/commonService'],
                         return deferred.promise;
                     },
                     /*查询会员关注二维码*/
-                    queryWxQrcode: function (data) {
+                    queryWxQrcode: function (id) {
                         var deferred = $q.defer();
-                        var info = "id=" + data.id + "&openId=" + data.openId;
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/qrcode",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/qrcode/" + id,
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

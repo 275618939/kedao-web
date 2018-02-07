@@ -70,8 +70,9 @@ define(['controllers/controllers', 'services/workPacketService', 'services/commo
                         }
                         //关闭添加面板
                         $scope.onClose();
+                        $scope.load();
                         //todo 脏数据更新
-                        window.location.href = "packet.html";
+                        //window.location.href = "packet.html";
                     });
                 };
                 //更新套餐信息

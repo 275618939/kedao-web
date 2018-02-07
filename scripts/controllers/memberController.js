@@ -105,6 +105,51 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     });
 
                 };
+                //查询最近关注的会员
+                $scope.queryWxRecentInfo = function () {
+                    var promise = memberService.queryWxRecent();
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            return;
+                        }
+                        //关注信息
+                        $scope.wxRecentInfo = data.value;
+                    });
+                };
+                $scope.queryWxRecentInfo();
+                //绑定微信
+                $scope.onMemberBind = function (id, openId) {
+                    var data = {id: id, openId: openId};
+                    var promise = memberService.bindMember(data);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            alert(data.desc);
+                            return;
+                        }
+                    });
+                };
+
+                //初始化生成二维码
+                $scope.qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: "http://aiyunzhou.com/",
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                $scope.onQrcodeShow = function (id) {
+                    var promise = memberService.queryWxQrcode(id);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            return;
+                        }
+                        $scope.qrcode.makeCode(data.value);
+                        $("#qrcode-member").modal('show');
+                    });
+
+
+                }
 
 
                 //更新会员
