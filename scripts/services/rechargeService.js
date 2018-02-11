@@ -9,7 +9,7 @@ define(['services/services', 'services/commonService'],
                     queryMyRechargeInfo: function (month, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/charge/staff/" + month + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/charge/shop/" + month + "/" + page + "/" + this.PAGE_MAX_SIZE,
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

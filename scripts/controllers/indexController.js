@@ -315,7 +315,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 }
                 //查询当日消费记录
                 $scope.onQueryConsumeInfo = function () {
-                    var promise = consumeService.queryMonthConsumeInfo("2018-01");
+                    var promise = consumeService.queryMonthConsumeInfo($scope.date);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             return;

@@ -356,14 +356,13 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         return;
                     }
                     var data = {
-                            id: memberId,
-                            payType: payType,
-                            productName: productName,
-                            items: "[" + $scope.consumeProductItems.toString() + "]",
-                            money: commonService.getFen(money),
-                            given: commonService.getFen(given)
-                        }
-                        ;
+                        id: memberId,
+                        payType: payType,
+                        productName: productName,
+                        items: "[" + $scope.consumeProductItems.toString() + "]",
+                        money: commonService.getFen(money),
+                        given: commonService.getFen(given)
+                    };
                     var promise = memberService.memberConsume(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
@@ -380,9 +379,18 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
 
             }]);
         /*充值*/
-        controllers.controller('MemberRechargeCtrl', ['$scope', 'MemberService', 'PacketService', 'ProductService', 'CommonService',
-            function ($scope, memberService, packetService, productService, commonService) {
+        controllers.controller('MemberRechargeCtrl', ['$scope', 'MemberService', 'PacketService', 'ProductService', 'CommonService', 'StaffService',
+            function ($scope, memberService, packetService, productService, commonService, staffService) {
 
+                //查询员工信息
+                $scope.staffItemInfo = 0;
+                $scope.queryStaffInfo = function () {
+                    var promise = staffService.getShopStaffList(0);
+                    promise.then(function (data) {
+                        $scope.staffItems = data.value;
+                    });
+                };
+                $scope.queryStaffInfo();
                 //查询套餐信息
                 $scope.packetItemInfo = null;
                 $scope.queryPacketInfo = function () {
@@ -422,6 +430,10 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         alert("请选择一种支付方式!");
                         return;
                     }
+                    if (null == $scope.staffItemInfo || $scope.staffItemInfo == 0) {
+                        alert("请选择一个服务员工!");
+                        return;
+                    }
                     if (null == $scope.packetItem || $scope.packetItem.id == "undefined") {
                         alert("请选择一个套餐!");
                         return;
@@ -451,6 +463,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var data = {
                         id: memberId,
                         payType: payType,
+                        waiterId: $scope.staffItemInfo,
                         packetId: $scope.packetItem.id,
                         money: commonService.getFen(money),
                         given: commonService.getFen(given)

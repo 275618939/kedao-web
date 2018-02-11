@@ -65,7 +65,7 @@ define(['services/services', 'services/commonService'],
                     queryDayStaffServiceInfo: function (id, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/staffServiceDate/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiterServiceDate/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -79,7 +79,7 @@ define(['services/services', 'services/commonService'],
                     queryMonthStaffServiceInfo: function (id, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/staffServiceMonth/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiterServiceMonth/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

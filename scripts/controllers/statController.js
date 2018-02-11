@@ -138,16 +138,6 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                 $scope.statTypeInfo = "消费";
                 $scope.queryId = paramService.getValue("queryId");
                 $scope.queryType = paramService.getValue("queryType"); //0:日，1:月
-                if ($scope.queryId != null && $scope.queryId != "undefined") {
-                    $scope.onQueryInfo
-                }
-                $scope.onQueryInfo = function () {
-                    if ($scope.queryType == 0) {
-                        $scope.onQueryDayStaffServiceInfo();
-                    } else if ($scope.queryType == 1) {
-                        $scope.onQueryMonthStaffServiceInfo();
-                    }
-                }
                 //查询店员日统计信息
                 $scope.onQueryDayStaffServiceInfo = function () {
                     var promise = statService.queryDayStaffServiceInfo($scope.queryId, $scope.currentPage);
@@ -173,6 +163,16 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                         $scope.dataLen = $scope.statItems.length;
                     });
                 };
+                $scope.onQueryInfo = function () {
+                    if ($scope.queryType == 0) {
+                        $scope.onQueryDayStaffServiceInfo();
+                    } else if ($scope.queryType == 1) {
+                        $scope.onQueryMonthStaffServiceInfo();
+                    }
+                }
+                if ($scope.queryId != null && $scope.queryId != "undefined") {
+                    $scope.onQueryInfo();
+                }
                 //翻页
                 $scope.onNextPage = function () {
                     if ($scope.dataLen > 0) {

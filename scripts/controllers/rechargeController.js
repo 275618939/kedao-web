@@ -1,9 +1,9 @@
-define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/rechargeService', 'services/paramService'],
+define(['controllers/controllers', 'services/memberService', 'services/packetService', 'services/productService', 'services/commonService', 'services/rechargeService', 'services/paramService', 'services/staffService'],
     function (controllers) {
 
         /*充值*/
-        controllers.controller('RechargeManagerCtrl', ['$scope', 'MemberService', 'PacketService', 'CommonService', 'RechargeService', 'ParamService',
-            function ($scope, memberService, packetService, commonService, rechargeService, paramService) {
+        controllers.controller('RechargeManagerCtrl', ['$scope', 'MemberService', 'PacketService', 'CommonService', 'RechargeService', 'ParamService', 'StaffService',
+            function ($scope, memberService, packetService, commonService, rechargeService, paramService, staffService) {
 
                 //查询套餐信息
                 $scope.packetItemInfo = null;
@@ -40,8 +40,9 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                             alert(data.desc);
                             return;
                         }
-                        if (data.value == null || data.value == "undefined") {
+                        if (data.value == null || data.value == "undefined" || data.value == "") {
                             alert("会员不存在!");
+                            $("#rechargePhone").val("")
                             return;
                         }
                         //会员信息
@@ -51,7 +52,16 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 };
                 $scope.onRechargeClose = function () {
                     $("#add-recharge").modal('hide');
-                }
+                };
+                //查询员工信息
+                $scope.staffItemInfo = 0;
+                $scope.queryStaffInfo = function () {
+                    var promise = staffService.getShopStaffList(0);
+                    promise.then(function (data) {
+                        $scope.staffItems = data.value;
+                    });
+                };
+                $scope.queryStaffInfo();
                 //用户充值
                 $scope.onRecharge = function () {
                     var payType = $("#rechargePayType").val();
@@ -71,6 +81,10 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     }
                     if (money == null || money.trim() == "" || money == "undefined") {
                         alert("充值金额不能为空!");
+                        return;
+                    }
+                    if (null == $scope.staffItemInfo || $scope.staffItemInfo == 0) {
+                        alert("请选择一个服务员工!");
                         return;
                     }
                     if (money > commonService.max_money) {
@@ -95,6 +109,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         id: $scope.memberInfo.id,
                         payType: payType,
                         packetId: $scope.packetItem.id,
+                        waiterId: $scope.staffItemInfo,
                         money: commonService.getFen(money),
                         given: commonService.getFen(given)
                     };
@@ -117,7 +132,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $scope.dataLen = -1;
                 $scope.queryId = paramService.getValue("queryId");
                 if ($scope.queryId != null && $scope.queryId != "undefined") {
-                    //查询用户消费记录信息
+                    //查询用户充值记录信息
                     $scope.onQueryMemberRechargeInfo = function () {
                         var promise = rechargeService.queryMemberRechargeInfo($scope.queryId, $scope.date, $scope.currentPage);
                         promise.then(function (data) {
@@ -131,7 +146,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     }
                     $scope.onQueryMemberRechargeInfo();
                 } else {
-                    //查询当日消费记录
+                    //查询当日充值记录
                     $scope.onQueryRechargeInfo = function () {
                         var promise = rechargeService.queryMyRechargeInfo($scope.date, $scope.currentPage);
                         promise.then(function (data) {

@@ -221,6 +221,15 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>选择员工</label>
+                                    <select class="form-control"
+                                            ng-model="staffItemInfo"
+                                            ng-options="value.id as value.name for value in staffItems"
+                                            data-placeholder="选择服务员工">
+                                        <option value="" selected="selected">选择服务员工</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>套餐类型</label>
                                     <select class="form-control select2"
                                             ng-change="selectPacketInfo()"
