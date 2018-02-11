@@ -23,29 +23,48 @@
     <div class="login-logo">
         <a href="index.html"><b>可</b>道</a>
     </div>
+    <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">重置密码</p>
+        <p class="login-box-msg">修改密码</p>
         <form>
             <div class="form-group has-feedback">
-                <input type="number" class="form-control" id="phone" placeholder="手机号">
+                <input type="number" class="form-control" id="phone" placeholder="手机号" ng-blur="onImageVerify()">
                 <span class="glyphicon glyphicon-phone form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" id="password" placeholder="密码">
+                <input type="password" class="form-control" id="nowPassword" placeholder="当前密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" id="identifying" placeholder="验证码">
+                <input type="password" class="form-control" id="password" placeholder="新密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="checkPassword" placeholder="确认密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row" ng-show="showIdentifying.show">
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" id="identifying" placeholder="验证码">
+                </div>
+                <label for="identifying" class="col-xs-3 control-label">
+                    <img id="img-identify"/>
+                </label>
+                <div class="col-xs-4">
+                    <button type="button" id="captcha" class="btn btn-block btn-success" ng-click="onImageVerify()">
+                        换一张
+                    </button>
+                </div>
             </div>
             <br/>
             <div class="row" ng-controller="CommonCtrl">
                 <div class="col-xs-6">
-                    <button type="button" class="btn btn-primary btn-block btn-warning" ng-click="goWorkLogin();">返回
+                    <button type="button" class="btn btn-primary btn-block btn-warning" ng-click="goBack();">返回
                     </button>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-6">
-                    <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onReSetPwd();">完成
+                    <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onSetPwd();">修改
                     </button>
                 </div>
                 <!-- /.col -->
@@ -54,6 +73,7 @@
 
 
     </div>
+    <!-- /.login-box-body -->
 
 </div>
 <!-- /.login-box -->

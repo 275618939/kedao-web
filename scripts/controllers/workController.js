@@ -110,7 +110,7 @@ define(['controllers/controllers', 'services/workService', 'services/commonServi
                             return;
                         }
                         //跳转至密码重置页
-                        window.location.href = "pass-update.html";
+                        window.location.href = "work-pass-reset.html";
                     });
                 };
                 //获得图片验证码
@@ -190,8 +190,8 @@ define(['controllers/controllers', 'services/workService', 'services/commonServi
             }
         ]);
         //用户更新密码
-        controllers.controller('UpdatePassCtrl', ['$scope', 'UserService', 'CommonService',
-            function ($scope, userService, commonService) {
+        controllers.controller('UpdatePassCtrl', ['$scope', 'WorkService', 'CommonService',
+            function ($scope, workService, commonService) {
                 $scope.showIdentifying = {"show": false};
                 //获得图片验证码
                 $scope.onImageVerify = function (rimage) {
@@ -208,7 +208,7 @@ define(['controllers/controllers', 'services/workService', 'services/commonServi
                     }
                     if (rimage == null || rimage.trim() == "" || rimage == "undefined") {
                         //获取图片验证码
-                        var promise = userService.getImageVerify(phone);
+                        var promise = workService.getImageVerify(phone);
                         promise.then(function (data) {
                             if (data.state != 1) {
                                 return;
@@ -220,7 +220,7 @@ define(['controllers/controllers', 'services/workService', 'services/commonServi
                         $("#img-identify").attr("src", "data:image/png;base64," + rimage);
                     }
                 };
-                //重置密码
+                //更新密码
                 $scope.onSetPwd = function () {
                     var phone = $("#phone").val();
                     var nowPassword = $("#nowPassword").val();
@@ -257,7 +257,7 @@ define(['controllers/controllers', 'services/workService', 'services/commonServi
                     var newPass = $.md5(phone + password);
                     var oldPass = $.md5(phone + password + identifying);
                     var data = {account: phone, verify: identifying, newpwd: newPass, oldpwd: oldPass};
-                    var promise = userService.setPass(data);
+                    var promise = workService.setPass(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             alert(data.desc)
@@ -268,6 +268,42 @@ define(['controllers/controllers', 'services/workService', 'services/commonServi
                             return;
                         }
                         window.history.back();
+                    });
+
+                };
+                //重置密码
+                $scope.onReSetPwd = function () {
+                    var phone = $("#phone").val();
+                    var password = $("#password").val();
+                    var identifying = $("#identifying").val();
+                    if (isNaN(phone) || (phone.length != 11)) {
+                        alert("手机号码为11位数字！请正确填写！");
+                        return;
+                    }
+                    //发送请求道服务端
+                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                        $("#phone").focus();
+                        alert("请输入正确的手机号!");
+                        return;
+                    }
+                    if (password.trim() == "" || password == null) {
+                        alert("请输入密码！");
+                        return;
+                    }
+                    if (identifying.trim() == "" || identifying == null) {
+                        alert("请输入验证码！");
+                        return;
+                    }
+                    //构造加密参数
+                    var newPass = $.md5(phone + password);
+                    var data = {account: phone, verify: identifying, newpwd: newPass};
+                    var promise = workService.resetPass(data);
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            alert(data.desc)
+                            return;
+                        }
+                        window.location.href = "work-login.html";
                     });
 
                 };

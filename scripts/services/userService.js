@@ -124,6 +124,20 @@ define(['services/services', 'services/commonService'],
                             deferred.reject(data);
                         });
                         return deferred.promise;
+                    },
+                    /*用户重置密码*/
+                    resetPass: function (data) {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getServerUrl() + "/app/waiter/setpwd",
+                            method: "post",
+                            data: "account=" + data.account + "&verify=" + data.verify + "&newpwd=" + data.newpwd
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
                     }
 
                 };
