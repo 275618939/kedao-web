@@ -139,7 +139,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     correctLevel: QRCode.CorrectLevel.H
                 });
                 $scope.onQrcodeShow = function (id) {
-                    var promise = memberService.queryWxQrcode(id);
+                    var promise = memberService.queryCompanyWxQrcode(id);
                     promise.then(function (data) {
                         if (data.state != 1) {
                             return;

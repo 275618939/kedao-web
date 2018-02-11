@@ -155,6 +155,20 @@ define(['services/services', 'services/commonService'],
                         return deferred.promise;
                     },
                     /*查询会员关注二维码*/
+                    queryCompanyWxQrcode: function (id) {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/permanent",
+                            method: "get",
+                            data: {}
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*查询会员关注二维码*/
                     queryWxQrcode: function (id) {
                         var deferred = $q.defer();
                         $http({
