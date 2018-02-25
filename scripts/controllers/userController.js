@@ -225,7 +225,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                             }
                             return;
                         }
-                        commonService.addCookie("hair-sessionId", data.value);
+                        commonService.addDataByStorage("hair-sessionId", data.value);
                         window.location.href = "index.html?first=" + $scope.first;
                     });
 

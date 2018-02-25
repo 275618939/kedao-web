@@ -14,7 +14,7 @@ define(['interceptors/interceptors', 'services/commonService'],
                         //alert("request:"+ $rootScope.sessionId);
                         //$rootScope.sessionId="e10adc3949ba59abbe56e057f20f883e";
                         if ($rootScope.sessionId == null) {
-                            $rootScope.sessionId = commonService.getCookie("hair-sessionId");
+                            $rootScope.sessionId = commonService.getDataByStorage("hair-sessionId");
                             //$rootScope.sessionId="e10adc3949ba59abbe56e057f20f883e";
                         }
                         config.headers["Session-Id"] = $rootScope.sessionId;

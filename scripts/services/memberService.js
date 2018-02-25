@@ -39,7 +39,7 @@ define(['services/services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getAppServerUrl() + "/app/consume",
                             method: "post",
-                            data: "id=" + data.id + "&payType=" + data.payType + "&items=" + data.items + "&money=" + data.money + "&given=" + data.given + "&productName=" + data.productName
+                            data: "id=" + data.id + "&payType=" + data.payType + "&productId=" + data.productId + "&money=" + data.money + "&given=" + data.given + "&waiterId=" + data.waiterId
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {

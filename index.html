@@ -98,11 +98,11 @@
                 <li><a href="recharge.html"><i class="fa fa-link"></i> <span>充值管理</span></a></li>
                 <li><a href="users.html"><i class="fa fa-link"></i> <span>会员管理</span></a></li>
                 <li><a href="staff.html"><i class="fa fa-link"></i> <span>员工管理</span></a></li>
-                <li class="active"><a href="shop-day-stat.html"><i class="fa fa-link"></i> <span>店日统计</span></a>
-                </li>
-                <li><a href="shop-month-stat.html"><i class="fa fa-link"></i> <span>店月统计</span></a></li>
                 <li><a href="packet.html"><i class="fa fa-link"></i> <span>套餐管理</span></a></li>
                 <li><a href="service.html"><i class="fa fa-link"></i> <span>服务管理</span></a></li>
+                <li><a href="shop-day-stat.html"><i class="fa fa-link"></i> <span>店日统计</span></a>
+                </li>
+                <li><a href="shop-month-stat.html"><i class="fa fa-link"></i> <span>店月统计</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -255,8 +255,8 @@
                                 <div class="form-group">
                                     <label>付款方式</label>
                                     <select class="form-control select2" style="width:100%;" id="payType">
-                                        <option selected="selected" value="1">现金</option>
-                                        <option value="6">余额</option>
+                                        <option value="6" selected="selected" value="1">余额</option>
+                                        <option>现金</option>
                                         <option value="2">支付宝</option>
                                         <option value="3">微信</option>
                                         <option value="4">POS刷卡</option>
@@ -293,12 +293,19 @@
                                              aria-hidden="true">
                                          <option value="" selected="selected">请选择消费项目</option>
                                      </select>-->
-                                    <select class="form-control select2 select2-hidden-accessible"
+                                    <!--    <select class="form-control select2 select2-hidden-accessible"
+                                                ng-change="selectProductInfo()"
+                                                ng-model="productItemInfo"
+                                                multiple=""
+                                                data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
+                                                aria-hidden="true">
+                                            <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
+                                        </select>-->
+                                    <select class="form-control"
                                             ng-change="selectProductInfo()"
                                             ng-model="productItemInfo"
-                                            multiple=""
-                                            data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
-                                            aria-hidden="true">
+                                            data-placeholder="请选择消费项目" style="width: 100%;"
+                                    >
                                         <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
                                     </select>
                                 </div>

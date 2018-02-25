@@ -26,7 +26,7 @@ define(['controllers/controllers', 'services/commonService', 'services/userServi
                 //登出
                 $scope.onLogout = function () {
                     userService.userLogout();
-                    commonService.delCookie("hair-sessionId");
+                    commonService.deleteDataByStorage("hair-sessionId");
                     window.location.href = "login.html";
                 };
 

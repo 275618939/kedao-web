@@ -322,6 +322,15 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         alert("请选择一个服务员工!");
                         return;
                     }
+                    if ($scope.productItemInfo == null || $scope.productItemInfo == "undefined") {
+                        alert("请选择一个消费项目!");
+                        return;
+                    }
+                    var arr = JSON.parse($scope.productItemInfo);
+                    if (arr.id == null || arr.id == "undefined") {
+                        alert("请选择一个消费项目!");
+                        return;
+                    }
                     if (money == null || money.trim() == "" || money == "undefined") {
                         alert("消费金额不能为空!");
                         return;
@@ -339,27 +348,28 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         given = 0;
                     }
                     //记录选择的产品信息
-                    $scope.consumeProductItems = new Array();
-                    var productName = "";
-                    var maxProduct = 0;
-                    var arr = JSON.parse("[" + $scope.productItemInfo + "]");
-                    arr.forEach(function (value, index, array) {
-                        var v = "{productId:" + value.id + ",waiterId:" + $scope.staffItemInfo + "}";
-                        if (value.price > maxProduct) {
-                            productName = value.name;
-                            maxProduct = value.price;
-                        }
-                        $scope.consumeProductItems.push(v);
-                    });
-                    if ($scope.consumeProductItems.length <= 0) {
-                        alert("请选择一个消费项目!");
-                        return;
-                    }
+                    /*        $scope.consumeProductItems = new Array();
+                     var productName = "";
+                     var maxProduct = 0;
+                     var arr = JSON.parse("[" + $scope.productItemInfo + "]");
+                     arr.forEach(function (value, index, array) {
+                     var v = "{productId:" + value.id + ",waiterId:" + $scope.staffItemInfo + "}";
+                     if (value.price > maxProduct) {
+                     productName = value.name;
+                     maxProduct = value.price;
+                     }
+                     $scope.consumeProductItems.push(v);
+                     });
+                     if ($scope.consumeProductItems.length <= 0) {
+                     alert("请选择一个消费项目!");
+                     return;
+                     }*/
                     var data = {
                         id: memberId,
                         payType: payType,
-                        productName: productName,
-                        items: "[" + $scope.consumeProductItems.toString() + "]",
+                        productId: arr.id,
+                        waiterId: $scope.staffItemInfo,
+                        /*  items: "[" + $scope.consumeProductItems.toString() + "]",*/
                         money: commonService.getFen(money),
                         given: commonService.getFen(given)
                     };

@@ -109,6 +109,22 @@ define(['services/services'],
                     }
                     ,
                     reportUrl: "http://" + window.location.host + ":9601/getScaleReportResult?json={'resultId':*}",
+                    //localstorage 添加
+                    //添加数据到storage
+                    addDataByStorage: function (name, value, time) {
+                        var storage = window.localStorage;
+                        storage.setItem(name, value);
+                    },
+                    getDataByStorage: function (name) {
+                        var storage = window.localStorage;
+                        var arr = storage.getItem(name);
+                        if (arr != null) return arr;
+                        return null;
+                    },
+                    deleteDataByStorage: function (name) {
+                        var storage = window.localStorage;
+                        storage.removeItem(name);
+                    },
                     //添加cookie
                     addCookie: function (name, value, time) {
                         var exp = new Date();
@@ -116,7 +132,6 @@ define(['services/services'],
                         exp.setTime(exp.getTime() + time);
                         document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
                     }
-
                     ,
                     //获得cookie
                     getCookie: function (name) {

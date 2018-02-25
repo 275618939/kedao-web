@@ -182,7 +182,7 @@ define(['controllers/controllers', 'services/workService', 'services/commonServi
                             }
                             return;
                         }
-                        commonService.addCookie("hair-sessionId", data.value);
+                        commonService.addDataByStorage("hair-sessionId", data.value);
                         window.location.href = "shop.html?first=" + $scope.first;
                     });
 
