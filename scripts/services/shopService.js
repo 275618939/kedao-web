@@ -10,7 +10,8 @@ define(['services/services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getServerUrl() + "/business/shop",
                             method: "PUT",
-                            data: "id=" + data.id + "&name=" + data.name + "&description=" + data.description + "&address=" + data.address + "&telephone=" + data.telephone + "&longitude =" + data.longitude + "&latitude =" + data.latitude
+                            data: "id=" + data.id + "&name=" + data.name + "&description=" + data.description + "&address=" + data.address + "&telephone=" + data.telephone
+                            //data: "id=" + data.id + "&name=" + data.name + "&description=" + data.description + "&address=" + data.address + "&telephone=" + data.telephone + "&longitude =" + data.longitude + "&latitude =" + data.latitude
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -36,7 +37,7 @@ define(['services/services', 'services/commonService'],
                     getShopList: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/shop/" + page + "/" + commonService.getMessageCount() + "",
+                            url: "http://" + commonService.getServerUrl() + "/business/shop/" + page + "/" + commonService.getMessageCount() + "&time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

@@ -181,6 +181,11 @@ define(['services/services'],
                         return 4;
                     }
                     ,
+                    getDataString: function () {
+
+                        return new Date().getTime();
+
+                    },
                     //获得随机字符串 "ABC".toLowerCase()//转小写  "abc".toUpperCase()//转大写
                     getRandomString: function (len) {
                         len = len || 32;
