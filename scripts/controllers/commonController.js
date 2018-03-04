@@ -46,13 +46,15 @@ define(['controllers/controllers', 'services/commonService', 'services/userServi
                     correctLevel: QRCode.CorrectLevel.H
                 });
                 $scope.onQrcodeShow = function () {
-                    var promise = userService.queryCompanyWxQrcode();
+                    var promise = userService.queryCompanyInfo();
                     promise.then(function (data) {
                         if (data.state != 1) {
                             return;
                         }
-                        $scope.qrcode.makeCode(data.value);
-                        $("#qrcode-member").modal('show');
+                        if (data.qrcode != null) {
+                            $scope.qrcode.makeCode(data.qrcode);
+                            $("#qrcode-member").modal('show');
+                        }
                     });
 
 
