@@ -9,10 +9,12 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                 $scope.dataLen = -1;
                 $scope.statType = 0;//0:充值，1:消费
                 $scope.statTypeInfo = "充值";
+                $scope.statStatus = false;
                 //查询店日充值信息
                 $scope.onQuerysShopChargeStatInfo = function () {
                     $scope.statType = 0;
                     $scope.statTypeInfo = "充值";
+                    $scope.statStatus = false;
                     var promise = statService.querysShopChargeStatInfo($scope.currentPage);
                     promise.then(function (data) {
                         if (data.state != 1) {
@@ -27,6 +29,7 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                 $scope.onQuerysShopConsumeStatInfo = function () {
                     $scope.statType = 1;
                     $scope.statTypeInfo = "消费";
+                    $scope.statStatus = true;
                     var promise = statService.querysShopConsumeStatInfo($scope.currentPage);
                     promise.then(function (data) {
                         if (data.state != 1) {
@@ -73,10 +76,12 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                 $scope.dataLen = -1;
                 $scope.statType = 0;//0:充值，1:消费
                 $scope.statTypeInfo = "充值";
+                $scope.statStatus = {"show": false};
                 //查询店月充值信息
                 $scope.onQueryMonthShopChargeStatInfo = function () {
                     $scope.statType = 0;
                     $scope.statTypeInfo = "充值";
+                    $scope.statStatus = {"show": false};
                     var promise = statService.querysShopMonthChargeStatInfo($scope.currentPage);
                     promise.then(function (data) {
                         if (data.state != 1) {
@@ -91,6 +96,7 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                 $scope.onQueryMonthShopConsumeStatInfo = function () {
                     $scope.statType = 1;
                     $scope.statTypeInfo = "消费";
+                    $scope.statStatus = {"show": true};
                     var promise = statService.querysShopMonthConsumeStatInfo($scope.currentPage);
                     promise.then(function (data) {
                         if (data.state != 1) {

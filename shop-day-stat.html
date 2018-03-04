@@ -155,7 +155,9 @@
                         <th>日期</th>
                         <th>{{statTypeInfo}}次数</th>
                         <th>{{statTypeInfo}}金额</th>
-                        <th>{{statTypeInfo}}余额</th>
+                        <div ng-show="statStatus">
+                            <th>{{statTypeInfo}}余额</th>
+                        </div>
                         <th>赠送金额</th>
                         <th>{{statTypeInfo}}提成</th>
                         <th>统计日期</th>
@@ -166,7 +168,9 @@
                         <td ng-bind="item.date"></td>
                         <td ng-bind="item.count"></td>
                         <td ng-bind="item.money|MoneyFilters"></td>
-                        <td ng-bind="item.charge|MoneyFilters"></td>
+                        <div ng-show="statStatus">
+                            <td ng-bind="item.charge|MoneyFilters"></td>
+                        </div>
                         <td ng-bind="item.given|MoneyFilters"></td>
                         <td ng-bind="item.retain|MoneyFilters"></td>
                         <td ng-bind="item.createdTime"></td>
