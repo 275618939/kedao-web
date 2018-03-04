@@ -128,8 +128,6 @@
 
             <!-- Info boxes -->
             <div class="row">
-
-
                 <div class="col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#user-consume">
                     <a href="#" ng-click="">
                         <div class="small-box bg-aqua">
@@ -464,7 +462,7 @@
             <!--会员充值 start-->
             <div class="modal fade" id="user-recharge" ng-controller="IndexRechargeCtrl">
 
-                <div class="modal-dialog">
+                <!--<div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -522,6 +520,120 @@
                                     <label>赠送金额</label>
                                     <input type="number" class="form-control" id="rechargeGiven"
                                            placeholder="请输入消费赠送金额"/>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="onRecharge();">充值</button>
+                        </div>
+                    </div>
+                    &lt;!&ndash; /.modal-content &ndash;&gt;
+                </div>-->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">会员充值</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>会员手机</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="rechargePhone"
+                                                   placeholder="请输入会员手机号" ng-blur="queryMemberInfo();"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>付款方式</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control select2" style="width:100%;"
+                                                    id="rechargePayType">
+                                                <option selected="selected" value="1">现金</option>
+                                                <option value="6">余额</option>
+                                                <option value="2">支付宝</option>
+                                                <option value="3">微信</option>
+                                                <option value="4">POS刷卡</option>
+                                                <option value="5">其他</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>选择员工</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control"
+                                                    ng-model="staffItemInfo"
+                                                    ng-options="value.id as value.name for value in staffItems"
+                                                    data-placeholder="选择服务员工">
+                                                <option value="" selected="selected">选择服务员工</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>套餐类型</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control select2"
+                                                    ng-change="selectPacketInfo()"
+                                                    ng-model="packetItemInfo"
+                                                    data-placeholder="请选择套餐类型" style="width: 100%;" tabindex="-1"
+                                                    aria-hidden="true">
+                                                <option ng-repeat="x in packetItems" value="{{x}}">{{x.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>当前折扣</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" disabled="disabled"
+                                                   id="rechargeDiscount"
+                                                   placeholder="不打折"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>充值金额</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="rechargeMoney"
+                                                   placeholder="请输入消费金额"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>赠送金额</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="rechargeGiven"
+                                                   placeholder="请输入消费赠送金额"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
 

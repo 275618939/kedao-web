@@ -205,54 +205,99 @@
                         <div class="modal-body">
                             <form role="form">
                                 <div class="form-group">
-                                    <label>会员手机</label>
-                                    <input type="number" class="form-control" id="rechargePhone"
-                                           placeholder="请输入会员手机号" ng-blur="queryMemberInfo();"/>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>会员手机</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="rechargePhone"
+                                                   placeholder="请输入会员手机号" ng-blur="queryMemberInfo();"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>付款方式</label>
-                                    <select class="form-control select2" style="width:100%;" id="rechargePayType">
-                                        <option selected="selected" value="1">现金</option>
-                                        <option value="6">余额</option>
-                                        <option value="2">支付宝</option>
-                                        <option value="3">微信</option>
-                                        <option value="4">POS刷卡</option>
-                                        <option value="5">其他</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>付款方式</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control select2" style="width:100%;"
+                                                    id="rechargePayType">
+                                                <option selected="selected" value="1">现金</option>
+                                                <option value="6">余额</option>
+                                                <option value="2">支付宝</option>
+                                                <option value="3">微信</option>
+                                                <option value="4">POS刷卡</option>
+                                                <option value="5">其他</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>选择员工</label>
-                                    <select class="form-control"
-                                            ng-model="staffItemInfo"
-                                            ng-options="value.id as value.name for value in staffItems"
-                                            data-placeholder="选择服务员工">
-                                        <option value="" selected="selected">选择服务员工</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>选择员工</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control"
+                                                    ng-model="staffItemInfo"
+                                                    ng-options="value.id as value.name for value in staffItems"
+                                                    data-placeholder="选择服务员工">
+                                                <option value="" selected="selected">选择服务员工</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>套餐类型</label>
-                                    <select class="form-control select2"
-                                            ng-change="selectPacketInfo()"
-                                            ng-model="packetItemInfo"
-                                            data-placeholder="请选择套餐类型" style="width: 100%;" tabindex="-1"
-                                            aria-hidden="true">
-                                        <option ng-repeat="x in packetItems" value="{{x}}">{{x.name}}</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>套餐类型</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control select2"
+                                                    ng-change="selectPacketInfo()"
+                                                    ng-model="packetItemInfo"
+                                                    data-placeholder="请选择套餐类型" style="width: 100%;" tabindex="-1"
+                                                    aria-hidden="true">
+                                                <option ng-repeat="x in packetItems" value="{{x}}">{{x.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="form-group">
-                                    <label>当前折扣</label>
-                                    <input type="text" class="form-control" disabled="disabled" id="rechargeDiscount"
-                                           placeholder="不打折"/>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>当前折扣</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" disabled="disabled"
+                                                   id="rechargeDiscount"
+                                                   placeholder="不打折"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>充值金额</label>
-                                    <input type="number" class="form-control" id="rechargeMoney" placeholder="请输入消费金额"/>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>充值金额</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="rechargeMoney"
+                                                   placeholder="请输入消费金额"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>赠送金额</label>
-                                    <input type="number" class="form-control" id="rechargeGiven"
-                                           placeholder="请输入消费赠送金额"/>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>赠送金额</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="rechargeGiven"
+                                                   placeholder="请输入消费赠送金额"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
 
