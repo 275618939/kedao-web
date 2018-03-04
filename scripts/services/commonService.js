@@ -263,6 +263,9 @@ define(['services/services'],
                          data = '0' + data;
                          }
                          return data;*/
+                        if (money == null) {
+                            return 0;
+                        }
 
                         var yuan = money / 100.0;
                         return yuan.toFixed(0);
