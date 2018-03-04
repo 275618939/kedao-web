@@ -9,7 +9,7 @@ define(['services/services', 'services/commonService'],
                     queryMyConsumeInfo: function (month, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/consume/shop/" + month + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/consume/shop/" + month + "/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -23,7 +23,7 @@ define(['services/services', 'services/commonService'],
                     queryMemberConsumeInfo: function (id, month, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/consume/member/" + id + "/" + month + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/consume/member/" + id + "/" + month + "/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -37,7 +37,7 @@ define(['services/services', 'services/commonService'],
                     queryMonthConsumeInfo: function (month) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/consume/shop/" + month + "/0/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/consume/shop/" + month + "/0/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

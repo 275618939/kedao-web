@@ -9,7 +9,7 @@ define(['services/services', 'services/commonService'],
                     querysShopChargeStatInfo: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/shopChargeDate/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shopChargeDate/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -23,7 +23,7 @@ define(['services/services', 'services/commonService'],
                     querysShopConsumeStatInfo: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/shopConsumeDate/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shopConsumeDate/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -37,7 +37,7 @@ define(['services/services', 'services/commonService'],
                     querysShopMonthChargeStatInfo: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/shopChargeMonth/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shopChargeMonth/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -51,7 +51,7 @@ define(['services/services', 'services/commonService'],
                     querysShopMonthConsumeStatInfo: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/shopConsumeMonth/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shopConsumeMonth/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -65,7 +65,7 @@ define(['services/services', 'services/commonService'],
                     queryDayStaffServiceInfo: function (id, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/waiterServiceDate/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiterServiceDate/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -79,7 +79,7 @@ define(['services/services', 'services/commonService'],
                     queryMonthStaffServiceInfo: function (id, page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/waiterServiceMonth/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiterServiceMonth/" + id + "/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

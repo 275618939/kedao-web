@@ -37,7 +37,7 @@ define(['services/services', 'services/commonService'],
                     getShopList: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/shop/" + page + "/" + commonService.getMessageCount() + "?time=" + commonService.getDataString(),
+                            url: "http://" + commonService.getServerUrl() + "/business/shop/" + page + "/" + commonService.getMessageCount() + "?time=" + commonService.getDataString() + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

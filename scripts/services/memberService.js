@@ -9,7 +9,7 @@ define(['services/services', 'services/commonService'],
                     queryMemberInfo: function (phone) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/member/cellNumber/" + phone,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/member/cellNumber/" + phone + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -23,7 +23,7 @@ define(['services/services', 'services/commonService'],
                     queryAllMemberInfo: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/member/list/" + page + "/" + this.PAGE_MAX_SIZE,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/member/list/" + page + "/" + this.PAGE_MAX_SIZE + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -129,7 +129,7 @@ define(['services/services', 'services/commonService'],
                     queryWxRecent: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/recent",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/recent" + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -158,7 +158,7 @@ define(['services/services', 'services/commonService'],
                     queryCompanyWxQrcode: function (id) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/permanent",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/permanent" + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -172,7 +172,7 @@ define(['services/services', 'services/commonService'],
                     queryWxQrcode: function (id) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/qrcode/" + id,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/qrcode/" + id + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

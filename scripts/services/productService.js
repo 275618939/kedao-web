@@ -63,7 +63,7 @@ define(['services/services', 'services/commonService'],
                     queryClassfyInfo: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/classify",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/classify" + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -77,7 +77,7 @@ define(['services/services', 'services/commonService'],
                     queryProductInfo: function (classId) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/product/" + classId,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/product/" + classId + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

@@ -10,7 +10,7 @@ define(['services/services', 'services/commonService'],
                     queryCompanyInfo: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/company",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/company" + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -23,7 +23,7 @@ define(['services/services', 'services/commonService'],
                     queryCompanyWxQrcode: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/permanent",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/permanent" + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -100,7 +100,7 @@ define(['services/services', 'services/commonService'],
                     getImageVerify: function (account) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/image/verify/" + account,
+                            url: "http://" + commonService.getServerUrl() + "/app/image/verify/" + account + "?time=" + commonService.getDataString(),
                             method: "get"
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);

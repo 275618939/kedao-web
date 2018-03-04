@@ -36,7 +36,7 @@ define(['services/services', 'services/commonService'],
                     getPacketList: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/business/packet",
+                            url: "http://" + commonService.getAppServerUrl() + "/business/packet" + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
