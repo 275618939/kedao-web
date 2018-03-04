@@ -45,7 +45,7 @@ define(['controllers/controllers', 'services/workStaffService', 'services/common
                         alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#telephone").focus();
                         alert("请输入正确的手机号!");
                         return;
@@ -112,7 +112,7 @@ define(['controllers/controllers', 'services/workStaffService', 'services/common
                         alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         alert("请输入正确的手机号!");
                         return;

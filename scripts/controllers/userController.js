@@ -16,7 +16,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         alert("请输入正确的手机号!");
                         return;
@@ -50,7 +50,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         alert("请输入正确的手机号!");
                         return;
@@ -139,7 +139,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         alert("请输入正确的手机号!");
                         return;
@@ -165,10 +165,10 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+          /*          if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         return;
-                    }
+                    }*/
                     if (rimage == null || rimage.trim() == "" || rimage == "undefined") {
                         //获取图片验证码
                         var promise = userService.getImageVerify(phone);
@@ -199,11 +199,11 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+          /*          if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         alert("请输入正确的手机号!");
                         return;
-                    }
+                    }*/
                     if (password.trim() == "" || password == null) {
                         alert("请输入密码！");
                         return;
@@ -245,7 +245,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         return;
                     }
@@ -275,7 +275,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         alert("请输入正确的手机号!");
                         return;
@@ -324,7 +324,7 @@ define(['controllers/controllers', 'services/userService', 'services/commonServi
                         return;
                     }
                     //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
                         alert("请输入正确的手机号!");
                         return;
