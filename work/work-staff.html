@@ -41,6 +41,11 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="../index.html" class="dropdown-toggle">
+                            <span class="hidden-xs">店业务管理</span>
+                        </a>
+                    </li>
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -61,7 +66,7 @@
                                     <ul class="nav nav-stacked">
                                         <!--           <li><a href="#" style="color: #001a35">消费记录</a></li>
                                                    <li><a href="#" style="color: #001a35">充值记录</a></li>-->
-                                        <li><a href="../index.html" style="color: #001a35">店业务管理</a></li>
+                                        <!-- <li><a href="../index.html" style="color: #001a35">店业务管理</a></li>-->
                                         <li><a href="work-pass-update.html" style="color: #001a35">修改密码</a></li>
                                         <li><a href="#" ng-click="onWorkLogout();" style="color: #001a35">退出</a></li>
                                     </ul>
@@ -281,6 +286,25 @@
             <!-- /.modal-dialog -->
         </div>
         <!--更新员工 end-->
+        <!--会员二维码-->
+        <div class="modal fade" id="qrcode-member">
+            <div class="modal-dialog" style="width: 280px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">扫描二维码进行关注</h4>
+                    </div>
+                    <div class="modal-body">
+                        <center>
+                            <div id="qrcode"/>
+                        </center>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
 
 
         </section>

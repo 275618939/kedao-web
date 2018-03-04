@@ -4,11 +4,16 @@ require.config({
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
         jqueryMd5: 'vendor/jQuery.md5',
+        qrcode: 'vendor/qrcode.min',
         domReady: 'vendor/domReady'
     },
     shim: {
         jquery: {
             exports: 'jquery'
+        },
+        qrcode: {
+            deps: ['jquery'],
+            exports: 'qrcode'
         },
         jqueryMd5: {
             deps: ['jquery'],
@@ -29,7 +34,7 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'jqueryMd5',
+        'app', 'domReady', 'jquery', 'jqueryMd5', 'qrcode',
         'filters/intervalFilters',
         'controllers/workController',
         'controllers/commonController',
