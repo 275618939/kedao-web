@@ -36,6 +36,27 @@ define(['controllers/controllers', 'services/commonService', 'services/userServi
                     commonService.delCookie("hair-sessionId");
                     window.location.href = "../login.html";
                 };
+                //初始化生成二维码
+                $scope.qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: "http://aiyunzhou.com/",
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                $scope.onQrcodeShow = function () {
+                    var promise = userService.queryCompanyWxQrcode();
+                    promise.then(function (data) {
+                        if (data.state != 1) {
+                            return;
+                        }
+                        $scope.qrcode.makeCode(data.value);
+                        $("#qrcode-member").modal('show');
+                    });
+
+
+                }
 
 
             }]);

@@ -7,6 +7,19 @@ define(['services/services', 'services/commonService'],
                     collectCourse: 3,
                     secrecyOpen: 0,
                     secrecyClose: 1,
+                    queryCompanyWxQrcode: function () {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/weixin/permanent",
+                            method: "get",
+                            data: {}
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
                     /*创建店面*/
                     shopCreate: function (data) {
                         var deferred = $q.defer();

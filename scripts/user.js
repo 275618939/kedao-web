@@ -1,14 +1,14 @@
-
 require.config({
     paths: {
         angular: 'vendor/angular',
-        angularRoute:'vendor/angular-route',
+        angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
         iscroll: 'vendor/iscroll-lite',
+        qrcode: 'vendor/qrcode.min',
         touchslider: 'vendor/jquery.touchslider.min',
-        twitter:'vendor/bootstrap',
-        bootstrap:'vendor/bootstrap3.3.4',
-        jqueryMobile:'vendor/jquery.mobile-1.4.5',
+        twitter: 'vendor/bootstrap',
+        bootstrap: 'vendor/bootstrap3.3.4',
+        jqueryMobile: 'vendor/jquery.mobile-1.4.5',
         domReady: 'vendor/domReady'
 
     },
@@ -17,26 +17,30 @@ require.config({
             exports: 'jquery'
         },
         touchslider: {
-            deps: [ 'jquery'],
+            deps: ['jquery'],
             exports: 'touchslider'
         },
         iscroll: {
-            deps: [ 'jquery'],
+            deps: ['jquery'],
             exports: 'iscroll'
         },
+        qrcode: {
+            deps: ['jquery'],
+            exports: 'qrcode'
+        },
         jqueryMobile: {
-            deps: [ 'jquery'],
+            deps: ['jquery'],
             exports: 'jqueryMobile'
         },
         bootstrap: {
-            deps: [ 'jquery'],
+            deps: ['jquery'],
             exports: 'bootstrap'
         },
         angular: {
-            deps: [ 'jquery'],
+            deps: ['jquery'],
             exports: 'angular'
         }, angularRoute: {
-            deps: [ 'angular'],
+            deps: ['angular'],
             exports: 'angularRoute'
         }
     }
@@ -45,8 +49,8 @@ require.config({
 });
 //
 require([
-        'angular','angularRoute',
-        'app', 'domReady','jquery',"iscroll","touchslider",
+        'angular', 'angularRoute',
+        'app', 'domReady', 'jquery', "iscroll", "touchslider", 'qrcode',
         'filters/intervalFilters',
         'controllers/userController',
         'controllers/commonController',
@@ -55,10 +59,10 @@ require([
         // Any individual controller, service, directive or filter file
         // that you add will need to be pulled in here.
     ],
-    function (angular,angularRoute,app, domReady) {
+    function (angular, angularRoute, app, domReady) {
         'use strict';
-        app.config(['$httpProvider','$routeProvider',
-            function($httpProvider,$routeProvider) {
+        app.config(['$httpProvider', '$routeProvider',
+            function ($httpProvider, $routeProvider) {
                 $httpProvider.interceptors.push('RequestInterceptors');
                 /*      $routeProvider.when('/', {
                  templateUrl: 'views/roo.html',
@@ -75,7 +79,7 @@ require([
             }
         ]);
 
-        domReady(function() {
+        domReady(function () {
             angular.bootstrap(document, ['zhwApp']);
             // The following is required if you want AngularJS Scenario tests to work
             $('html').addClass('ng-app: zhwApp');

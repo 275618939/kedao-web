@@ -4,6 +4,7 @@ require.config({
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
         md5: 'vendor/jQuery.md5',
+        qrcode: 'vendor/qrcode.min',
         chart: '../bower_components/dist/js/Chart',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
@@ -21,6 +22,10 @@ require.config({
         },
         chart: {
             exports: 'chart'
+        },
+        qrcode: {
+            deps: ['jquery'],
+            exports: 'qrcode'
         },
         select: {
             deps: ['jquery'],
@@ -47,7 +52,7 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte',
+        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'filters/powerFilters',

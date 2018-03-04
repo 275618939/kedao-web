@@ -15,7 +15,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
-    <![endif]-->
     <script data-main="scripts/index" src="scripts/vendor/require.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -58,6 +57,7 @@
                                         <!--           <li><a href="#" style="color: #001a35">消费记录</a></li>
                                                    <li><a href="#" style="color: #001a35">充值记录</a></li>-->
                                         <li><a href="work/work-login.html" style="color: #001a35">公司业务管理</a></li>
+                                        <li><a href="#" ng-click="onQrcodeShow()" style="color: #001a35">店二维码</a></li>
                                         <li><a href="pass-update.html" style="color: #001a35">修改密码</a></li>
                                         <li><a href="#" ng-click="onLogout();" style="color: #001a35">退出</a></li>
                                     </ul>
@@ -235,9 +235,17 @@
                         <div class="modal-body">
                             <form role="form">
                                 <div class="form-group">
-                                    <label>会员手机</label>
-                                    <input type="number" class="form-control" id="phone" placeholder="默认消费"
-                                           ng-blur="queryMemberInfo();"/>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>
+                                                会员手机
+                                            </label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="phone" placeholder="默认消费"
+                                                   ng-blur="queryMemberInfo();"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--会员账户信息 start-->
                                 <div class="form-group">
@@ -247,79 +255,202 @@
                                     <div class="col-md-3" id="given">0</div>
                                 </div>
                                 <!--end-->
-                                <br/>
+                                <br/> <br/>
                                 <div class="form-group">
-                                    <label>当前折扣</label>
-                                    <input type="text" class="form-control" disabled="disabled" id="discount">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>当前折扣</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" disabled="disabled" id="discount">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>付款方式</label>
-                                    <select class="form-control select2" style="width:100%;" id="payType">
-                                        <option value="6" selected="selected" value="1">余额</option>
-                                        <option>现金</option>
-                                        <option value="2">支付宝</option>
-                                        <option value="3">微信</option>
-                                        <option value="4">POS刷卡</option>
-                                        <option value="5">其他</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>付款方式</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control select2" style="width:100%;" id="payType">
+                                                <option value="6" selected="selected" value="1">余额</option>
+                                                <option>现金</option>
+                                                <option value="2">支付宝</option>
+                                                <option value="3">微信</option>
+                                                <option value="4">POS刷卡</option>
+                                                <option value="5">其他</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>选择员工</label>
-                                    <select class="form-control"
-                                            ng-model="staffItemInfo"
-                                            ng-options="value.id as value.name for value in staffItems"
-                                            data-placeholder="选择服务员工">
-                                        <option value="" selected="selected">选择服务员工</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>选择员工</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control"
+                                                    ng-model="staffItemInfo"
+                                                    ng-options="value.id as value.name for value in staffItems"
+                                                    data-placeholder="选择服务员工">
+                                                <option value="" selected="selected">选择服务员工</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>消费类别</label>
-                                    <select class="form-control" ng-change="selectClassfyInfo()"
-                                            ng-model="classItemInfo"
-                                            ng-options="value.id as value.name for value in classItems" id="classItem"
-                                            data-placeholder="选择消费类别"
-                                            style="width: 100%;">
-                                        <option value="" selected="selected">请选择消费类别</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>消费类别</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class=" form-control
+                                            " ng-change="selectClassfyInfo()"
+                                                    ng-model="classItemInfo"
+                                                    ng-options="value.id as value.name for value in classItems"
+                                                    id="classItem"
+                                                    data-placeholder="选择消费类别"
+                                                    style="width: 100%;">
+                                                <option value="" selected="selected">请选择消费类别</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>消费项目</label>
-                                    <!-- <select class="form-control select2 select2-hidden-accessible"
-                                             ng-change="selectProductInfo()"
-                                             ng-model="productItemInfo"
-                                             ng-options="value as value.name for value in productItems" id="productItem"
-                                             multiple=""
-                                             data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
-                                             aria-hidden="true">
-                                         <option value="" selected="selected">请选择消费项目</option>
-                                     </select>-->
-                                    <!--    <select class="form-control select2 select2-hidden-accessible"
-                                                ng-change="selectProductInfo()"
-                                                ng-model="productItemInfo"
-                                                multiple=""
-                                                data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
-                                                aria-hidden="true">
-                                            <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
-                                        </select>-->
-                                    <select class="form-control"
-                                            ng-change="selectProductInfo()"
-                                            ng-model="productItemInfo"
-                                            data-placeholder="请选择消费项目" style="width: 100%;"
-                                    >
-                                        <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>消费项目</label>
+                                        </div>
+                                        <!--     <select class="form-control select2 select2-hidden-accessible"
+                                                     ng-change="selectProductInfo()"
+                                                     ng-model="productItemInfo"
+                                                     multiple=""
+                                                     data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
+                                                     aria-hidden="true">
+                                                 <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
+                                             </select>-->
+                                        <div class="col-md-10">
+                                            <select class="form-control select2"
+                                                    ng-change="selectProductInfo()"
+                                                    ng-model="productItemInfo"
+                                                    data-placeholder="请选择消费项目" style="width: 100%;">
+                                                <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>消费金额</label>
-                                    <input type="number" class="form-control" placeholder="请输入消费金额" id="cunsumeMoney"/>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>消费金额</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" placeholder="请输入消费金额"
+                                                   id="cunsumeMoney"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>消费赠送金额</label>
-                                    <input type="number" class="form-control" placeholder="请输入消费赠送金额"
-                                           id="cunsumeGiven"/>
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>消费赠送</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" placeholder="请输入消费赠送金额"
+                                                   id="cunsumeGiven"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
+                        <!--   <div class="modal-body">
+                               <form role="form">
+                                   <div class="form-group">
+                                       <label>会员手机</label>
+                                       <input type="number" class="form-control" id="phone" placeholder="默认消费"
+                                              ng-blur="queryMemberInfo();"/>
+                                   </div>
+                                   &lt;!&ndash;会员账户信息 start&ndash;&gt;
+                                   <div class="form-group">
+                                       <div class="col-md-3 text-light-blue">剩余余额</div>
+                                       <div class="col-md-3" id="money">0</div>
+                                       <div class="col-md-3 text-light-blue">剩余赠送</div>
+                                       <div class="col-md-3" id="given">0</div>
+                                   </div>
+                                   &lt;!&ndash;end&ndash;&gt;
+                                   <br/>
+                                   <div class="form-group">
+                                       <label>当前折扣</label>
+                                       <input type="text" class="form-control" disabled="disabled" id="discount">
+                                   </div>
+                                   <div class="form-group">
+                                       <label>付款方式</label>
+                                       <select class="form-control select2" style="width:100%;" id="payType">
+                                           <option value="6" selected="selected" value="1">余额</option>
+                                           <option>现金</option>
+                                           <option value="2">支付宝</option>
+                                           <option value="3">微信</option>
+                                           <option value="4">POS刷卡</option>
+                                           <option value="5">其他</option>
+                                       </select>
+                                   </div>
+                                   <div class="form-group">
+                                       <label>选择员工</label>
+                                       <select class="form-control"
+                                               ng-model="staffItemInfo"
+                                               ng-options="value.id as value.name for value in staffItems"
+                                               data-placeholder="选择服务员工">
+                                           <option value="" selected="selected">选择服务员工</option>
+                                       </select>
+                                   </div>
+                                   <div class="form-group">
+                                       <label>消费类别</label>
+                                       <select class="form-control" ng-change="selectClassfyInfo()"
+                                               ng-model="classItemInfo"
+                                               ng-options="value.id as value.name for value in classItems" id="classItem"
+                                               data-placeholder="选择消费类别"
+                                               style="width: 100%;">
+                                           <option value="" selected="selected">请选择消费类别</option>
+                                       </select>
+                                   </div>
+                                   <div class="form-group">
+                                       <label>消费项目</label>
+                                       &lt;!&ndash; <select class="form-control select2 select2-hidden-accessible"
+                                                ng-change="selectProductInfo()"
+                                                ng-model="productItemInfo"
+                                                ng-options="value as value.name for value in productItems" id="productItem"
+                                                multiple=""
+                                                data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
+                                                aria-hidden="true">
+                                            <option value="" selected="selected">请选择消费项目</option>
+                                        </select>&ndash;&gt;
+                                       &lt;!&ndash;    <select class="form-control select2 select2-hidden-accessible"
+                                                   ng-change="selectProductInfo()"
+                                                   ng-model="productItemInfo"
+                                                   multiple=""
+                                                   data-placeholder="请选择消费项目" style="width: 100%;" tabindex="-1"
+                                                   aria-hidden="true">
+                                               <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
+                                           </select>&ndash;&gt;
+                                       <select class="form-control"
+                                               ng-change="selectProductInfo()"
+                                               ng-model="productItemInfo"
+                                               data-placeholder="请选择消费项目" style="width: 100%;"
+                                       >
+                                           <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
+                                       </select>
+                                   </div>
+                                   <div class="form-group">
+                                       <label>消费金额</label>
+                                       <input type="number" class="form-control" placeholder="请输入消费金额" id="cunsumeMoney"/>
+                                   </div>
+                                   <div class="form-group">
+                                       <label>消费赠送金额</label>
+                                       <input type="number" class="form-control" placeholder="请输入消费赠送金额"
+                                              id="cunsumeGiven"/>
+                                   </div>
+                               </form>
+                           </div>-->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
                             <button type="button" class="btn btn-primary" ng-click="onConsumeInfo();">消费</button>
@@ -451,6 +582,25 @@
                 </div>
             </div>
             <!--新增会员 end-->
+            <!--会员二维码-->
+            <div class="modal fade" id="qrcode-member">
+                <div class="modal-dialog" style="width: 280px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">扫描二维码进行关注</h4>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <div id="qrcode"/>
+                            </center>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+            </div>
 
 
         </section>

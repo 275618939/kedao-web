@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
-    <![endif]-->
     <script data-main="scripts/product" src="scripts/vendor/require.js"></script>
 
 </head>
@@ -61,6 +60,7 @@
                                         <!--           <li><a href="#" style="color: #001a35">消费记录</a></li>
                                                    <li><a href="#" style="color: #001a35">充值记录</a></li>-->
                                         <li><a href="work/work-login.html" style="color: #001a35">公司业务管理</a></li>
+                                        <li><a href="#" ng-click="onQrcodeShow()" style="color: #001a35">店二维码</a></li>
                                         <li><a href="pass-update.html" style="color: #001a35">修改密码</a></li>
                                         <li><a href="#" ng-click="onLogout();" style="color: #001a35">退出</a></li>
                                     </ul>
@@ -307,6 +307,25 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--更新服务内容 end-->
+            <!--会员二维码-->
+            <div class="modal fade" id="qrcode-member">
+                <div class="modal-dialog" style="width: 280px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">扫描二维码进行关注</h4>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <div id="qrcode"/>
+                            </center>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+            </div>
 
 
         </section>

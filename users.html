@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
     <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
-    <![endif]-->
-
     <script data-main="scripts/member" src="scripts/vendor/require.js"></script>
 
 </head>
@@ -63,6 +61,7 @@
                                         <!--           <li><a href="#" style="color: #001a35">消费记录</a></li>
                                                    <li><a href="#" style="color: #001a35">充值记录</a></li>-->
                                         <li><a href="work/work-login.html" style="color: #001a35">公司业务管理</a></li>
+                                        <li><a href="#" ng-click="onQrcodeShow()" style="color: #001a35">店二维码</a></li>
                                         <li><a href="pass-update.html" style="color: #001a35">修改密码</a></li>
                                         <li><a href="#" ng-click="onLogout();" style="color: #001a35">退出</a></li>
                                     </ul>
@@ -190,8 +189,8 @@
                                 </button>
                                 <button type="button" class="btn btn-warning" ng-click=onMemberRechargeQuery(item)>充值
                                 </button>
-                                <button type="button" class="btn btn-warning" ng-click=onQrcodeShow(item.id)>二维码
-                                </button>
+                                <!--        <button type="button" class="btn btn-warning" ng-click=onQrcodeShow(item.id)>二维码
+                                        </button>-->
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success">记录查询</button>
                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"

@@ -128,30 +128,6 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         }
                     });
                 };
-
-                //初始化生成二维码
-                $scope.qrcode = new QRCode(document.getElementById("qrcode"), {
-                    text: "http://aiyunzhou.com/",
-                    width: 128,
-                    height: 128,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-                $scope.onQrcodeShow = function (id) {
-                    var promise = memberService.queryCompanyWxQrcode(id);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            return;
-                        }
-                        $scope.qrcode.makeCode(data.value);
-                        $("#qrcode-member").modal('show');
-                    });
-
-
-                }
-
-
                 //更新会员
                 $scope.onMemberUpdate = function () {
                     var memberPhone = $("#updateMemberPhone").val();
