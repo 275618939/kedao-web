@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="box-footer no-padding" ng-controller="CommonCtrl">
                                     <ul class="nav nav-stacked">
-                                      <!--  <li><a href="work/work-login.html" style="color: #001a35">公司业务管理</a></li>-->
+                                        <!--  <li><a href="work/work-login.html" style="color: #001a35">公司业务管理</a></li>-->
                                         <li><a href="#" ng-click="onQrcodeShow()" style="color: #001a35">店二维码</a></li>
                                         <li><a href="pass-update.html" style="color: #001a35">修改密码</a></li>
                                         <li><a href="#" ng-click="onLogout();" style="color: #001a35">退出</a></li>
@@ -218,7 +218,8 @@
                                             </label>
                                         </div>
                                         <div class="col-md-10">
-                                            <input type="number" class="form-control" id="phone" placeholder="默认消费"
+                                            <input type="number" class="form-control" id="phone"
+                                                   placeholder="13800138000"
                                                    ng-blur="queryMemberInfo();"/>
                                         </div>
                                     </div>
@@ -249,8 +250,8 @@
                                         </div>
                                         <div class="col-md-10">
                                             <select class="form-control select2" style="width:100%;" id="payType">
-                                                <option value="6" selected="selected" value="1">余额</option>
-                                                <option>现金</option>
+                                                <option value="6" selected="selected">余额</option>
+                                                <option value="1">现金</option>
                                                 <option value="2">支付宝</option>
                                                 <option value="3">微信</option>
                                                 <option value="4">POS刷卡</option>
