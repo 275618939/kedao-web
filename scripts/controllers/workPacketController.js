@@ -133,7 +133,7 @@ define(['controllers/controllers', 'services/workPacketService', 'services/commo
                             alert(data.desc)
                             return;
                         }
-                        window.location.href = "packet.html";
+                        window.location.href = "work-packet.html";
                     });
                 };
 
