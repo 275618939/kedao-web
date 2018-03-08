@@ -152,13 +152,13 @@ define(['services/services'],
                     getServerUrl: function () {
                         //return window.location.host;
                         //return "101.200.176.217";
-                        return "app.aiyunzhou.com";
+                        return "business.aiyunzhou.com";
                     }
                     ,
                     //返回app服务器请求地址
                     getAppServerUrl: function () {
                         //return "101.200.176.217";
-                        return "app.aiyunzhou.com";
+                        return "business.aiyunzhou.com";
                     }
                     ,
                     //返回显示消息条数
