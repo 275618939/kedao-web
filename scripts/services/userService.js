@@ -57,7 +57,7 @@ define(['services/services', 'services/commonService'],
                             info = "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password;
                         }
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/login",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter/login",
                             method: "POST",
                             data: info
                             //data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password
@@ -72,7 +72,7 @@ define(['services/services', 'services/commonService'],
                     userLogout: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/logout",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter/logout",
                             method: "DELETE",
                             data: {}
                         }).success(function (data, status, headers, config) {
@@ -100,7 +100,7 @@ define(['services/services', 'services/commonService'],
                     getImageVerify: function (account) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/image/verify/" + account + "?time=" + commonService.getDataString(),
+                            url: "http://" + commonService.getAppServerUrl() + "/app/image/verify/" + account + "?time=" + commonService.getDataString(),
                             method: "get"
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
@@ -113,7 +113,7 @@ define(['services/services', 'services/commonService'],
                     sendVerify: function (mobile) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/sms/verify",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/sms/verify",
                             method: "post",
                             data: "account=" + mobile
                         }).success(function (data, status, headers, config) {
@@ -127,7 +127,7 @@ define(['services/services', 'services/commonService'],
                     forgetPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/forget",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter/forget",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify
                         }).success(function (data, status, headers, config) {
@@ -141,7 +141,7 @@ define(['services/services', 'services/commonService'],
                     setPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/modpwd",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter/modpwd",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify + "&newpwd=" + data.newpwd + "&oldpwd=" + data.oldpwd
                         }).success(function (data, status, headers, config) {
@@ -155,7 +155,7 @@ define(['services/services', 'services/commonService'],
                     resetPass: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/waiter/setpwd",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter/setpwd",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify + "&newpwd=" + data.newpwd
                         }).success(function (data, status, headers, config) {
