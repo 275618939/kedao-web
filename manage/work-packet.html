@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>可道管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="bower_components/dist/css/skin-blue.min.css">
+    <link rel="stylesheet" href="bower_components/dist/css/dataTables.bootstrap.min.css">
+    <![endif]-->
+    <script data-main="scripts/workPacket" src="scripts/vendor/require.js"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="shop.html" class="logo">
+            <span class="logo-mini"><b>道</b></span>
+            <span class="logo-lg"><b>可</b>道</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="http://wwww.aiyuanzhou.com/shop/index.html" class="dropdown-toggle">
+                            <span class="hidden-xs">店业务管理</span>
+                        </a>
+                    </li>
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="dist/img/kedao.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs">个人信息</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <div class="box box-widget widget-user-2">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header bg-light-blue-active">
+                                    <div class="widget-user-image">
+                                        <img class="img-circle" src="dist/img/kedao.png" alt="User Avatar">
+                                    </div>
+                                    <!-- /.widget-user-image -->
+                                    <h3 class="widget-user-username">信息</h3>
+                                </div>
+                                <div class="box-footer no-padding" ng-controller="CommonCtrl">
+                                    <ul class="nav nav-stacked">
+                                        <!--           <li><a href="#" style="color: #001a35">消费记录</a></li>
+                                                   <li><a href="#" style="color: #001a35">充值记录</a></li>-->
+                                        <!--  <li><a href="../index.html" style="color: #001a35">店业务管理</a></li>-->
+                                        <li><a href="work-pass-update.html" style="color: #001a35">修改密码</a></li>
+                                        <li><a href="#" ng-click="onLogout();" style="color: #001a35">退出</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="dist/img/kedao.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <!--  <p>店长xxx</p>-->
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i>在线</a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">功能栏</li>
+                <!-- Optionally, you can add icons to the links -->
+                <li><a href="shop.html"><i class="fa fa-link"></i> <span>店管理</span></a></li>
+                <li><a href="work-staff.html"><i class="fa fa-link"></i> <span>员工管理</span></a></li>
+                <li class="active"><a href="work-packet.html"><i class="fa fa-link"></i> <span>套餐管理</span></a></li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                可道信息管理
+                <small>套餐管理</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid" ng-controller="PacketManagerCtrl">
+            <div class="box">
+                <div class="box-body">
+                    <div class="input-group">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#packet-add">
+                            添加套餐
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table id="packet-list" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>套餐名</th>
+                            <th>折扣率</th>
+                            <th>充值金额</th>
+                            <th>赠送金额</th>
+                            <th>提成</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in packetItems">
+                            <td ng-bind="item.name"></td>
+                            <td ng-bind="item.discount|DiscountFilters"></td>
+                            <td ng-bind="item.money|MoneyFilters"></td>
+                            <td ng-bind="item.given|MoneyFilters"></td>
+                            <td ng-bind="item.retain|MoneyFilters"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-warning" ng-click=onUpdateQuery(item)> 修改
+                                    </button>
+                                 <!--   <button type="button" class="btn btn-warning">删除</button>-->
+                                </div>
+                                <!--            <a href="hair-packet-update.html?id={{item.id}}&name={{item.name}}&discount={{item.discount}}&money={{item.money}}&given={{item.given}}&retain={{item.retain}}">详情</a>-->
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div class="box-footer">
+                     <div class="btn-group">
+                         <button type="button" class="btn btn-warning"> 上一页</button>
+                         <button type="button" class="btn btn-warning">下一页</button>
+                     </div>
+                 </div>-->
+            </div>
+
+            <!--添加套餐 start-->
+            <div class="modal fade" id="packet-add">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="onClose();" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">新增套餐</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label>套餐名称</label>
+                                    <input type="text" class="form-control" id="name"
+                                           placeholder="请输入套餐名称"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>享受折扣</label>
+                                    <input type="number" class="form-control" id="discount"
+                                           placeholder="10" value="10"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>充值金额</label>
+                                    <input type="number" class="form-control" id="money" placeholder="请输入消费金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>赠送金额</label>
+                                    <input type="number" class="form-control" id="given"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>套餐提成</label>
+                                    <input type="number" class="form-control" id="retain"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left"
+                                    ng-click="onClose();">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="onCreate();">
+                                添加
+                            </button>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+            </div>
+            <!--添加套餐 end-->
+
+            <!--更新套餐 start-->
+            <div class="modal fade" id="packet-update">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="onUpdateClose();" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">修改套餐</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <input type="text" id="packetId" hidden="hidden"/>
+                                <div class="form-group">
+                                    <label>套餐名称</label>
+                                    <input type="text" class="form-control" id="packetName"
+                                           placeholder="请输入套餐名称"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>享受折扣</label>
+                                    <input type="number" class="form-control" id="packetDiscount"
+                                           placeholder="10" value="10"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>充值金额</label>
+                                    <input type="number" class="form-control" id="packetMoney" placeholder="请输入消费金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>赠送金额</label>
+                                    <input type="number" class="form-control" id="packetGiven"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>套餐提成</label>
+                                    <input type="number" class="form-control" id="packetRetain"
+                                           placeholder="请输入消费赠送金额"/>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left"
+                                    ng-click="onUpdateClose();">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="onUpdate();">
+                                修改
+                            </button>
+
+                        </div>
+                    </div>
+                    /.modal-content
+                </div>
+            </div>
+            <!-- 更新套餐 end-->
+            <!--会员二维码-->
+            <div class="modal fade" id="qrcode-member">
+                <div class="modal-dialog" style="width: 280px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">扫描二维码进行关注</h4>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <div id="qrcode"/>
+                            </center>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Main Footer -->
+<footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+        Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2016 <a href="#">云胄科技有限责任公司</a>.</strong> All rights reserved.
+</footer>
+
+
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>
