@@ -8,7 +8,7 @@ define(['services/services', 'services/commonService'],
                     staffCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",
                             method: "put",
                             data: "cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power
                         }).success(function (data, status, headers, config) {
@@ -22,7 +22,7 @@ define(['services/services', 'services/commonService'],
                     staffUpdate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",
                             method: "post",
                             data: "id=" + data.id + "&name=" + data.name + "&cellNumber=" + data.cellNumber
                         }).success(function (data, status, headers, config) {
@@ -36,7 +36,7 @@ define(['services/services', 'services/commonService'],
                     getShopStaffList: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter/" + page + "/" + commonService.getMessageCount() + "",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter/" + page + "/" + commonService.getMessageCount() + "",
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {
