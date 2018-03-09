@@ -1,5 +1,5 @@
 /*店业务处理*/
-define(['services/services', 'services/commonService'],
+define(['services', 'services/commonService'],
     function (services) {
         services.factory('WorkPacketService', ['$http', '$q', 'CommonService',
             function ($http, $q, commonService) {
@@ -36,7 +36,7 @@ define(['services/services', 'services/commonService'],
                     getPacketList: function () {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/business/packet" + "?time=" + commonService.getDataString(),
+                            url: "http://" + commonService.getServerUrl() + "/business/packet" + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

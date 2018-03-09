@@ -1,4 +1,4 @@
-define(['controllers/controllers', 'services/userService', 'services/commonService', 'services/paramService'],
+define(['controllers', 'services/userService', 'services/commonService', 'services/paramService'],
     function (controllers) {
         /*用户注册*/
         controllers.controller('RegisterCtrl', ['$scope', 'UserService', 'CommonService',
