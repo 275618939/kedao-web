@@ -47,6 +47,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         }
                         //会员信息
                         $scope.memberInfo = data.value;
+                        $("#userName").text(data.value.name);
                         $("#money").text(commonService.getYuan(data.value.money));
                         $("#given").text(commonService.getYuan(data.value.given));
                     });
