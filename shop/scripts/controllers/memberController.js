@@ -119,14 +119,20 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $scope.queryWxRecentInfo();
                 //绑定微信
                 $scope.onMemberBind = function (id, openId) {
-                    var data = {id: id, openId: openId};
-                    var promise = memberService.bindMember(data);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            alert(data.desc);
+                    Ewin.confirm({message: "确认要绑定此用户吗？"}).on(function (e) {
+                        if (!e) {
                             return;
                         }
+                        var data = {id: id, openId: openId};
+                        var promise = memberService.bindMember(data);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                alert(data.desc);
+                                return;
+                            }
+                        });
                     });
+
                 };
                 //更新会员
                 $scope.onMemberUpdate = function () {

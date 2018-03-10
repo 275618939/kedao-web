@@ -4,6 +4,7 @@ require.config({
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
         qrcode: 'vendor/qrcode.min',
+        confirm: 'vendor/confirm',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
         adminlte: '../bower_components/dist/js/adminlte.min',
@@ -25,6 +26,10 @@ require.config({
             deps: ['jquery'],
             exports: 'qrcode'
         },
+        confirm: {
+            deps: ['jquery'],
+            exports: 'confirm'
+        },
         adminlte: {
             deps: ['jquery', 'bootstrap'],
             exports: 'adminlte'
@@ -41,7 +46,7 @@ require.config({
 });
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'select', 'bootstrap', 'adminlte', 'qrcode',
+        'app', 'domReady', 'jquery', 'select', 'bootstrap', 'adminlte', 'qrcode', 'confirm',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'filters/discountFilters',

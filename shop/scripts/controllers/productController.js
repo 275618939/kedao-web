@@ -156,7 +156,11 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                 };
                 //删除服务
                 $scope.onProductDelete = function (data) {
-                    if (confirm("确定删除该服务吗?")) {
+                    Ewin.confirm({message: "确认要删除选择的数据吗？"}).on(function (e) {
+                        if (!e) {
+                            return;
+                        }
+                        //alert("ok");
                         var data = {
                             id: data.id,
                             classifyId: data.classifyId
@@ -170,7 +174,22 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                             //刷新服务信息
                             $scope.selectClassfyInfo();
                         });
-                    }
+                    });
+                    /*  if (confirm("确定删除该服务吗?")) {
+                     var data = {
+                     id: data.id,
+                     classifyId: data.classifyId
+                     };
+                     var promise = productService.productDelete(data);
+                     promise.then(function (data) {
+                     if (data.state != 1) {
+                     alert(data.desc)
+                     return;
+                     }
+                     //刷新服务信息
+                     $scope.selectClassfyInfo();
+                     });
+                     }*/
 
 
                 };

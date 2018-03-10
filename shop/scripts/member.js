@@ -5,6 +5,7 @@ require.config({
         jquery: 'vendor/jquery',
         md5: 'vendor/jQuery.md5',
         qrcode: 'vendor/qrcode.min',
+        confirm: 'vendor/confirm',
         chart: '../bower_components/dist/js/Chart',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
@@ -23,6 +24,10 @@ require.config({
         qrcode: {
             deps: ['jquery'],
             exports: 'qrcode'
+        },
+        confirm: {
+            deps: ['jquery'],
+            exports: 'confirm'
         },
         chart: {
             exports: 'chart'
@@ -51,7 +56,7 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode',
+        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode', 'confirm',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'filters/sexFilters',
