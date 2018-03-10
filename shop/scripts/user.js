@@ -5,6 +5,7 @@ require.config({
         jquery: 'vendor/jquery',
         iscroll: 'vendor/iscroll-lite',
         qrcode: 'vendor/qrcode.min',
+        confirm: 'vendor/confirm',
         touchslider: 'vendor/jquery.touchslider.min',
         twitter: 'vendor/bootstrap',
         bootstrap: 'vendor/bootstrap3.3.4',
@@ -28,6 +29,10 @@ require.config({
             deps: ['jquery'],
             exports: 'qrcode'
         },
+        confirm: {
+            deps: ['jquery'],
+            exports: 'confirm'
+        },
         jqueryMobile: {
             deps: ['jquery'],
             exports: 'jqueryMobile'
@@ -50,7 +55,7 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', "iscroll", "touchslider", 'qrcode',
+        'app', 'domReady', 'jquery', "iscroll", "touchslider", 'qrcode', 'confirm',
         'filters/intervalFilters',
         'controllers/userController',
         'controllers/commonController',

@@ -225,6 +225,8 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         }
                         //会员信息
                         $scope.memberInfo = data.value;
+                        $("#showRechargeMoney").text(commonService.getYuan(data.value.money));
+                        $("#showRechargeGiven").text(commonService.getYuan(data.value.given));
                     });
 
                 };

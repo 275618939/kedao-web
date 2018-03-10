@@ -92,11 +92,17 @@ define(['controllers/controllers', 'services/staffService', 'services/commonServ
                         cellNumber: phone,
                         name: name
                     };
-                    staffService.staffUpdate(data);
-                    //关闭更新面板
-                    $scope.onUpdateClose();
-                    //刷新会员信息
-                    $scope.onQueryStaffInfo();
+                    Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
+                        if (!e) {
+                            return;
+                        }
+                        staffService.staffUpdate(data);
+                        //关闭更新面板
+                        $scope.onUpdateClose();
+                        //刷新会员信息
+                        $scope.onQueryStaffInfo();
+                    });
+
 
                 };
 

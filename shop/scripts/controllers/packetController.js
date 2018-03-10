@@ -126,14 +126,20 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                         given: parseInt(commonService.getFen(given)),
                         retain: parseInt(commonService.getFen(retain))
                     };
-                    var promise = packetService.packetUpdate(info);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            alert(data.desc)
+                    Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
+                        if (!e) {
                             return;
                         }
-                        window.location.href = "packet.html";
+                        var promise = packetService.packetUpdate(info);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                alert(data.desc)
+                                return;
+                            }
+                            window.location.href = "packet.html";
+                        });
                     });
+
                 };
 
 

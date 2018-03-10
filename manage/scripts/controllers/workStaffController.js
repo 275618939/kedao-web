@@ -109,14 +109,14 @@ define(['controllers', 'services/workStaffService', 'services/commonService', 's
                         return;
                     }
                     /*if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
-                        return;
-                    }
-                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
-                        $("#phone").focus();
-                        alert("请输入正确的手机号!");
-                        return;
-                    }*/
+                     alert("手机号码为11位数字！请正确填写！");
+                     return;
+                     }
+                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
+                     $("#phone").focus();
+                     alert("请输入正确的手机号!");
+                     return;
+                     }*/
                     if ($scope.shopItemInfo == null || $scope.shopItemInfo == "undefined") {
                         alert("请选择一个店!");
                         return;
@@ -131,11 +131,17 @@ define(['controllers', 'services/workStaffService', 'services/commonService', 's
                         power: $scope.powerInfo,
                         name: name
                     };
-                    staffService.staffUpdate(data);
-                    //关闭更新面板
-                    $scope.onUpdateClose();
-                    //刷新会员信息
-                    $scope.onQueryStaffInfo();
+                    Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
+                        if (!e) {
+                            return;
+                        }
+                        staffService.staffUpdate(data);
+                        //关闭更新面板
+                        $scope.onUpdateClose();
+                        //刷新会员信息
+                        $scope.onQueryStaffInfo();
+                    });
+
 
                 };
 

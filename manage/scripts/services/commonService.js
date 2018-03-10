@@ -42,7 +42,7 @@ define(['services'],
                                 "label": "员工权限"
                             },
                             {
-                                "id": 0xff7,
+                                "id": 4095,
                                 "label": "店长权限"
                             }/*,
                              {

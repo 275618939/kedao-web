@@ -176,13 +176,19 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         name: memberName,
                         card: memberCard
                     };
-                    memberService.memberNameUpdate(data);
-                    //memberService.memberPhoneUpdate(data);
-                    memberService.memberCardUpdate(data);
-                    //关闭更新面板
-                    $scope.onUpdateClose();
-                    //刷新会员信息
-                    $scope.onQueryMemberInfo();
+                    Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
+                        if (!e) {
+                            return;
+                        }
+                        memberService.memberNameUpdate(data);
+                        //memberService.memberPhoneUpdate(data);
+                        memberService.memberCardUpdate(data);
+                        //关闭更新面板
+                        $scope.onUpdateClose();
+                        //刷新会员信息
+                        $scope.onQueryMemberInfo();
+                    });
+
 
                 };
 

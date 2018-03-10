@@ -141,18 +141,24 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                         price: commonService.getFen(price),
                         retain: commonService.getFen(retain)
                     };
-                    var promise = productService.productUpdate(data);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            alert(data.desc)
+                    Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
+                        if (!e) {
                             return;
                         }
-                        //关闭更新面板
-                        $scope.onUpdateClose();
-                        //刷新服务信息
-                        $scope.selectClassfyInfo();
-                        //window.location.href = ".html";
+                        var promise = productService.productUpdate(data);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                alert(data.desc)
+                                return;
+                            }
+                            //关闭更新面板
+                            $scope.onUpdateClose();
+                            //刷新服务信息
+                            $scope.selectClassfyInfo();
+                            //window.location.href = ".html";
+                        });
                     });
+
                 };
                 //删除服务
                 $scope.onProductDelete = function (data) {

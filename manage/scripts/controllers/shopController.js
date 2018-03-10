@@ -156,16 +156,22 @@ define(['controllers', 'services/shopService', 'services/paramService'],
                         address: address,
                         telephone: telephone
                     };
-                    var promise = shopService.shopUpdate(data);
-                    promise.then(function (data) {
-                        if (data.state != 1) {
-                            alert(data.desc)
+                    Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
+                        if (!e) {
                             return;
                         }
-                        $scope.onUpdateClose();
-                        $scope.load();
+                        var promise = shopService.shopUpdate(data);
+                        promise.then(function (data) {
+                            if (data.state != 1) {
+                                alert(data.desc)
+                                return;
+                            }
+                            $scope.onUpdateClose();
+                            $scope.load();
 
+                        });
                     });
+
                 };
 
 
