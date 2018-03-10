@@ -51,12 +51,11 @@ define(['controllers/controllers', 'services/commonService', 'services/userServi
                         if (data.state != 1) {
                             return;
                         }
-                        if (data.qrcode != null) {
-                            $scope.qrcode.makeCode(data.qrcode);
+                        if (data.value.qrcode != null) {
+                            $scope.qrcode.makeCode(data.value.qrcode);
                             $("#qrcode-member").modal('show');
                         }
                     });
-
 
                 }
 

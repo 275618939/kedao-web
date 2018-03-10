@@ -51,8 +51,8 @@ define(['controllers', 'services/commonService', 'services/userService', 'servic
                         if (data.state != 1) {
                             return;
                         }
-                        if (data.qrcode != null) {
-                            $scope.qrcode.makeCode(data.qrcode);
+                        if (data.value.qrcode != null) {
+                            $scope.qrcode.makeCode(data.value.qrcode);
                             $("#qrcode-member").modal('show');
                         }
                     });
