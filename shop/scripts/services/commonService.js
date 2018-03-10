@@ -3,11 +3,6 @@ define(['services/services'],
         services.factory('CommonService', [
             function () {
                 return {
-                    weixin_expires_in: 7200 * 1000,//微信token有效期，单位毫秒
-                    /*    weixin_appID:'wxfe49c636d485e4d9',
-                     weixin_appsecret:'3e23328c96455dd6776a48eb8a55be28',*/
-                    weixin_appID: 'wxcc0665a79fe9c691',
-                    weixin_appsecret: '22470b2c0d6eba71c555c8dfaf2b4ad8',
                     OneDayValidity: 24 * 60 * 60 * 1000,//有效期1天
                     ThirtyDayValidity: 30 * 60 * 60 * 1000,//有效期30天
                     HxAllTime: 9,
