@@ -7,7 +7,7 @@ define(['services/services', 'services/commonService'],
                     classfyCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/classify",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/classify",
                             method: "put",
                             data: "name=" + data.name
                         }).success(function (data, status, headers, config) {
@@ -21,7 +21,7 @@ define(['services/services', 'services/commonService'],
                     productCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/product",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/product",
                             method: "put",
                             data: "classifyId=" + data.classifyId + "&name=" + data.name + "&price=" + data.price + "&retain=" + data.retain
                         }).success(function (data, status, headers, config) {
@@ -35,7 +35,7 @@ define(['services/services', 'services/commonService'],
                     productUpdate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/product",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/product",
                             method: "post",
                             data: "id=" + data.id + "&classifyId=" + data.classifyId + "&name=" + data.name + "&price=" + data.price + "&retain=" + data.retain
                         }).success(function (data, status, headers, config) {
@@ -49,7 +49,7 @@ define(['services/services', 'services/commonService'],
                     productDelete: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/product/" + data.classifyId + "/" + data.id,
+                            url: "http://" + commonService.getAppServerUrl() + "/app/product/" + data.classifyId + "/" + data.id,
                             method: "delete",
                             data: {}
                         }).success(function (data, status, headers, config) {
