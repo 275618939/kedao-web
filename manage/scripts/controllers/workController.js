@@ -39,7 +39,7 @@ define(['controllers', 'services/workService', 'services/commonService', 'servic
                             return;
                         }
                         //成功后调转到店创建页，提示用户新增店信息
-                        window.location.href = "work-login.html?first=true";
+                        window.location.href = "login.html?first=true";
                     });
                 };
                 //发送验证码
@@ -304,7 +304,7 @@ define(['controllers', 'services/workService', 'services/commonService', 'servic
                             alert(data.desc)
                             return;
                         }
-                        window.location.href = "work-login.html";
+                        window.location.href = "login.html";
                     });
 
                 };

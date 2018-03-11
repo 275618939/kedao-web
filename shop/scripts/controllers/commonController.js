@@ -13,7 +13,7 @@ define(['controllers/controllers', 'services/commonService', 'services/userServi
                     window.location.href = "login.html";
                 };
                 $scope.goWorkLogin = function () {
-                    window.location.href = "work-login.html";
+                    window.location.href = "login.html";
                 };
                 $scope.goUser = function () {
                     window.location.href = "users.html";

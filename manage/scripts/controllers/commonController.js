@@ -13,7 +13,7 @@ define(['controllers', 'services/commonService', 'services/userService', 'servic
                     window.location.href = "login.html";
                 };
                 $scope.goWorkLogin = function () {
-                    window.location.href = "work-login.html";
+                    window.location.href = "login.html";
                 };
                 $scope.goUser = function () {
                     window.location.href = "users.html";
@@ -27,14 +27,14 @@ define(['controllers', 'services/commonService', 'services/userService', 'servic
                 $scope.onLogout = function () {
                     userService.userLogout();
                     commonService.deleteDataByStorage("hair-sessionId");
-                    window.location.href = "work-login.html";
+                    window.location.href = "login.html";
                 };
 
                 //wrok登出
                 $scope.onWorkLogout = function () {
                     workService.userLogout();
                     commonService.delCookie("hair-sessionId");
-                    window.location.href = "work-login.html";
+                    window.location.href = "login.html";
                 };
                 //初始化生成二维码
                 $scope.qrcode = new QRCode(document.getElementById("qrcode"), {
