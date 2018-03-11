@@ -36,7 +36,7 @@ define(['services', 'services/commonService'],
                     getShopStaffList: function (page) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter/" + page + "/" + commonService.getMessageCount() + "",
+                            url: "http://" + commonService.getServerUrl() + "/app/shop/waiter/" + page + "/" + commonService.getMessageCount() + "?time=" + commonService.getDataString(),
                             method: "get",
                             data: {}
                         }).success(function (data, status, headers, config) {

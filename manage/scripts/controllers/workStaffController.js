@@ -66,8 +66,7 @@ define(['controllers', 'services/workStaffService', 'services/commonService', 's
                         alert("请选择员工权限！");
                         return;
                     }
-                    var pass = phone + $.md5(phone + password);
-                    pass = $.md5(pass);
+                    var pass = $.md5(phone + password);
                     var data = {
                         shopId: $scope.shopItemInfo,
                         cellNumber: phone,

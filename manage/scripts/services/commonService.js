@@ -6,8 +6,8 @@ define(['services'],
                     OneDayValidity: 24 * 60 * 60 * 1000,//有效期1天
                     ThirtyDayValidity: 30 * 60 * 60 * 1000,//有效期30天
                     HxAllTime: 9,
-                    defaultPower: 0x3f9f,
-                    defaultClerkPower: 0xf0,
+                    defaultPower: 4095,
+                    defaultClerkPower: 4095,
                     max_money: 999999999,
                     //默认消费者ID
                     defualt_consumer_id: 1555255472947200000,
