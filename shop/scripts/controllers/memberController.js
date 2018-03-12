@@ -130,6 +130,8 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                                 alert(data.desc);
                                 return;
                             }
+                            //刷新最近绑定的会员
+                            $scope.queryWxRecentInfo();
                         });
                     });
 

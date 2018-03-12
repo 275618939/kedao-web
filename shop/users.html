@@ -208,8 +208,7 @@
                                         <li><a href="recharge.html?queryId={{item.id}}">充值记录</a></li>
                                     </ul>
                                 </div>
-
-                                <div class="btn-group">
+                                <div class="btn-group" ng-if="item.subscribe==1">
                                     <button type="button" class="btn btn-info">最近关注会员</button>
                                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
