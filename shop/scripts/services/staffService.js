@@ -8,7 +8,7 @@ define(['services/services', 'services/commonService'],
                     staffCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter",
                             /*     url: "http://" + commonService.getServerUrl() + "/business/waiter",*/
                             method: "put",
                             data: "cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power
@@ -24,7 +24,7 @@ define(['services/services', 'services/commonService'],
                         var deferred = $q.defer();
                         $http({
                             /*    url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",   */
-                            url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter",
                             method: "post",
                             data: "id=" + data.id + "&name=" + data.name + "&cellNumber=" + data.cellNumber
                         }).success(function (data, status, headers, config) {
