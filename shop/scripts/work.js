@@ -1,4 +1,5 @@
 require.config({
+    waitSeconds: 200,
     paths: {
         angular: 'vendor/angular',
         angularRoute: 'vendor/angular-route',
@@ -27,7 +28,6 @@ require.config({
             exports: 'angularRoute'
         }
     },
-    waitSeconds: 0
     //deps:['angular'],//angular
     /* urlArgs: "bust=" + (new Date()).getTime()  //∑¿÷π∂¡»°ª∫¥Ê£¨µ˜ ‘”√*/
 });
