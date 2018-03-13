@@ -78,8 +78,7 @@ define(['controllers', 'services/shopService', 'services/paramService'],
                         alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
-                    //发送请求道服务端
-                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(telephone))) {
+                    if (!(/^1[0-9][0-9]\d{4,8}$/.test(telephone))) {
                         $("#telephone").focus();
                         alert("请输入正确的手机号!");
                         return;

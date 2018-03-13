@@ -387,7 +387,9 @@
                                         ng-change="selectProductInfo()"
                                         ng-model="productItemInfo"
                                         data-placeholder="请选择消费项目" style="width: 100%;">
-                                    <option ng-repeat="x in productItems" value="{{x}}">{{x.name}}</option>
+                                    <option ng-repeat="x in productItems" value="{{x}}">
+                                        项目：{{x.name}}，价格：{{x.price|MoneyFilters}}
+                                    </option>
                                 </select>
                                 <!--   <select class="form-control select2 select2-hidden-accessible"
                                            ng-change="selectProductInfo()"

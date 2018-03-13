@@ -54,6 +54,7 @@ require([
         'angular', 'angularRoute',
         'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode',
         'filters/intervalFilters',
+        'filters/moneyFilters',
         'controllers/indexController',
         'controllers/commonController',
         'interceptors/requestInterceptors'

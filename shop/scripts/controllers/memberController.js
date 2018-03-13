@@ -91,7 +91,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                             alert(data.desc);
                             return;
                         }
-                        if (data.value == null || data.value == "undefined") {
+                        if (data.value == null || data.value == "undefined" || data.value == "") {
                             alert("会员不存在!");
                             return;
                         }
@@ -289,10 +289,21 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     arr.forEach(function (value, index, array) {
                         money += value.price;
                     });
-                    $("#cunsumeMoney").val(commonService.getYuan(money));
+                    var temp_money = 0;
+                    if ($scope.memberInfo != null && $scope.memberInfo != "undefined") {
+                        temp_money = (commonService.getYuan(money) * (commonService.getDiscountConvert($scope.memberInfo.discount) / 10.0)).toFixed(0);
+                    } else {
+                        temp_money = commonService.getYuan(money);
+                    }
+                    $("#cunsumeMoney").val(temp_money);
                 };
                 $scope.onConsumeClose = function () {
                     $("#user-consume").modal('hide');
+                    $("#phone").val("");
+                    $("#discount").val("");
+                    $("#cunsumeMoney").val("");
+                    $scope.memberInfo = null;
+                    $scope.productItemInfo = 0;
                 }
                 //用户消费
                 $scope.onConsumeInfo = function () {

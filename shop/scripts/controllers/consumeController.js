@@ -42,7 +42,13 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     arr.forEach(function (value, index, array) {
                         money += value.price;
                     });
-                    $("#cunsumeMoney").val(commonService.getYuan(money));
+                    var temp_money = 0;
+                    if ($scope.memberInfo != null && $scope.memberInfo != "undefined") {
+                        temp_money = (commonService.getYuan(money) * (commonService.getDiscountConvert($scope.memberInfo.discount) / 10.0)).toFixed(0);
+                    } else {
+                        temp_money = commonService.getYuan(money);
+                    }
+                    $("#cunsumeMoney").val(temp_money);
                 };
                 //查询会员信息
                 $scope.queryMemberInfo = function () {
@@ -57,13 +63,12 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                             alert(data.desc);
                             return;
                         }
-                        if (data.value == null || data.value == "undefined") {
+                        if (data.value == null || data.value == "undefined" || data.value == "") {
                             alert("会员不存在!");
                             return;
                         }
                         //会员信息
                         $scope.memberInfo = data.value;
-                        var money = data.value.money;
                         $("#userName").text(data.value.name);
                         $("#money").text(commonService.getYuan(data.value.money));
                         $("#given").text(commonService.getYuan(data.value.given));
@@ -74,6 +79,11 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 };
                 $scope.onConsumeClose = function () {
                     $("#add-consume").modal('hide');
+                    $("#phone").val("");
+                    $("#discount").val("");
+                    $("#cunsumeMoney").val("");
+                    $scope.memberInfo = null;
+                    $scope.productItemInfo = 0;
                 }
                 //用户消费
                 $scope.onConsumeInfo = function () {
@@ -134,6 +144,10 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var memberId = commonService.defualt_consumer_id;
                     if (null != $scope.memberInfo && $scope.memberInfo.id != "undefined") {
                         memberId = $scope.memberInfo.id;
+                    }
+                    if (memberId == "undefined" || memberId == null) {
+                        alert("请选择一个合法会员");
+                        return;
                     }
                     var data = {
                         id: memberId,
