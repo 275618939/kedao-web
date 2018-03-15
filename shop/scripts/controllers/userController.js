@@ -305,6 +305,8 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                             if (data.state == 15 && data.value != null && data.value.trim() != "") {
                                 //显示验证码，重新输入验证码
                                 $scope.onImageVerify(data.value);
+                            } else {
+                                $scope.onImageVerify(null);
                             }
                             return;
                         }
