@@ -11,7 +11,6 @@ require.config({
         confirm: 'vendor/confirm',
         adminlte: '../bower_components/dist/js/adminlte.min',
         domReady: 'vendor/domReady'
-
     },
     shim: {
         jquery: {

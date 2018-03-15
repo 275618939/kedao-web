@@ -51,15 +51,15 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                     var price = $("#productPrice").val();
                     var retain = $("#productRetain").val();
                     if (null == $scope.classItemInfo || $scope.classItemInfo == "undefined") {
-                        alert("请选择一个服务类别!");
+                         Ewin.alert("请选择一个服务类别!");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                        alert("请输入套餐名！");
+                         Ewin.alert("请输入套餐名！");
                         return;
                     }
                     if (isNaN(price) || price == null || price <= 0) {
-                        alert("请输入正确的价格！");
+                         Ewin.alert("请输入正确的价格！");
                         return;
                     }
                     if (isNaN(retain) || retain == null || retain < 0) {
@@ -74,7 +74,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                     var promise = productService.productCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         //关闭添加面板
@@ -87,7 +87,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                 $scope.onClassCreate = function () {
                     var name = $("#className").val();
                     if (name.trim() == "" || name == null) {
-                        alert("请输入服务类别名称！");
+                         Ewin.alert("请输入服务类别名称！");
                         return;
                     }
                     var data = {
@@ -96,7 +96,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                     var promise = productService.classfyCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         //关闭添加面板
@@ -120,15 +120,15 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                     var retain = $("#updateProductRetain").val();
                     var productId = $("#productId").val();
                     if (productId == null) {
-                        alert("请选择一个服务！");
+                         Ewin.alert("请选择一个服务！");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                        alert("请输入套餐名！");
+                         Ewin.alert("请输入套餐名！");
                         return;
                     }
                     if (isNaN(price) || price == null || price <= 0) {
-                        alert("请输入正确的价格！");
+                         Ewin.alert("请输入正确的价格！");
                         return;
                     }
                     if (isNaN(retain) || retain == null || retain < 0) {
@@ -148,7 +148,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                         var promise = productService.productUpdate(data);
                         promise.then(function (data) {
                             if (data.state != 1) {
-                                alert(data.desc)
+                                 Ewin.alert(data.desc)
                                 return;
                             }
                             //关闭更新面板
@@ -166,7 +166,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                         if (!e) {
                             return;
                         }
-                        //alert("ok");
+                        // Ewin.alert("ok");
                         var data = {
                             id: data.id,
                             classifyId: data.classifyId
@@ -174,7 +174,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                         var promise = productService.productDelete(data);
                         promise.then(function (data) {
                             if (data.state != 1) {
-                                alert(data.desc)
+                                 Ewin.alert(data.desc)
                                 return;
                             }
                             //刷新服务信息
@@ -189,7 +189,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                      var promise = productService.productDelete(data);
                      promise.then(function (data) {
                      if (data.state != 1) {
-                     alert(data.desc)
+                      Ewin.alert(data.desc)
                      return;
                      }
                      //刷新服务信息

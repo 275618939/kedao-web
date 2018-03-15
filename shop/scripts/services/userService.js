@@ -57,8 +57,7 @@ define(['services/services', 'services/commonService'],
                             info = "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password;
                         }
                         $http({
-                            //rl: "http://" + commonService.getAppServerUrl() + "/app/waiter/login" + "?time=" + commonService.getDataString(),
-                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter/login",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter/login" + "?time=" + commonService.getDataString(),
                             method: "POST",
                             data: info
                             //data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password

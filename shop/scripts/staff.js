@@ -53,7 +53,8 @@ require.config({
             exports: 'angularRoute'
         }
     },
-    deps: ['jquery', 'bootstrap', 'adminlte']
+    deps: ['jquery', 'bootstrap', 'adminlte'],
+    urlArgs: "bust=" + (new Date()).getTime()  //防止读取缓存，调试用
 });
 //
 require([

@@ -4,6 +4,7 @@ require.config({
         angular: 'vendor/angular',
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
+        confirm: 'vendor/confirm',
         jqueryMd5: 'vendor/jQuery.md5',
         qrcode: 'vendor/qrcode.min',
         domReady: 'vendor/domReady'
@@ -20,6 +21,10 @@ require.config({
             deps: ['jquery'],
             exports: 'jqueryMd5'
         },
+        confirm: {
+            deps: ['jquery'],
+            exports: 'confirm'
+        },
         angular: {
             deps: ['jquery'],
             exports: 'angular'
@@ -34,7 +39,7 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'jqueryMd5', 'qrcode',
+        'app', 'domReady', 'jquery', 'jqueryMd5', 'qrcode', 'confirm',
         'filters/intervalFilters',
         'controllers/workController',
         'controllers/commonController',

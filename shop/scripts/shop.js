@@ -6,6 +6,7 @@ require.config({
         jquery: 'vendor/jquery',
         md5: 'vendor/jQuery.md5',
         qrcode: 'vendor/qrcode.min',
+        confirm: 'vendor/confirm',
         chart: '../bower_components/dist/js/Chart',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
@@ -24,6 +25,10 @@ require.config({
         md5: {
             deps: ['jquery'],
             exports: 'md5'
+        },
+        confirm: {
+            deps: ['jquery'],
+            exports: 'confirm'
         },
         chart: {
             exports: 'chart'
@@ -47,12 +52,13 @@ require.config({
             deps: ['angular'],
             exports: 'angularRoute'
         }
-    }
+    },
+    urlArgs: "bust=" + (new Date()).getTime()  //防止读取缓存，调试用
 });
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode',
+        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode', 'confirm',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'controllers/shopController',

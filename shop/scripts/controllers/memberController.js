@@ -312,37 +312,37 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var given = $("#cunsumeGiven").val();
                     var memberId = $("#memberId").val();
                     if (memberId == null) {
-                        alert("请选择一个会员");
+                         Ewin.alert("请选择一个会员");
                         return;
                     }
                     if (payType == null || payType == "undefined") {
-                        alert("请选择一种支付方式!");
+                         Ewin.alert("请选择一种支付方式!");
                         return;
                     }
                     if (null == $scope.staffItemInfo || $scope.staffItemInfo == 0) {
-                        alert("请选择一个服务员工!");
+                         Ewin.alert("请选择一个服务员工!");
                         return;
                     }
                     if ($scope.productItemInfo == null || $scope.productItemInfo == "undefined") {
-                        alert("请选择一个消费项目!");
+                         Ewin.alert("请选择一个消费项目!");
                         return;
                     }
                     var arr = JSON.parse($scope.productItemInfo);
                     if (arr.id == null || arr.id == "undefined") {
-                        alert("请选择一个消费项目!");
+                         Ewin.alert("请选择一个消费项目!");
                         return;
                     }
                     if (money == null || money.trim() == "" || money == "undefined") {
-                        alert("消费金额不能为空!");
+                         Ewin.alert("消费金额不能为空!");
                         return;
                     }
                     if (money > commonService.max_money) {
-                        alert("消费金额不合法!");
+                         Ewin.alert("消费金额不合法!");
                         return;
                     }
                     if (given = !null && given.trim() != "" && given != "undefined") {
                         if (given > commonService.max_money) {
-                            alert("消费赠送金额不合法!");
+                             Ewin.alert("消费赠送金额不合法!");
                             return;
                         }
                     } else {
@@ -362,7 +362,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                      $scope.consumeProductItems.push(v);
                      });
                      if ($scope.consumeProductItems.length <= 0) {
-                     alert("请选择一个消费项目!");
+                      Ewin.alert("请选择一个消费项目!");
                      return;
                      }*/
                     var data = {
@@ -377,10 +377,10 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var promise = memberService.memberConsume(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc);
+                             Ewin.alert(data.desc);
                             return;
                         }
-                        alert("消费成功");
+                         Ewin.alert("消费成功");
                         $scope.onConsumeClose();
                     });
 
@@ -434,33 +434,33 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var given = $("#rechargeGiven").val();
                     var memberId = $("#memberId").val();
                     if (memberId == null) {
-                        alert("请选择一个会员");
+                         Ewin.alert("请选择一个会员");
                         return;
                     }
                     if (payType == null || payType == "undefined") {
-                        alert("请选择一种支付方式!");
+                         Ewin.alert("请选择一种支付方式!");
                         return;
                     }
                     if (null == $scope.staffItemInfo || $scope.staffItemInfo == 0) {
-                        alert("请选择一个服务员工!");
+                         Ewin.alert("请选择一个服务员工!");
                         return;
                     }
                     if (null == $scope.packetItem || $scope.packetItem.id == "undefined") {
-                        alert("请选择一个套餐!");
+                         Ewin.alert("请选择一个套餐!");
                         return;
                     }
                     if (money == null || money.trim() == "" || money == "undefined") {
-                        alert("充值金额不能为空!");
+                         Ewin.alert("充值金额不能为空!");
                         return;
                     }
                     if (money > commonService.max_money) {
-                        alert("充值金额不合法!");
+                         Ewin.alert("充值金额不合法!");
                         return;
                     }
                     try {
                         if (given != null && given.trim() != "" && given != "undefined") {
                             if (given > commonService.max_money) {
-                                alert("充值赠送金额不合法!");
+                                 Ewin.alert("充值赠送金额不合法!");
                                 return;
                             }
                             given = parseInt(given);
@@ -482,10 +482,10 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var promise = memberService.memberRecharge(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc);
+                             Ewin.alert(data.desc);
                             return;
                         }
-                        alert("充值成功");
+                         Ewin.alert("充值成功");
                         $scope.onRechargeClose();
                     });
 

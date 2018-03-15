@@ -13,20 +13,20 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var identifying = $("#identifying").val();
                     var password = $("#password").val();
                     if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     if (identifying.trim() == "" || identifying == null) {
-                        alert("请输入验证码！");
+                         Ewin.alert("请输入验证码！");
                         return;
                     }
                     if (password.trim() == "" || password == null) {
-                        alert("请输入密码！");
+                         Ewin.alert("请输入密码！");
                         return;
                     }
                     //构造加密参数
@@ -35,7 +35,7 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var promise = userService.userCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         //成功后调转到店创建页，提示用户新增店信息
@@ -46,19 +46,19 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                 $scope.sendCaptcha = function () {
                     var phone = $("#phone").val();
                     if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     //发送请求道服务端
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     var promise = userService.sendVerify(phone);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                     });
@@ -96,28 +96,28 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     //电话信息
                     var telephone = $("#telephone").val();
                     if (name.trim() == "" || name == null) {
-                        alert("请输入店名！");
+                         Ewin.alert("请输入店名！");
                         return;
                     }
                     if (address.trim() == "" || address == null) {
-                        alert("请输入店地址信息！");
+                         Ewin.alert("请输入店地址信息！");
                         return;
                     }
                     if (isNaN(telephone) || (telephone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     //发送请求道服务端
                     if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(telephone))) {
                         $("#telephone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     var data = {name: name, description: description, address: address, telephone: telephone};
                     var promise = userService.shopCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         window.location.href = "hair-index.html";
@@ -135,13 +135,13 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var phone = $("#phone").val();
                     var identifying = $("#identifying").val();
                     if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     //发送请求道服务端
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     //构造加密参数
@@ -149,7 +149,7 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var promise = userService.forgetPass(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         //跳转至密码重置页
@@ -165,10 +165,10 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                         return;
                     }
                     //发送请求道服务端
-          /*          if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
-                        $("#phone").focus();
-                        return;
-                    }*/
+                    /*          if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
+                                  $("#phone").focus();
+                                  return;
+                              }*/
                     if (rimage == null || rimage.trim() == "" || rimage == "undefined") {
                         //获取图片验证码
                         var promise = userService.getImageVerify(phone);
@@ -195,17 +195,11 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var password = $("#password").val();
                     var identifying = $("#identifying").val();
                     if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
-                    //发送请求道服务端
-          /*          if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
-                        $("#phone").focus();
-                        alert("请输入正确的手机号!");
-                        return;
-                    }*/
                     if (password.trim() == "" || password == null) {
-                        alert("请输入密码！");
+                         Ewin.alert("请输入密码！");
                         return;
                     }
                     //构造加密参数
@@ -218,7 +212,7 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var promise = userService.userLogin(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc);
+                            Ewin.alert(data.desc);
                             if (data.state == 15 && data.value != null && data.value.trim() != "") {
                                 //显示验证码，重新输入验证码
                                 $scope.onImageVerify(data.value);
@@ -271,29 +265,29 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var checkPassword = $("#checkPassword").val();
                     var identifying = $("#identifying").val();
                     if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     //发送请求道服务端
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     if (nowPassword.trim() == "" || nowPassword == null) {
-                        alert("请输入当前密码！");
+                         Ewin.alert("请输入当前密码！");
                         return;
                     }
                     if (password.trim() == "" || password == null) {
-                        alert("请输入密码！");
+                         Ewin.alert("请输入密码！");
                         return;
                     }
                     if (password != checkPassword) {
-                        alert("两次密码输入不一致！");
+                         Ewin.alert("两次密码输入不一致！");
                         return;
                     }
                     if (identifying.trim() == "" || identifying == null) {
-                        alert("请输入验证码！");
+                         Ewin.alert("请输入验证码！");
                         return;
                     }
                     //构造加密参数
@@ -303,7 +297,7 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var promise = userService.setPass(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             if (data.state == 15 && data.value != null && data.value.trim() == "") {
                                 //显示验证码，重新输入验证码
                                 $scope.onImageVerify(data.value);
@@ -320,21 +314,21 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var password = $("#password").val();
                     var identifying = $("#identifying").val();
                     if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     //发送请求道服务端
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     if (password.trim() == "" || password == null) {
-                        alert("请输入密码！");
+                         Ewin.alert("请输入密码！");
                         return;
                     }
                     if (identifying.trim() == "" || identifying == null) {
-                        alert("请输入验证码！");
+                         Ewin.alert("请输入验证码！");
                         return;
                     }
                     //构造加密参数
@@ -343,7 +337,7 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                     var promise = userService.resetPass(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         window.location.href = "login.html";

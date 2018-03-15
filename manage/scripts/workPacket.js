@@ -3,10 +3,10 @@ require.config({
         angular: 'vendor/angular',
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
+        confirm: 'vendor/confirm',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
         qrcode: 'vendor/qrcode.min',
-        confirm: 'vendor/confirm',
         adminlte: '../bower_components/dist/js/adminlte.min',
         /*      'ui.bootstrap': 'vendor/ui-bootstrap-tpls.min',*/
         domReady: 'vendor/domReady'

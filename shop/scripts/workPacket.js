@@ -7,6 +7,7 @@ require.config({
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
         qrcode: 'vendor/qrcode.min',
+        confirm: 'vendor/confirm',
         adminlte: '../bower_components/dist/js/adminlte.min',
         /*      'ui.bootstrap': 'vendor/ui-bootstrap-tpls.min',*/
         domReady: 'vendor/domReady'
@@ -31,6 +32,10 @@ require.config({
             deps: ['jquery', 'bootstrap'],
             exports: 'adminlte'
         },
+        confirm: {
+            deps: ['jquery'],
+            exports: 'confirm'
+        },
         angular: {
             deps: ['jquery'],
             exports: 'angular'
@@ -47,7 +52,7 @@ require.config({
 });
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'select', 'bootstrap', 'adminlte', 'qrcode',
+        'app', 'domReady', 'jquery', 'select', 'bootstrap', 'adminlte', 'qrcode', 'confirm',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'filters/discountFilters',

@@ -54,17 +54,17 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $scope.queryMemberInfo = function () {
                     var phone = $("#phone").val();
                     if (isNaN(phone) || (phone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     var promise = memberService.queryMemberInfo(phone);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc);
+                             Ewin.alert(data.desc);
                             return;
                         }
                         if (data.value == null || data.value == "undefined" || data.value == "") {
-                            alert("会员不存在!");
+                             Ewin.alert("会员不存在!");
                             return;
                         }
                         //会员信息
@@ -91,33 +91,33 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var money = $("#cunsumeMoney").val();
                     var given = $("#cunsumeGiven").val();
                     if (payType == null || payType == "undefined") {
-                        alert("请选择一种支付方式!");
+                         Ewin.alert("请选择一种支付方式!");
                         return;
                     }
                     if (null == $scope.staffItemInfo || $scope.staffItemInfo == 0) {
-                        alert("请选择一个服务员工!");
+                         Ewin.alert("请选择一个服务员工!");
                         return;
                     }
                     if ($scope.productItemInfo == null || $scope.productItemInfo == "undefined") {
-                        alert("请选择一个消费项目!");
+                         Ewin.alert("请选择一个消费项目!");
                         return;
                     }
                     var arr = JSON.parse($scope.productItemInfo);
                     if (arr.id == null || arr.id == "undefined") {
-                        alert("请选择一个消费项目!");
+                         Ewin.alert("请选择一个消费项目!");
                         return;
                     }
                     if (money == null || money.trim() == "" || money == "undefined") {
-                        alert("消费金额不能为空!");
+                         Ewin.alert("消费金额不能为空!");
                         return;
                     }
                     if (money > commonService.max_money) {
-                        alert("消费金额不合法!");
+                         Ewin.alert("消费金额不合法!");
                         return;
                     }
                     if (given = !null && given.trim() != "" && given != "undefined") {
                         if (given > commonService.max_money) {
-                            alert("消费赠送金额不合法!");
+                             Ewin.alert("消费赠送金额不合法!");
                             return;
                         }
                     } else {
@@ -138,7 +138,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                      $scope.consumeProductItems.push(v);
                      });
                      if ($scope.consumeProductItems.length <= 0) {
-                     alert("请选择一个消费项目!");
+                      Ewin.alert("请选择一个消费项目!");
                      return;
                      }*/
                     var memberId = commonService.defualt_consumer_id;
@@ -146,7 +146,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         memberId = $scope.memberInfo.id;
                     }
                     if (memberId == "undefined" || memberId == null) {
-                        alert("请选择一个合法会员");
+                         Ewin.alert("请选择一个合法会员");
                         return;
                     }
                     var data = {
@@ -161,7 +161,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var promise = memberService.memberConsume(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc);
+                             Ewin.alert(data.desc);
                             return;
                         }
                         $scope.onConsumeClose();

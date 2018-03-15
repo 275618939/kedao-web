@@ -39,11 +39,11 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     var given = $("#given").val();
                     var retain = $("#retain").val();
                     if (name.trim() == "" || name == null) {
-                        alert("请输入套餐名！");
+                         Ewin.alert("请输入套餐名！");
                         return;
                     }
                     if (isNaN(discount) || discount > 10 || discount < 0) {
-                        alert("请输入正确的折扣！");
+                         Ewin.alert("请输入正确的折扣！");
                         return;
                     }
                     if (isNaN(money)) {
@@ -65,7 +65,7 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     var promise = packetService.packetCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         //关闭添加面板
@@ -94,15 +94,15 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     var retain = $("#packetRetain").val();
                     var packetId = $("#packetId").val();
                     if (packetId == null) {
-                        alert("请选择一个套餐！");
+                         Ewin.alert("请选择一个套餐！");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                        alert("请输入套餐名！");
+                         Ewin.alert("请输入套餐名！");
                         return;
                     }
                     if (isNaN(discount) || discount > 10 || discount < 0) {
-                        alert("请输入正确的折扣！");
+                         Ewin.alert("请输入正确的折扣！");
                         return;
                     }
                     if (isNaN(money)) {
@@ -112,7 +112,7 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                         given = 0;
                     }
                     if (isNaN(discount) || discount > 100 || discount < 0) {
-                        alert("请输入正确的提成！");
+                         Ewin.alert("请输入正确的提成！");
                         return;
                     }
 
@@ -134,7 +134,7 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                         var promise = packetService.packetUpdate(info);
                         promise.then(function (data) {
                             if (data.state != 1) {
-                                alert(data.desc)
+                                 Ewin.alert(data.desc)
                                 return;
                             }
                             window.location.href = "work-packet.html";

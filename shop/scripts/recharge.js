@@ -6,12 +6,12 @@ require.config({
         jquery: 'vendor/jquery',
         md5: 'vendor/jQuery.md5',
         qrcode: 'vendor/qrcode.min',
+        confirm: 'vendor/confirm',
         chart: '../bower_components/dist/js/Chart',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
         adminlte: '../bower_components/dist/js/adminlte.min',
         domReady: 'vendor/domReady'
-
     },
     shim: {
         jquery: {
@@ -40,6 +40,10 @@ require.config({
             deps: ['jquery', 'bootstrap'],
             exports: 'adminlte'
         },
+        confirm: {
+            deps: ['jquery'],
+            exports: 'confirm'
+        },
         angular: {
             deps: ['jquery'],
             exports: 'angular'
@@ -52,7 +56,7 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode',
+        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode', 'confirm',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'controllers/rechargeController',

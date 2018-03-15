@@ -67,20 +67,20 @@ define(['controllers/controllers', 'services/shopService', 'services/paramServic
                     //电话信息
                     var telephone = $("#telephone").val();
                     if (name.trim() == "" || name == null) {
-                        alert("请输入店名！");
+                         Ewin.alert("请输入店名！");
                         return;
                     }
                     if (address.trim() == "" || address == null) {
-                        alert("请输入店地址信息！");
+                         Ewin.alert("请输入店地址信息！");
                         return;
                     }
                     if (isNaN(telephone) || (telephone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     var data = {
@@ -93,7 +93,7 @@ define(['controllers/controllers', 'services/shopService', 'services/paramServic
                     var promise = shopService.shopCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         //用户第一次添加店
@@ -127,25 +127,25 @@ define(['controllers/controllers', 'services/shopService', 'services/paramServic
                     var telephone = $("#updateTelephone").val();
                     var shopId = $("#shopId").val();
                     if (shopId.trim() == "" || shopId == null) {
-                        alert("请选择一个店");
+                         Ewin.alert("请选择一个店");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                        alert("请输入店名！");
+                         Ewin.alert("请输入店名！");
                         return;
                     }
                     if (address.trim() == "" || address == null) {
-                        alert("请输入店地址信息！");
+                         Ewin.alert("请输入店地址信息！");
                         return;
                     }
                     if (isNaN(telephone) || (telephone.length != 11)) {
-                        alert("手机号码为11位数字！请正确填写！");
+                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     //发送请求道服务端
                     if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(telephone))) {
                         $("#telephone").focus();
-                        alert("请输入正确的手机号!");
+                         Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     var data = {
@@ -158,7 +158,7 @@ define(['controllers/controllers', 'services/shopService', 'services/paramServic
                     var promise = shopService.shopUpdate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            alert(data.desc)
+                             Ewin.alert(data.desc)
                             return;
                         }
                         $scope.onUpdateClose();
