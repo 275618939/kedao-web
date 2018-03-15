@@ -27,9 +27,9 @@ require.config({
             exports: 'angularRoute'
         }
     },
-    waitSeconds: 0
+    waitSeconds: 200,
     //deps:['angular'],//angular
-    /* urlArgs: "bust=" + (new Date()).getTime()  //·ÀÖ¹¶ÁÈ¡»º´æ£¬µ÷ÊÔÓÃ*/
+    urlArgs: "bust=" + (new Date()).getTime()  //é˜²æ­¢è¯»å–ç¼“å­˜ï¼Œè°ƒè¯•ç”¨
 });
 //
 require([

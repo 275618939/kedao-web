@@ -28,9 +28,9 @@ require.config({
             exports: 'angularRoute'
         }
     },
-    waitSeconds: 0
+    waitSeconds: 200,
     //deps:['angular'],//angular
-    /* urlArgs: "bust=" + (new Date()).getTime()  //防止读取缓存，调试用*/
+    urlArgs: "bust=" + (new Date()).getTime()  //防止读取缓存，调试用
 });
 //
 require([

@@ -43,9 +43,10 @@ require.config({
             deps: ['angular'],
             exports: 'angularRoute'
         }
-    }
-    //deps:['bootstrap'],//先加载bootstrap文件
-    /* urlArgs: "bust=" + (new Date()).getTime()  //防止读取缓存，调试用*/
+    },
+    waitSeconds: 200,
+    urlArgs: "bust=" + (new Date()).getTime()  //防止读取缓存，调试用
+
 });
 //
 require([
