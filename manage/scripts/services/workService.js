@@ -31,7 +31,7 @@ define(['services', 'services/commonService'],
                             info = "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password;
                         }
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/worker/login",
+                            url: "http://" + commonService.getServerUrl() + "/business/worker/login" + "?time=" + commonService.getDataString(),
                             method: "POST",
                             data: info
                             //data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password
@@ -74,7 +74,7 @@ define(['services', 'services/commonService'],
                     getImageVerify: function (account) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/image/verify/" + account,
+                            url: "http://" + commonService.getServerUrl() + "/business/image/verify/" + account + "?time=" + commonService.getDataString(),
                             method: "get"
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
@@ -87,7 +87,7 @@ define(['services', 'services/commonService'],
                     sendVerify: function (mobile) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/sms/verify",
+                            url: "http://" + commonService.getServerUrl() + "/business/sms/verify" + "?time=" + commonService.getDataString(),
                             method: "post",
                             data: "account=" + mobile
                         }).success(function (data, status, headers, config) {
