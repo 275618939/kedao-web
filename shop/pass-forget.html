@@ -1,82 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>可道管理系统忘记密码</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/font-awesome.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="bower_components/dist/css/blue.css">
-  <script data-main="scripts/register" src="scripts/vendor/require.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>可道管理系统忘记密码</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="bower_components/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="bower_components/dist/css/blue.css">
+    <script data-main="scripts/register" src="scripts/vendor/require.js"></script>
 
 </head>
 <body class="hold-transition login-page">
 <div class="login-box" ng-controller="LoginCtrl">
-  <div class="login-logo">
-    <a href="index.html"><b>可</b>道</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">忘记密码</p>
-    <form>
-      <div class="form-group has-feedback">
-        <input type="number" class="form-control" id="phone" placeholder="手机号" ng-blur="onImageVerify()">
-        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-      </div>
-      <div class="row"  ng-show="showIdentifying.show">
-        <div class="col-xs-5">
-          <input type="text" class="form-control" id="identifying" placeholder="验证码">
-        </div>
-        <label for="identifying" class="col-xs-3 control-label">
-          <img id="img-identify"/>
-        </label>
-        <div class="col-xs-4">
-          <button type="button" id="captcha" class="btn btn-block btn-success" ng-click="onImageVerify()">
-            换一张
-          </button>
-        </div>
-      </div>
-      <br/>
-      <div class="row" ng-controller="CommonCtrl">
-        <div class="col-xs-6">
-          <button type="button" class="btn btn-primary btn-block btn-warning" ng-click="goBack();">返回</button>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-6">
-          <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onForgetPass();">下一步</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-    <!--会员二维码-->
-    <div class="modal fade" id="qrcode-member">
-      <div class="modal-dialog" style="width: 280px;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">扫描二维码进行关注</h4>
-          </div>
-          <div class="modal-body">
-            <center>
-              <div id="qrcode"/>
-            </center>
-
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
+    <div class="login-logo">
+        <a href="index.html"><b>可</b>道</a>
     </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">忘记密码</p>
+        <form>
+            <div class="form-group has-feedback">
+                <input type="number" class="form-control" id="phone" placeholder="手机号" ng-blur="onImageVerify()">
+                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+            </div>
+            <div class="row" ng-show="showIdentifying.show">
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" id="identifying" placeholder="验证码">
+                </div>
+                <label for="identifying" class="col-xs-3 control-label">
+                    <img id="img-identify"/>
+                </label>
+                <div class="col-xs-4">
+                    <button type="button" id="captcha" class="btn btn-block btn-success" ng-click="onImageVerify()">
+                        换一张
+                    </button>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block btn-warning" ng-click="goBack();">返回</button>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block btn-flat" ng-click="onForgetPass();">下一步
+                    </button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+        <!--会员二维码-->
+        <div class="modal fade" id="qrcode-member">
+            <div class="modal-dialog" style="width: 500px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">扫描二维码进行关注</h4>
+                    </div>
+                    <div class="modal-body">
+                        <center>
+                            <div id="qrcode"/>
+                        </center>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
 
 
-
-  </div>
-  <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box-body -->
 
 </div>
 <!-- /.login-box -->

@@ -130,6 +130,10 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
             function ($scope, userService, commonService, paramService) {
                 $scope.showIdentifying = {"show": false};
                 $scope.first = paramService.getValue("first");
+                //返回到上一步
+                $scope.goBack = function () {
+                    window.history.back();
+                };
                 //忘记密码
                 $scope.onForgetPass = function () {
                     var phone = $("#phone").val();
@@ -233,6 +237,9 @@ define(['controllers', 'services/userService', 'services/commonService', 'servic
                 //返回到上一步
                 $scope.goBack = function () {
                     window.history.back();
+                };
+                $scope.goLogin = function () {
+                    window.location.href = "login.html";
                 };
                 //获得图片验证码
                 $scope.onImageVerify = function (rimage) {

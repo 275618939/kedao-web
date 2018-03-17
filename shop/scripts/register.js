@@ -5,6 +5,8 @@ require.config({
         angularRoute: 'vendor/angular-route',
         jquery: 'vendor/jquery',
         qrcode: 'vendor/qrcode.min',
+        jqprint: 'vendor/jquery.jqprint-0.3',
+        migrate: 'vendor/jquery-migrate-1.2.1.min',
         confirm: 'vendor/confirm',
         jqueryMd5: 'vendor/jQuery.md5',
         domReady: 'vendor/domReady'
@@ -16,6 +18,14 @@ require.config({
         qrcode: {
             deps: ['jquery'],
             exports: 'qrcode'
+        },
+        migrate: {
+            deps: ['jquery'],
+            exports: 'migrate'
+        },
+        jqprint: {
+            deps: ['jquery'],
+            exports: 'jqprint'
         },
         jqueryMd5: {
             deps: ['jquery'],
@@ -40,10 +50,11 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'jqueryMd5', 'qrcode', 'confirm',
+        'app', 'domReady', 'jquery', 'jqueryMd5', 'qrcode', 'confirm', 'jqprint', 'migrate',
         'filters/intervalFilters',
         'controllers/userController',
         'controllers/commonController',
+        'controllers/printController',
         'interceptors/requestInterceptors'
         /*  'directives/ngbkFocus'*/
         // Any individual controller, service, directive or filter file

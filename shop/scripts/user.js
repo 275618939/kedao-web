@@ -6,6 +6,8 @@ require.config({
         jquery: 'vendor/jquery',
         iscroll: 'vendor/iscroll-lite',
         qrcode: 'vendor/qrcode.min',
+        jqprint: 'vendor/jquery.jqprint-0.3',
+        migrate: 'vendor/jquery-migrate-1.2.1.min',
         confirm: 'vendor/confirm',
         touchslider: 'vendor/jquery.touchslider.min',
         twitter: 'vendor/bootstrap',
@@ -29,6 +31,14 @@ require.config({
         qrcode: {
             deps: ['jquery'],
             exports: 'qrcode'
+        },
+        migrate: {
+            deps: ['jquery'],
+            exports: 'migrate'
+        },
+        jqprint: {
+            deps: ['jquery'],
+            exports: 'jqprint'
         },
         confirm: {
             deps: ['jquery'],
@@ -56,9 +66,10 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', "iscroll", "touchslider", 'qrcode', 'confirm',
+        'app', 'domReady', 'jquery', "iscroll", "touchslider", 'qrcode', 'confirm', 'jqprint', 'migrate',
         'filters/intervalFilters',
         'controllers/userController',
+        'controllers/printController',
         'controllers/commonController',
         'interceptors/requestInterceptors'
         /*  'directives/ngbkFocus'*/

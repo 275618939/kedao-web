@@ -7,6 +7,8 @@ require.config({
         md5: 'vendor/jQuery.md5',
         qrcode: 'vendor/qrcode.min',
         confirm: 'vendor/confirm',
+        jqprint: 'vendor/jquery.jqprint-0.3',
+        migrate: 'vendor/jquery-migrate-1.2.1.min',
         chart: '../bower_components/dist/js/Chart',
         select: '../bower_components/dist/js/select2.min',
         bootstrap: 'vendor/bootstrap3.3.4',
@@ -27,6 +29,14 @@ require.config({
         qrcode: {
             deps: ['jquery'],
             exports: 'qrcode'
+        },
+        migrate: {
+            deps: ['jquery'],
+            exports: 'migrate'
+        },
+        jqprint: {
+            deps: ['jquery'],
+            exports: 'jqprint'
         },
         select: {
             deps: ['jquery'],
@@ -56,10 +66,11 @@ require.config({
 //
 require([
         'angular', 'angularRoute',
-        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode', 'confirm',
+        'app', 'domReady', 'jquery', 'md5', 'chart', 'select', 'bootstrap', 'adminlte', 'qrcode', 'confirm', 'jqprint', 'migrate',
         'filters/intervalFilters',
         'filters/moneyFilters',
         'controllers/rechargeController',
+        'controllers/printController',
         'controllers/commonController',
         'interceptors/requestInterceptors'
     ],
