@@ -103,6 +103,7 @@ define(['controllers', 'services/workService', 'services/commonService', 'servic
                         Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
+
                     //发送请求道服务端
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
