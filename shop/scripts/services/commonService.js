@@ -13,7 +13,7 @@ define(['services/services'],
                     defualt_consumer_id: 1555255472947200000,
                     //默认消费者NAME
                     defualt_consumer_name: "13800138000",
-                    //默认套餐ID
+                    //默认会员卡ID
                     default_packet_id: 1555251698073600000,
                     //默认会员ID
                     efailt_member_id: 1555255472947200000,
@@ -56,7 +56,7 @@ define(['services/services'],
                              },
                              {
                              "id": 0x0008,
-                             "label": "套餐维护"
+                             "label": "会员卡维护"
                              },
                              {
                              "id": 0x0010,

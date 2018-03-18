@@ -5,7 +5,7 @@ define(['controllers', 'services/memberService', 'services/packetService', 'serv
         controllers.controller('RechargeManagerCtrl', ['$scope', 'MemberService', 'PacketService', 'CommonService', 'RechargeService', 'ParamService', 'StaffService',
             function ($scope, memberService, packetService, commonService, rechargeService, paramService, staffService) {
 
-                //查询套餐信息
+                //查询会员卡信息
                 $scope.packetItemInfo = null;
                 $scope.queryPacketInfo = function () {
                     var promise = packetService.getPacketList();
@@ -14,7 +14,7 @@ define(['controllers', 'services/memberService', 'services/packetService', 'serv
                     });
                 };
                 $scope.queryPacketInfo();
-                //选择套餐信息
+                //选择会员卡信息
                 $scope.selectPacketInfo = function () {
                     if (null == $scope.packetItemInfo) {
                         return;
@@ -76,7 +76,7 @@ define(['controllers', 'services/memberService', 'services/packetService', 'serv
                         return;
                     }
                     if (null == $scope.packetItem || $scope.packetItem.id == "undefined") {
-                        alert("请选择一个套餐!");
+                        alert("请选择一个会员卡!");
                         return;
                     }
                     if (money == null || money.trim() == "" || money == "undefined") {

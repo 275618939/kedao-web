@@ -166,7 +166,7 @@
                         <thead>
                         <tr>
                             <th>充值会员</th>
-                            <th>套餐类型</th>
+                            <th>会员卡类型</th>
                             <th>充值金额</th>
                             <th>赠送金额</th>
                             <th>服务提成</th>
@@ -264,13 +264,13 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-2 middle">
-                                            <label>套餐类型</label>
+                                            <label>会员卡类型</label>
                                         </div>
                                         <div class="col-md-10">
                                             <select class="form-control select2"
                                                     ng-change="selectPacketInfo()"
                                                     ng-model="packetItemInfo"
-                                                    data-placeholder="请选择套餐类型" style="width: 100%;" tabindex="-1"
+                                                    data-placeholder="请选择会员卡类型" style="width: 100%;" tabindex="-1"
                                                     aria-hidden="true">
                                                 <option ng-repeat="x in packetItems" value="{{x}}">{{x.name}}</option>
                                             </select>

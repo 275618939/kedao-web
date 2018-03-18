@@ -55,7 +55,7 @@ define(['controllers', 'services/productService', 'services/commonService', 'ser
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                        alert("请输入套餐名！");
+                        alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(price) || price == null || price <= 0) {
@@ -124,7 +124,7 @@ define(['controllers', 'services/productService', 'services/commonService', 'ser
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                        alert("请输入套餐名！");
+                        alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(price) || price == null || price <= 0) {

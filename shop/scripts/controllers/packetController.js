@@ -1,13 +1,13 @@
 define(['controllers/controllers', 'services/packetService', 'services/commonService', 'services/paramService'],
     function (controllers) {
 
-        /*套餐信息管理*/
+        /*会员卡信息管理*/
         controllers.controller('PacketManagerCtrl', ['$scope', 'PacketService', 'CommonService',
             function ($scope, packetService, commonService) {
                 $scope.create = {"show": true};
                 $scope.update = {"show": false};
-                $scope.title = "新增套餐";
-                //关闭套餐信息
+                $scope.title = "新增会员卡";
+                //关闭会员卡信息
                 $scope.onClose = function () {
                     $("#packet-add").modal('hide');
                 }
@@ -21,7 +21,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                 $scope.onUpdateClose = function () {
                     $("#packet-update").modal('hide');
                 }
-                //查询套餐信息
+                //查询会员卡信息
                 $scope.load = function () {
                     var promise = packetService.getPacketList($scope.currentPage);
                     promise.then(function (data) {
@@ -29,7 +29,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                     });
                 };
                 $scope.load();
-                //创建套餐信息
+                //创建会员卡信息
                 $scope.onCreate = function () {
                     $scope.create = {"show": true};
                     $scope.update = {"show": false};
@@ -39,7 +39,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                     var given = $("#given").val();
                     var retain = $("#retain").val();
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入套餐名！");
+                         Ewin.alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(discount) || discount > 10 || discount < 0) {
@@ -74,7 +74,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                         window.location.href = "packet.html";
                     });
                 };
-                //更新套餐信息
+                //更新会员卡信息
                 $scope.onUpdateQuery = function (data) {
                     $scope.onUpdateShow();
                     $("#packetName").val(data.name);
@@ -84,7 +84,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                     $("#packetRetain").val(commonService.getYuan(data.retain));
                     $("#packetId").val(data.id);
                 }
-                //更新套餐
+                //更新会员卡
                 $scope.onUpdate = function (data) {
                     var name = $("#packetName").val();
                     var discount = $("#packetDiscount").val();
@@ -93,11 +93,11 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                     var retain = $("#packetRetain").val();
                     var packetId = $("#packetId").val();
                     if (packetId == null) {
-                         Ewin.alert("请选择一个套餐！");
+                         Ewin.alert("请选择一个会员卡！");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入套餐名！");
+                         Ewin.alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(discount) || discount > 10 || discount < 0) {
@@ -188,7 +188,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
             }
         ]);
 
-        /*显示套餐详情信息*/
+        /*显示会员卡详情信息*/
         controllers.controller('StaffDetailCtrl', ['$scope', 'PacketService', 'CommonService', 'ParamService',
             function ($scope, packetService, commonService, paramService) {
                 $scope.id = paramService.getValue("id");
@@ -197,7 +197,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                 $scope.money = paramService.getValue("money");
                 $scope.given = paramService.getValue("given");
                 $scope.retain = paramService.getValue("retain");
-                //更新套餐
+                //更新会员卡
                 $scope.onUpdate = function () {
                     var name = $("#name").val();
                     var discount = $("#discount").val();
@@ -205,7 +205,7 @@ define(['controllers/controllers', 'services/packetService', 'services/commonSer
                     var given = $("#given").val();
                     var retain = $("#retain").val();
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入套餐名！");
+                         Ewin.alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(discount) || discount > 10 || discount < 0) {

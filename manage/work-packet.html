@@ -128,7 +128,7 @@
                 <div class="box-body">
                     <div class="input-group">
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#packet-add">
-                            添加套餐
+                            添加会员卡
                         </button>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                     <table id="packet-list" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>套餐名</th>
+                            <th>会员卡名</th>
                             <th>折扣率</th>
                             <th>充值金额</th>
                             <th>赠送金额</th>
@@ -172,7 +172,7 @@
                  </div>-->
             </div>
 
-            <!--添加套餐 start-->
+            <!--添加会员卡 start-->
             <div class="modal fade" id="packet-add">
 
                 <div class="modal-dialog">
@@ -180,14 +180,14 @@
                         <div class="modal-header">
                             <button type="button" class="close" ng-click="onClose();" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">新增套餐</h4>
+                            <h4 class="modal-title">新增会员卡</h4>
                         </div>
                         <div class="modal-body">
                             <form role="form">
                                 <div class="form-group">
-                                    <label>套餐名称</label>
+                                    <label>会员卡名称</label>
                                     <input type="text" class="form-control" id="name"
-                                           placeholder="请输入套餐名称"/>
+                                           placeholder="请输入会员卡名称"/>
                                 </div>
                                 <div class="form-group">
                                     <label>享受折扣</label>
@@ -204,7 +204,7 @@
                                            placeholder="请输入消费赠送金额"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>套餐提成</label>
+                                    <label>会员卡提成</label>
                                     <input type="number" class="form-control" id="retain"
                                            placeholder="请输入消费赠送金额"/>
                                 </div>
@@ -224,9 +224,9 @@
                     <!-- /.modal-content -->
                 </div>
             </div>
-            <!--添加套餐 end-->
+            <!--添加会员卡 end-->
 
-            <!--更新套餐 start-->
+            <!--更新会员卡 start-->
             <div class="modal fade" id="packet-update">
 
                 <div class="modal-dialog">
@@ -234,15 +234,15 @@
                         <div class="modal-header">
                             <button type="button" class="close" ng-click="onUpdateClose();" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">修改套餐</h4>
+                            <h4 class="modal-title">修改会员卡</h4>
                         </div>
                         <div class="modal-body">
                             <form role="form">
                                 <input type="text" id="packetId" hidden="hidden"/>
                                 <div class="form-group">
-                                    <label>套餐名称</label>
+                                    <label>会员卡名称</label>
                                     <input type="text" class="form-control" id="packetName"
-                                           placeholder="请输入套餐名称"/>
+                                           placeholder="请输入会员卡名称"/>
                                 </div>
                                 <div class="form-group">
                                     <label>享受折扣</label>
@@ -259,7 +259,7 @@
                                            placeholder="请输入消费赠送金额"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>套餐提成</label>
+                                    <label>会员卡提成</label>
                                     <input type="number" class="form-control" id="packetRetain"
                                            placeholder="请输入消费赠送金额"/>
                                 </div>
@@ -279,7 +279,7 @@
                     /.modal-content
                 </div>
             </div>
-            <!-- 更新套餐 end-->
+            <!-- 更新会员卡 end-->
             <!--会员二维码-->
             <div class="modal fade" id="qrcode-member">
                 <div class="modal-dialog" style="width: 280px;">

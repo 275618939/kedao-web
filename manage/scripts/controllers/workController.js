@@ -114,7 +114,8 @@ define(['controllers', 'services/workService', 'services/commonService', 'servic
                     var promise = workService.forgetPass(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                            Ewin.alert(data.desc)
+                            Ewin.alert(data.desc);
+                            $scope.onImageVerify(null);
                             return;
                         }
                         //跳转至密码重置页
