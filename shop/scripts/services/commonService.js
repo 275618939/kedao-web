@@ -262,9 +262,14 @@ define(['services/services'],
                         if (money == null) {
                             return 0;
                         }
+                        money = money * 0.01;//分到元
+                        money += '';//转成字符串
+                        var reg = money.indexOf('.') > -1 ? /(\d{1,3})(?=(?:\d{3})+\.)/g : /(\d{1,3})(?=(?:\d{3})+$)/g;//千分符的正则
+                        money = money.replace(reg, '$1,');
+                        return money;
 
-                        var yuan = money / 100.0;
-                        return yuan.toFixed(0);
+                        /*    var yuan = money / 100.0;
+                         return yuan.toFixed(0);*/
                     }
                     ,
                     jsonSort: function (json, key) {
