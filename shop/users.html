@@ -38,11 +38,11 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown user user-menu">
-                        <a href="http://manage.aiyunzhou.com/login.html" class="dropdown-toggle">
-                            <span class="hidden-xs">运营管理</span>
-                        </a>
-                    </li>
+                    <!--<li class="dropdown user user-menu">-->
+                    <!--<a href="http://manage.aiyunzhou.com/login.html" class="dropdown-toggle">-->
+                    <!--<span class="hidden-xs">运营管理</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -207,8 +207,10 @@
                                     </ul>
                                 </div>
                                 <div class="btn-group" ng-if="item.subscribe==1">
-                                    <button type="button" class="btn btn-info">最近关注会员</button>
-                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                    <button type="button" class="btn btn-info" ng-click="queryWxRecentInfo()">最近关注会员
+                                    </button>
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                            ng-click="queryWxRecentInfo()">
                                         <span class="caret"></span>
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
