@@ -153,7 +153,7 @@ define(['services/services'],
                     ,
                     //返回app服务器请求地址
                     getAppServerUrl: function () {
-                        //return "101.200.176.217";
+                        // return "101.200.176.217";
                         return "shop.aiyunzhou.com";
                     }
                     ,

@@ -6,6 +6,20 @@ define(['services/services', 'services/commonService'],
                     /*最大显示条数*/
                     PAGE_MAX_SIZE: 100,
                     /*查询会员信息*/
+                    queryMemberInfoByName: function (name) {
+                        var deferred = $q.defer();
+                        $http({
+                            url: "http://" + commonService.getAppServerUrl() + "/app/member/name/" + name + "?time=" + commonService.getDataString(),
+                            method: "get",
+                            data: {}
+                        }).success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                        return deferred.promise;
+                    },
+                    /*查询会员信息*/
                     queryMemberInfo: function (phone) {
                         var deferred = $q.defer();
                         $http({
@@ -64,7 +78,7 @@ define(['services/services', 'services/commonService'],
                     /*更新会员*/
                     memberNameUpdate: function (data) {
                         var deferred = $q.defer();
-                        var info = "id=" + data.id + "&name=" + data.name;
+                        var info = "id=" + data.id + "&oldName=" + data.name + "&newName=" + data.newName;
                         $http({
                             url: "http://" + commonService.getAppServerUrl() + "/app/member/name",
                             method: "post",
