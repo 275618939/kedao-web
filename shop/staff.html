@@ -152,6 +152,7 @@
                             <th>姓名</th>
                             <!--  <th>权限</th>-->
                             <th>手机号</th>
+                            <th>员工职级</th>
                             <th>创建时间</th>
                             <th>操作</th>
                         </tr>
@@ -161,6 +162,7 @@
                             <td ng-bind="item.name"></td>
                             <!--             <td ng-bind="item.power|PowerFilters"></td>-->
                             <td ng-bind="item.cellNumber"></td>
+                            <td ng-bind="item.grade"></td>
                             <td ng-bind="item.createdTime"></td>
                             <td>
                                 <div class="btn-group">
@@ -174,9 +176,9 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="staff-stat.html?queryId={{item.id}}&queryType=0">日消费统计</a></li>
+                                        <li><a href="staff-stat.html?queryId={{item.id}}&queryType=0">日服务统计</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="staff-stat.html?queryId={{item.id}}&queryType=1">月消费统计</a></li>
+                                        <li><a href="staff-stat.html?queryId={{item.id}}&queryType=1">月服务统计</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -211,6 +213,11 @@
                                 <div class="form-group">
                                     <label>姓名</label>
                                     <input type="text" class="form-control" id="name" placeholder="请输入会员姓名"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>员工职级</label>
+                                    <input type="number" class="form-control" id="grade" value="100"
+                                           placeholder="请输入员工职级"/>
                                 </div>
                                 <div class="form-group">
                                     <label>密码</label>
@@ -255,6 +262,11 @@
                                 <div class="form-group">
                                     <label>姓名</label>
                                     <input type="text" class="form-control" id="updateName" placeholder="请输入会员姓名"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>员工职级</label>
+                                    <input type="number" class="form-control" id="updateGrade" value="100"
+                                           placeholder="请输入员工职级"/>
                                 </div>
                             </form>
 

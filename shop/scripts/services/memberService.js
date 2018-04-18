@@ -53,7 +53,9 @@ define(['services/services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getAppServerUrl() + "/app/consume",
                             method: "post",
-                            data: "id=" + data.id + "&payType=" + data.payType + "&productId=" + data.productId + "&money=" + data.money + "&given=" + data.given + "&waiterId=" + data.waiterId
+                            data: "id=" + data.id + "&payType=" + data.payType + "&productId=" + data.productId + "&money=" + data.money + "&given=" + data.given +
+                            "&majorWaiterId=" + data.majorWaiterId + "&majorWaiterName=" + data.majorWaiterName + "&majorRetain=" + data.majorRetain +
+                            "&minorWaiterId=" + data.minorWaiterId + "&minorWaiterName=" + data.minorWaiterName + "&minorRetain=" + data.minorRetain + "&productName=" + data.productName + "&productPrice=" + data.productPrice
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -67,7 +69,9 @@ define(['services/services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getAppServerUrl() + "/app/charge",
                             method: "post",
-                            data: "id=" + data.id + "&payType=" + data.payType + "&packetId=" + data.packetId + "&money=" + data.money + "&given=" + data.given + "&waiterId=" + data.waiterId
+                            data: "id=" + data.id + "&payType=" + data.payType + "&packetId=" + data.packetId + "&money=" + data.money + "&given=" + data.given +
+                            "&majorWaiterId=" + data.majorWaiterId + "&majorWaiterName=" + data.majorWaiterName + "&majorRetain=" + data.majorRetain +
+                            "&minorWaiterId=" + data.minorWaiterId + "&minorWaiterName=" + data.minorWaiterName + "&minorRetain=" + data.minorRetain + "&packetName=" + data.packetName
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {

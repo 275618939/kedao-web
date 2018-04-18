@@ -151,10 +151,15 @@
                     <tr>
                         <th>日期</th>
                         <th>{{statTypeInfo}}次数</th>
-                        <th>{{statTypeInfo}}金额</th>
-                        <div ng-show="statStatus">
-                            <th>{{statTypeInfo}}余额</th>
-                        </div>
+                        <th>现金{{statTypeInfo}}</th>
+                        <th>支付宝{{statTypeInfo}}</th>
+                        <th>微信{{statTypeInfo}}</th>
+                        <th>POS机{{statTypeInfo}}</th>
+                        <th>其它{{statTypeInfo}}</th>
+                        <th>余额{{statTypeInfo}}</th>
+                        <!--<div ng-show="statStatus">-->
+                        <!--<th>{{statTypeInfo}}余额</th>-->
+                        <!--</div>-->
                         <th>赠送金额</th>
                         <th>{{statTypeInfo}}提成</th>
                         <th>统计日期</th>
@@ -164,10 +169,15 @@
                     <tr ng-repeat="item in statItems">
                         <td ng-bind="item.date"></td>
                         <td ng-bind="item.count"></td>
-                        <td ng-bind="item.money|MoneyFilters"></td>
-                        <div ng-show="statStatus">
-                            <td ng-bind="item.charge|MoneyFilters"></td>
-                        </div>
+                        <td ng-bind="item.money[1]|MoneyFilters"></td>
+                        <td ng-bind="item.money[2]|MoneyFilters"></td>
+                        <td ng-bind="item.money[3]|MoneyFilters"></td>
+                        <td ng-bind="item.money[4]|MoneyFilters"></td>
+                        <td ng-bind="item.money[5]|MoneyFilters"></td>
+                        <td ng-bind="item.money[6]|MoneyFilters"></td>
+                        <!--<div ng-show="statStatus">-->
+                        <!--<td ng-bind="item.charge|MoneyFilters"></td>-->
+                        <!--</div>-->
                         <td ng-bind="item.given|MoneyFilters"></td>
                         <td ng-bind="item.retain|MoneyFilters"></td>
                         <td ng-bind="item.createdTime"></td>

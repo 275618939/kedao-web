@@ -49,32 +49,37 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                 $scope.onProductCreate = function () {
                     var name = $("#productName").val();
                     var price = $("#productPrice").val();
-                    var retain = $("#productRetain").val();
+                    var productMajorRetain = $("#productMajorRetain").val();
+                    var productMinorRetain = $("#productMinorRetain").val();
                     if (null == $scope.classItemInfo || $scope.classItemInfo == "undefined") {
-                         Ewin.alert("请选择一个服务类别!");
+                        Ewin.alert("请选择一个服务类别!");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入会员卡名！");
+                        Ewin.alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(price) || price == null || price <= 0) {
-                         Ewin.alert("请输入正确的价格！");
+                        Ewin.alert("请输入正确的价格！");
                         return;
                     }
-                    if (isNaN(retain) || retain == null || retain < 0) {
-                        retain = 0;
+                    if (isNaN(productMajorRetain) || productMajorRetain == null || productMajorRetain < 0) {
+                        productMajorRetain = 0;
+                    }
+                    if (isNaN(productMinorRetain) || productMinorRetain == null || productMinorRetain < 0) {
+                        productMinorRetain = 0;
                     }
                     var data = {
                         classifyId: $scope.classItemInfo,
                         name: name,
                         price: commonService.getFen(price),
-                        retain: commonService.getFen(retain)
+                        majorRetain: productMajorRetain,
+                        minorRetain: productMinorRetain
                     };
                     var promise = productService.productCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                             Ewin.alert(data.desc)
+                            Ewin.alert(data.desc)
                             return;
                         }
                         //关闭添加面板
@@ -87,7 +92,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                 $scope.onClassCreate = function () {
                     var name = $("#className").val();
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入服务类别名称！");
+                        Ewin.alert("请输入服务类别名称！");
                         return;
                     }
                     var data = {
@@ -96,7 +101,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                     var promise = productService.classfyCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                             Ewin.alert(data.desc)
+                            Ewin.alert(data.desc)
                             return;
                         }
                         //关闭添加面板
@@ -110,36 +115,42 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                     $scope.onUpdateShow();
                     $("#updateProductName").val(data.name);
                     $("#updateProductPrice").val(commonService.getYuan(data.price));
-                    $("#updateProductRetain").val(commonService.getYuan(data.retain));
+                    $("#updateProductMajorRetain").val(data.majorRetain);
+                    $("#updateProductMinorRetain").val(data.minorRetain);
                     $("#productId").val(data.id);
                 }
                 //更新服务
                 $scope.onProductUpdate = function () {
                     var name = $("#updateProductName").val();
                     var price = $("#updateProductPrice").val();
-                    var retain = $("#updateProductRetain").val();
+                    var majorRetain = $("#updateProductMajorRetain").val();
+                    var minorRetain = $("#updateProductMinorRetain").val();
                     var productId = $("#productId").val();
                     if (productId == null) {
-                         Ewin.alert("请选择一个服务！");
+                        Ewin.alert("请选择一个服务！");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入会员卡名！");
+                        Ewin.alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(price) || price == null || price <= 0) {
-                         Ewin.alert("请输入正确的价格！");
+                        Ewin.alert("请输入正确的价格！");
                         return;
                     }
-                    if (isNaN(retain) || retain == null || retain < 0) {
-                        retain = 0;
+                    if (isNaN(majorRetain) || majorRetain == null || majorRetain < 0) {
+                        majorRetain = 0;
+                    }
+                    if (isNaN(minorRetain) || minorRetain == null || minorRetain < 0) {
+                        minorRetain = 0;
                     }
                     var data = {
                         id: productId,
                         classifyId: $scope.classItemInfo,
                         name: name,
                         price: commonService.getFen(price),
-                        retain: commonService.getFen(retain)
+                        majorRetain: majorRetain,
+                        minorRetain: minorRetain
                     };
                     Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
                         if (!e) {
@@ -148,14 +159,13 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                         var promise = productService.productUpdate(data);
                         promise.then(function (data) {
                             if (data.state != 1) {
-                                 Ewin.alert(data.desc)
+                                Ewin.alert(data.desc)
                                 return;
                             }
                             //关闭更新面板
                             $scope.onUpdateClose();
                             //刷新服务信息
                             $scope.selectClassfyInfo();
-                            //window.location.href = ".html";
                         });
                     });
 
@@ -174,7 +184,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                         var promise = productService.productDelete(data);
                         promise.then(function (data) {
                             if (data.state != 1) {
-                                 Ewin.alert(data.desc)
+                                Ewin.alert(data.desc)
                                 return;
                             }
                             //刷新服务信息
@@ -189,7 +199,7 @@ define(['controllers/controllers', 'services/productService', 'services/commonSe
                      var promise = productService.productDelete(data);
                      promise.then(function (data) {
                      if (data.state != 1) {
-                      Ewin.alert(data.desc)
+                     Ewin.alert(data.desc)
                      return;
                      }
                      //刷新服务信息

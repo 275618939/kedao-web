@@ -19,36 +19,47 @@ define(['controllers/controllers', 'services/staffService', 'services/commonServ
                 $scope.onCreate = function () {
                     var name = $("#name").val();
                     var phone = $("#phone").val();
+                    var grade = $("#grade").val();
                     var password = $("#password").val();
                     var checkPassword = $("#checkPassword").val();
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入店名！");
+                        Ewin.alert("请输入店名！");
                         return;
                     }
                     if (isNaN(phone) || (phone.length != 11)) {
-                         Ewin.alert("手机号码为11位数字！请正确填写！");
+                        Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#telephone").focus();
-                         Ewin.alert("请输入正确的手机号!");
+                        Ewin.alert("请输入正确的手机号!");
                         return;
                     }
                     if (password.trim() == "" || password == null) {
-                         Ewin.alert("请输入密码！");
+                        Ewin.alert("请输入密码！");
                         return;
                     }
                     if (password != checkPassword) {
-                         Ewin.alert("两次密码输入不一致！");
+                        Ewin.alert("两次密码输入不一致！");
+                        return;
+                    }
+                    if (grade < 1 || grade > 100) {
+                        Ewin.alert("员工职级范围是1～100！");
                         return;
                     }
                     var pass = phone + $.md5(phone + password);
                     pass = $.md5(pass);
-                    var data = {cellNumber: phone, name: name, password: pass, power: commonService.defaultClerkPower};
+                    var data = {
+                        grade: grade,
+                        cellNumber: phone,
+                        name: name,
+                        password: pass,
+                        power: commonService.defaultClerkPower
+                    };
                     var promise = staffService.staffCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                             Ewin.alert(data.desc)
+                            Ewin.alert(data.desc)
                             return;
                         }
                         $scope.onCreateClose();
@@ -68,27 +79,35 @@ define(['controllers/controllers', 'services/staffService', 'services/commonServ
                     $("#updateName").val(data.name);
                     $("#updatePhone").val(data.cellNumber);
                     $("#staffId").val(data.id);
+                    $("#updateGrade").val(data.grade);
                 }
                 //更新员工
                 $scope.onUpdateStaff = function () {
                     var name = $("#updateName").val();
                     var phone = $("#updatePhone").val();
                     var staffId = $("#staffId").val();
+                    var grade = $("#updateGrade").val();
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("员工名称不能为空！");
+                        Ewin.alert("员工名称不能为空！");
                         return;
                     }
                     if (isNaN(phone) || (phone.length != 11)) {
-                         Ewin.alert("手机号码为11位数字！请正确填写！");
+                        Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     if (!(/^1[0-9][0-9]\d{4,8}$/.test(phone))) {
                         $("#phone").focus();
-                         Ewin.alert("请输入正确的手机号!");
+                        Ewin.alert("请输入正确的手机号!");
+                        return;
+                    }
+                    if (grade < 1 || grade > 100) {
+                        Ewin.alert("员工职级范围是1～100！");
                         return;
                     }
                     var data = {
+                        grade: grade,
                         id: staffId,
+                        power: commonService.defaultClerkPower,
                         cellNumber: phone,
                         name: name
                     };
@@ -155,12 +174,12 @@ define(['controllers/controllers', 'services/staffService', 'services/commonServ
                     //电话信息
                     var telephone = $("#telephone").val();
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入店名！");
+                        Ewin.alert("请输入店名！");
                         return;
                     }
 
                     if (isNaN(telephone) || (telephone.length != 11)) {
-                         Ewin.alert("手机号码为11位数字！请正确填写！");
+                        Ewin.alert("手机号码为11位数字！请正确填写！");
                         return;
                     }
                     var data = {
@@ -173,7 +192,7 @@ define(['controllers/controllers', 'services/staffService', 'services/commonServ
                     var promise = staffService.staffUpdate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                             Ewin.alert(data.desc)
+                            Ewin.alert(data.desc)
                             return;
                         }
                         window.location.href = "hair-staff-list.html?shopId=" + $scope.shopId + "&query=true";

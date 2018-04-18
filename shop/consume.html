@@ -165,7 +165,10 @@
                             <th>消费服务</th>
                             <th>消费金额</th>
                             <th>实收金额</th>
-                            <th>服务提成</th>
+                            <th>发型师名称</th>
+                            <th>发型师提成</th>
+                            <th>助理名称</th>
+                            <th>助理提成</th>
                             <th>消费时间</th>
                         </tr>
                         </thead>
@@ -179,9 +182,12 @@
                                      <label>{{service.productName}}:{{service.price|MoneyFilters}}</label>
                                  </div>-->
                             </td>
-                            <td ng-bind="item.price|MoneyFilters"></td>
+                            <td ng-bind="item.productPrice|MoneyFilters"></td>
                             <td ng-bind="item.money|MoneyFilters"></td>
-                            <td ng-bind="item.retain|MoneyFilters"></td>
+                            <td ng-bind="item.majorWaiterName"></td>
+                            <td ng-bind="item.majorRetain|MoneyFilters"></td>
+                            <td ng-bind="item.minorWaiterName"></td>
+                            <td ng-bind="item.minorRetain|MoneyFilters"></td>
                             <td ng-bind="item.createdTime"></td>
                         </tr>
                         </tfoot>
@@ -262,21 +268,6 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-2 middle">
-                                            <label>选择员工</label>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <select class="form-control"
-                                                    ng-model="staffItemInfo"
-                                                    ng-options="value.id as value.name for value in staffItems"
-                                                    data-placeholder="选择服务员工">
-                                                <option value="" selected="selected">选择服务员工</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-2 middle">
                                             <label>消费类别</label>
                                         </div>
                                         <div class="col-md-10">
@@ -336,6 +327,58 @@
                                         <div class="col-md-10">
                                             <input type="number" class="form-control" placeholder="请输入消费赠送金额"
                                                    id="cunsumeGiven"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>选择发型师</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control"
+                                                    ng-model="staffItemInfo"
+                                                    ng-options="value as value.name for value in staffItems"
+                                                    data-placeholder="选择发型师" ng-change="selectStaffItemInfo()">
+                                                <option value="" selected="selected">选择发型师</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>发型师提成</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="majorRetain"
+                                                   placeholder="请输入发型师提成"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>选择助理</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control"
+                                                    ng-model="minorStaffItemInfo" ng-change="selectMajorRetainInfo()"
+                                                    ng-options="value as value.name for value in staffItems"
+                                                    data-placeholder="选择助理">
+                                                <option value="" selected="selected">选择助理</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-2 middle">
+                                            <label>助理提成</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control" id="minorRetain"
+                                                   placeholder="请输入助理提成"/>
                                         </div>
                                     </div>
                                 </div>

@@ -8,10 +8,10 @@ define(['services/services', 'services/commonService'],
                     staffCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",
                             /*     url: "http://" + commonService.getServerUrl() + "/business/waiter",*/
                             method: "put",
-                            data: "cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power
+                            data: "cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power + "&grade=" + data.grade
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -23,10 +23,10 @@ define(['services/services', 'services/commonService'],
                     staffUpdate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            /*    url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",   */
-                            url: "http://" + commonService.getAppServerUrl() + "/app/waiter",
+                            url: "http://" + commonService.getAppServerUrl() + "/app/shop/waiter",
+                            // url: "http://" + commonService.getAppServerUrl() + "/app/waiter",
                             method: "post",
-                            data: "id=" + data.id + "&name=" + data.name + "&cellNumber=" + data.cellNumber
+                            data: "id=" + data.id + "&name=" + data.name + "&cellNumber=" + data.cellNumber + "&grade=" + data.grade+ "&power=" + data.power
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {

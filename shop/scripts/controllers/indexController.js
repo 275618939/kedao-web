@@ -21,8 +21,39 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                 $('.select2').select2();
                 //$("#phone").val(commonService.defualt_consumer_name);
                 $("#discount").val("不打折");
+                //发型师
+                $scope.staffItemInfo = null;
+                //助理
+                $scope.minorStaffItemInfo = null;
+                //选择发型师信息
+                $scope.selectStaffItemInfo = function () {
+                    if (null == $scope.staffItemInfo) {
+                        return;
+                    }
+                    if ($("#cunsumeMoney").val() <= 0) {
+                        Ewin.alert("请选择一个消费项目!");
+                        return;
+                    }
+                    var arr = JSON.parse($scope.productItemInfo);
+                    //todo 验证提成金额
+                    var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.majorRetain) * commonService.getRetainConvert($scope.staffItemInfo.grade);
+                    $("#majorRetain").val(temp_retain);
+                };
+                //选择助理信息
+                $scope.selectMajorRetainInfo = function () {
+                    if (null == $scope.minorStaffItemInfo) {
+                        return;
+                    }
+                    if ($("#cunsumeMoney").val() <= 0) {
+                        Ewin.alert("请选择一个消费项目!");
+                        return;
+                    }
+                    var arr = JSON.parse($scope.productItemInfo);
+                    //todo 验证提成金额
+                    var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.minorRetain) * commonService.getRetainConvert($scope.minorStaffItemInfo.grade);
+                    $("#minorRetain").val(temp_retain);
+                };
                 //查询员工信息
-                $scope.staffItemInfo = 0;
                 $scope.queryStaffInfo = function () {
                     var promise = staffService.getShopStaffList(0);
                     promise.then(function (data) {
@@ -104,12 +135,14 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var payType = $("#payType").val();
                     var money = $("#cunsumeMoney").val();
                     var given = $("#cunsumeGiven").val();
+                    var majorRetain = $("#majorRetain").val();
+                    var minorRetain = $("#minorRetain").val();
                     if (payType == null || payType == "undefined") {
                         Ewin.alert("请选择一种支付方式!");
                         return;
                     }
-                    if (null == $scope.staffItemInfo || $scope.staffItemInfo == 0) {
-                        Ewin.alert("请选择一个服务员工!");
+                    if (null == $scope.staffItemInfo) {
+                        Ewin.alert("请选择一个发型师!");
                         return;
                     }
                     if ($scope.productItemInfo == null || $scope.productItemInfo == "undefined") {
@@ -136,6 +169,12 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         }
                     } else {
                         given = 0;
+                    }
+                    if (null == majorRetain) {
+                        majorRetain = 0;
+                    }
+                    if (null == minorRetain) {
+                        minorRetain = 0;
                     }
                     //记录选择的产品信息
                     /* $scope.consumeProductItems = new Array();
@@ -166,7 +205,14 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         id: memberId,
                         payType: payType,
                         productId: arr.id,
-                        waiterId: $scope.staffItemInfo,
+                        productName: arr.name,
+                        productPrice: arr.price,
+                        majorWaiterId: $scope.staffItemInfo.id,
+                        majorWaiterName: $scope.staffItemInfo.name,
+                        majorRetain: commonService.getFen(majorRetain),
+                        minorWaiterId: $scope.minorStaffItemInfo.id,
+                        minorWaiterName: $scope.minorStaffItemInfo.name,
+                        minorRetain: commonService.getFen(minorRetain),
                         /* productName: productName,
                          items: "[" + $scope.consumeProductItems.toString() + "]",*/
                         money: commonService.getFen(money),
@@ -190,8 +236,37 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
         /*充值*/
         controllers.controller('IndexRechargeCtrl', ['$scope', 'MemberService', 'PacketService', 'ProductService', 'CommonService', 'StaffService',
             function ($scope, memberService, packetService, productService, commonService, staffService) {
+                //发型师
+                $scope.staffItemInfo = null;
+                //助理
+                $scope.minorStaffItemInfo = null;
+                //选择发型师信息
+                $scope.selectStaffItemInfo = function () {
+                    if (null == $scope.staffItemInfo) {
+                        return;
+                    }
+                    if ($("#rechargeMoney").val() <= 0) {
+                        Ewin.alert("请选择一个会员卡套餐!");
+                        return;
+                    }
+                    //todo 验证提成金额
+                    var temp_retain = $("#rechargeMoney").val() * commonService.getRetainConvert($scope.packetItem.majorRetain) * commonService.getRetainConvert($scope.staffItemInfo.grade);
+                    $("#rechargeMajorRetain").val(temp_retain);
+                };
+                //选择助理信息
+                $scope.selectMajorRetainInfo = function () {
+                    if (null == $scope.minorStaffItemInfo) {
+                        return;
+                    }
+                    if ($("#rechargeMoney").val() <= 0) {
+                        Ewin.alert("请选择一个会员卡套餐!");
+                        return;
+                    }
+                    //todo 验证提成金额
+                    var temp_retain = $("#rechargeMoney").val() * commonService.getRetainConvert($scope.packetItem.minorRetain) * commonService.getRetainConvert($scope.minorStaffItemInfo.grade);
+                    $("#rechargeMinorRetain").val(temp_retain);
+                };
                 //查询员工信息
-                $scope.staffItemInfo = 0;
                 $scope.queryStaffInfo = function () {
                     var promise = staffService.getShopStaffList(0);
                     promise.then(function (data) {
@@ -254,12 +329,14 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var payType = $("#rechargePayType").val();
                     var money = $("#rechargeMoney").val();
                     var given = $("#rechargeGiven").val();
+                    var majorRetain = $("#rechargeMajorRetain").val();
+                    var minorRetain = $("#rechargeMinorRetain").val();
                     if (null == $scope.memberInfo || $scope.memberInfo.id == "undefined") {
                         Ewin.alert("请选择一个会员!");
                         return;
                     }
-                    if (null == $scope.staffItemInfo || $scope.staffItemInfo == 0) {
-                        Ewin.alert("请选择一个服务员工!");
+                    if (null == $scope.staffItemInfo) {
+                        Ewin.alert("请选择一个发型师!");
                         return;
                     }
                     if (payType == null || payType == "undefined") {
@@ -288,6 +365,12 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         } else {
                             given = 0;
                         }
+                        if (null == majorRetain) {
+                            majorRetain = 0;
+                        }
+                        if (null == minorRetain) {
+                            minorRetain = 0;
+                        }
 
                     } catch (error) {
                         given = 0;
@@ -296,7 +379,13 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                         id: $scope.memberInfo.id,
                         payType: payType,
                         packetId: $scope.packetItem.id,
-                        waiterId: $scope.staffItemInfo,
+                        packetName: $scope.packetItem.name,
+                        majorWaiterId: $scope.staffItemInfo.id,
+                        majorWaiterName: $scope.staffItemInfo.name,
+                        majorRetain: commonService.getFen(majorRetain),
+                        minorWaiterId: $scope.minorStaffItemInfo.id,
+                        minorWaiterName: $scope.minorStaffItemInfo.name,
+                        minorRetain: commonService.getFen(minorRetain),
                         money: commonService.getFen(money),
                         given: commonService.getFen(given)
                     };

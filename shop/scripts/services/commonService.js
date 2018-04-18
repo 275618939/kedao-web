@@ -153,8 +153,8 @@ define(['services/services'],
                     ,
                     //返回app服务器请求地址
                     getAppServerUrl: function () {
-                        // return "101.200.176.217";
-                        return "shop.aiyunzhou.com";
+                        return "101.200.176.217";
+                        // return "shop.aiyunzhou.com";
                     }
                     ,
                     //返回显示消息条数
@@ -205,6 +205,15 @@ define(['services/services'],
                         return yuan.toFixed(1);
                     }
                     ,
+                    getRetain: function (money) {
+                        var yuan = money * 10.0;
+                        return yuan.toFixed(0);
+                    }
+                    ,
+                    getRetainConvert: function (money) {
+                        var yuan = money / 100.0;
+                        return yuan.toFixed(2);
+                    },
                     getFen: function (money) {
                         var yuan = money * 100.0;
                         return yuan.toFixed(0);
@@ -265,11 +274,11 @@ define(['services/services'],
                         money = money * 0.01;//分到元
                         money += '';//转成字符串
                         var reg = money.indexOf('.') > -1 ? /(\d{1,3})(?=(?:\d{3})+\.)/g : /(\d{1,3})(?=(?:\d{3})+$)/g;//千分符的正则
-                        money = money.replace(reg, '$1,');
+                        // money = money.replace(reg, '$1,');
+                        money = money.replace(reg, '$1');
                         return money;
-
-                        /*    var yuan = money / 100.0;
-                         return yuan.toFixed(0);*/
+                    /*    var yuan = money / 100.0;
+                        return yuan.toFixed(0);*/
                     }
                     ,
                     jsonSort: function (json, key) {

@@ -37,13 +37,14 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     var discount = $("#discount").val();
                     var money = $("#money").val();
                     var given = $("#given").val();
-                    var retain = $("#retain").val();
+                    var majorRetain = $("#majorRetain").val();
+                    var minorRetain = $("#minorRetain").val();
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入会员卡名！");
+                        Ewin.alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(discount) || discount > 10 || discount < 0) {
-                         Ewin.alert("请输入正确的折扣！");
+                        Ewin.alert("请输入正确的折扣！");
                         return;
                     }
                     if (isNaN(money)) {
@@ -52,20 +53,24 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     if (isNaN(given)) {
                         given = 0;
                     }
-                    if (isNaN(retain) || retain == null || retain.trim().length <= 0) {
-                        retain = 0;
+                    if (isNaN(majorRetain) || majorRetain == null) {
+                        majorRetain = 0;
+                    }
+                    if (isNaN(minorRetain) || minorRetain == null) {
+                        minorRetain = 0;
                     }
                     var data = {
                         name: name,
                         discount: commonService.getDiscount(discount),
                         money: commonService.getFen(money),
                         given: commonService.getFen(given),
-                        retain: commonService.getFen(retain)
+                        majorRetain: commonService.getFen(majorRetain),
+                        minorRetain: commonService.getFen(minorRetain)
                     };
                     var promise = packetService.packetCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
-                             Ewin.alert(data.desc)
+                            Ewin.alert(data.desc)
                             return;
                         }
                         //关闭添加面板
@@ -82,7 +87,8 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     $("#packetDiscount").val(commonService.getDiscountConvert(data.discount));
                     $("#packetMoney").val(commonService.getYuan(data.money));
                     $("#packetGiven").val(commonService.getYuan(data.given));
-                    $("#packetRetain").val(commonService.getYuan(data.retain));
+                    $("#packetMajorRetain").val(commonService.getYuan(data.majorRetain));
+                    $("#packetMinorRetain").val(commonService.getYuan(data.minorRetain));
                     $("#packetId").val(data.id);
                 }
                 //更新会员卡
@@ -94,15 +100,15 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     var retain = $("#packetRetain").val();
                     var packetId = $("#packetId").val();
                     if (packetId == null) {
-                         Ewin.alert("请选择一个会员卡！");
+                        Ewin.alert("请选择一个会员卡！");
                         return;
                     }
                     if (name.trim() == "" || name == null) {
-                         Ewin.alert("请输入会员卡名！");
+                        Ewin.alert("请输入会员卡名！");
                         return;
                     }
                     if (isNaN(discount) || discount > 10 || discount < 0) {
-                         Ewin.alert("请输入正确的折扣！");
+                        Ewin.alert("请输入正确的折扣！");
                         return;
                     }
                     if (isNaN(money)) {
@@ -112,7 +118,7 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                         given = 0;
                     }
                     if (isNaN(discount) || discount > 100 || discount < 0) {
-                         Ewin.alert("请输入正确的提成！");
+                        Ewin.alert("请输入正确的提成！");
                         return;
                     }
 
@@ -134,7 +140,7 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                         var promise = packetService.packetUpdate(info);
                         promise.then(function (data) {
                             if (data.state != 1) {
-                                 Ewin.alert(data.desc)
+                                Ewin.alert(data.desc)
                                 return;
                             }
                             window.location.href = "work-packet.html";

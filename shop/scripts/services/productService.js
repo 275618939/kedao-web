@@ -23,7 +23,7 @@ define(['services/services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getAppServerUrl() + "/app/product",
                             method: "put",
-                            data: "classifyId=" + data.classifyId + "&name=" + data.name + "&price=" + data.price + "&retain=" + data.retain
+                            data: "classifyId=" + data.classifyId + "&name=" + data.name + "&price=" + data.price + "&majorRetain=" + data.majorRetain + "&minorRetain=" + data.minorRetain
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -37,7 +37,7 @@ define(['services/services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getAppServerUrl() + "/app/product",
                             method: "post",
-                            data: "id=" + data.id + "&classifyId=" + data.classifyId + "&name=" + data.name + "&price=" + data.price + "&retain=" + data.retain
+                            data: "id=" + data.id + "&classifyId=" + data.classifyId + "&name=" + data.name + "&price=" + data.price + "&majorRetain=" + data.majorRetain + "&minorRetain=" + data.minorRetain
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
