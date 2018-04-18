@@ -48,7 +48,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var arr = JSON.parse($scope.productItemInfo);
                     //todo 验证提成金额
                     var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.majorRetain) * commonService.getRetainConvert($scope.staffItemInfo.grade);
-                    $("#majorRetain").val(temp_retain);
+                    $("#majorRetain").val(temp_retain.toFixed(2));
                 };
                 //选择助理信息
                 $scope.selectMajorRetainInfo = function () {
@@ -62,7 +62,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var arr = JSON.parse($scope.productItemInfo);
                     //todo 验证提成金额
                     var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.minorRetain) * commonService.getRetainConvert($scope.minorStaffItemInfo.grade);
-                    $("#minorRetain").val(temp_retain);
+                    $("#minorRetain").val(temp_retain.toFixed(2));
                 };
                 $scope.selectProductInfo = function () {
                     //服务信息

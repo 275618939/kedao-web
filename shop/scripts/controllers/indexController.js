@@ -37,7 +37,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var arr = JSON.parse($scope.productItemInfo);
                     //todo 验证提成金额
                     var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.majorRetain) * commonService.getRetainConvert($scope.staffItemInfo.grade);
-                    $("#majorRetain").val(temp_retain);
+                    $("#majorRetain").val(temp_retain.toFixed(2));
                 };
                 //选择助理信息
                 $scope.selectMajorRetainInfo = function () {
@@ -51,7 +51,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     var arr = JSON.parse($scope.productItemInfo);
                     //todo 验证提成金额
                     var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.minorRetain) * commonService.getRetainConvert($scope.minorStaffItemInfo.grade);
-                    $("#minorRetain").val(temp_retain);
+                    $("#minorRetain").val(temp_retain.toFixed(2));
                 };
                 //查询员工信息
                 $scope.queryStaffInfo = function () {
@@ -251,7 +251,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     }
                     //todo 验证提成金额
                     var temp_retain = $("#rechargeMoney").val() * commonService.getRetainConvert($scope.packetItem.majorRetain) * commonService.getRetainConvert($scope.staffItemInfo.grade);
-                    $("#rechargeMajorRetain").val(temp_retain);
+                    $("#rechargeMajorRetain").val(temp_retain.toFixed(2));
                 };
                 //选择助理信息
                 $scope.selectMajorRetainInfo = function () {
@@ -264,7 +264,7 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     }
                     //todo 验证提成金额
                     var temp_retain = $("#rechargeMoney").val() * commonService.getRetainConvert($scope.packetItem.minorRetain) * commonService.getRetainConvert($scope.minorStaffItemInfo.grade);
-                    $("#rechargeMinorRetain").val(temp_retain);
+                    $("#rechargeMinorRetain").val(temp_retain.toFixed(2));
                 };
                 //查询员工信息
                 $scope.queryStaffInfo = function () {
