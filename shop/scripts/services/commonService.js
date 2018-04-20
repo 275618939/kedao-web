@@ -196,13 +196,50 @@ define(['services/services'],
                     }
                     ,
                     getDiscount: function (money) {
-                        var yuan = money * 10.0;
-                        return yuan.toFixed(0);
+                        var data = 0;
+                        var dotCount = 0; //小数点个数
+                        var floatCount = 0; //小数点后数据位数
+                        if (money == null)return 0;
+
+                        var size = money.length;
+                        for (var i = 0; i < size; i++) {
+                            var c = money.charCodeAt(i);
+                            if (c >= 0x30 && c <= 0x39) {
+                                if (dotCount > 0) {
+                                    floatCount++;
+                                }
+                                if (floatCount > 1)return 0;
+                                data = data * 10 + (c - 0x30);
+                            }
+                            else if (c == 0x2e) {
+                                dotCount++;
+                                if (dotCount > 1)return 0;
+                            }
+                            else {
+                                return 0;
+                            }
+                        }
+                        for (var i = 1; i > floatCount; i--) {
+                            data = data * 10;
+                        }
+                        return data;
                     }
                     ,
                     getDiscountConvert: function (money) {
-                        var yuan = money / 10.0;
-                        return yuan.toFixed(1);
+                        if (money < 0) return null;
+                        var data = "";
+
+                        var dot = money % 10;				 //子
+                        money /= 10;
+                        if (dot > 0) data = String.fromCharCode(dot + 0x30);
+                        if (dot > 0) data = '.' + data;
+
+                        do {
+                            data = String.fromCharCode(money % 10 + 0x30) + data;
+                            money /= 10;
+                        } while (money > 0.99999999999)
+
+                        return data;
                     }
                     ,
                     getRetain: function (money) {
@@ -215,70 +252,55 @@ define(['services/services'],
                         return yuan.toFixed(2);
                     },
                     getFen: function (money) {
-                        var yuan = money * 100.0;
-                        return yuan.toFixed(0);
-                        /*               if (money <= 0) {
-                         return money;
-                         }
-                         var data = 0;
-                         var dotCount = 0; //小数点个数
-                         var floatCount = 0; //小数点后数据位数
-                         if (money == null)return -1;
-                         money = money.toString();
-                         var size = money.length;
-                         for (var i = 0; i < size; i++) {
-                         var c = money.charCodeAt(i);
-                         if (c >= 0x30 && c <= 0x39) {
-                         if (dotCount > 0) {
-                         floatCount++;
-                         }
-                         if (floatCount > 2)return -1;
-                         data = data * 10 + (c - 0x30);
-                         }
-                         else if (c == 0x2e) {
-                         dotCount++;
-                         if (dotCount > 1)return -1;
-                         }
-                         else {
-                         return -1;
-                         }
-                         }
-                         for (var i = 2; i > floatCount; i--) {
-                         data = data * 10;
-                         }
-                         return data;*/
+
+                        var data = 0;
+                        var dotCount = 0; //小数点个数
+                        var floatCount = 0; //小数点后数据位数
+                        if (money == null)return 0;
+
+                        var size = money.length;
+                        for (var i = 0; i < size; i++) {
+                            var c = money.charCodeAt(i);
+                            if (c >= 0x30 && c <= 0x39) {
+                                if (dotCount > 0) {
+                                    floatCount++;
+                                }
+                                if (floatCount > 2)return 0;
+                                data = data * 10 + (c - 0x30);
+                            }
+                            else if (c == 0x2e) {
+                                dotCount++;
+                                if (dotCount > 1)return 0;
+                            }
+                            else {
+                                return 0;
+                            }
+                        }
+                        for (var i = 2; i > floatCount; i--) {
+                            data = data * 10;
+                        }
+                        return data;
                     }
                     ,
                     getYuan: function (money) {
 
-                        /* if (money < 0) return null;
-                         var data = "";
 
-                         data = String.fromCharCode(money % 10 + 0x30) + data;    //分
-                         money /= 10;
-                         data = String.fromCharCode(money % 10 + 0x30) + data;    //角
-                         money /= 10;
-                         data = '.' + data;
-                         if (money > 0) {
-                         while (money > 0) {
-                         data = String.fromCharCode(money % 10 + 0x30) + data;
-                         money /= 10;
-                         }
-                         } else {
-                         data = '0' + data;
-                         }
-                         return data;*/
-                        if (money == null) {
-                            return 0;
-                        }
-                        money = money * 0.01;//分到元
-                        money += '';//转成字符串
-                        var reg = money.indexOf('.') > -1 ? /(\d{1,3})(?=(?:\d{3})+\.)/g : /(\d{1,3})(?=(?:\d{3})+$)/g;//千分符的正则
-                        // money = money.replace(reg, '$1,');
-                        money = money.replace(reg, '$1');
-                        return money;
-                    /*    var yuan = money / 100.0;
-                        return yuan.toFixed(0);*/
+                        if (money < 0) return null;
+                        var data = "";
+                        var fen = money % 10;				 //分
+                        money /= 10;
+                        var jiao = money % 10;				 //角
+                        money /= 10;
+                        if (fen > 0) data = String.fromCharCode(fen + 0x30);
+                        if (jiao > 0) data = String.fromCharCode(jiao + 0x30) + data;
+                        if (fen > 0 || jiao > 0) data = '.' + data;
+
+                        do {
+                            data = String.fromCharCode(money % 10 + 0x30) + data;
+                            money /= 10;
+                        } while (money > 0.99999999999)
+
+                        return data;
                     }
                     ,
                     jsonSort: function (json, key) {

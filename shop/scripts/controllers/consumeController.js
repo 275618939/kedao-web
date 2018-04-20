@@ -47,8 +47,11 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     }
                     var arr = JSON.parse($scope.productItemInfo);
                     //todo 验证提成金额
-                    var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.majorRetain) * commonService.getRetainConvert($scope.staffItemInfo.grade);
-                    $("#majorRetain").val(temp_retain.toFixed(2));
+					//var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.majorRetain) * commonService.getRetainConvert($scope.staffItemInfo.grade);
+                    //$("#majorRetain").val(temp_retain.toFixed(2));
+                    var temp_retain = commonService.getFen(String($("#cunsumeMoney").val())) * arr.majorRetain * $scope.staffItemInfo.grade / 10000;
+					temp_retain=Number(temp_retain.toFixed(0));
+                    $("#majorRetain").val(commonService.getYuan(temp_retain));
                 };
                 //选择助理信息
                 $scope.selectMajorRetainInfo = function () {
@@ -61,8 +64,11 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     }
                     var arr = JSON.parse($scope.productItemInfo);
                     //todo 验证提成金额
-                    var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.minorRetain) * commonService.getRetainConvert($scope.minorStaffItemInfo.grade);
-                    $("#minorRetain").val(temp_retain.toFixed(2));
+					//var temp_retain = $("#cunsumeMoney").val() * commonService.getRetainConvert(arr.minorRetain) * commonService.getRetainConvert($scope.minorStaffItemInfo.grade);
+                    //$("#minorRetain").val(temp_retain.toFixed(2));
+					var temp_retain = commonService.getFen(String($("#cunsumeMoney").val())) * arr.minorRetain * $scope.minorStaffItemInfo.grade / 10000;
+					temp_retain=Number(temp_retain.toFixed(0));
+                    $("#minorRetain").val(commonService.getYuan(temp_retain));
                 };
                 $scope.selectProductInfo = function () {
                     //服务信息
@@ -75,10 +81,10 @@ define(['controllers/controllers', 'services/memberService', 'services/packetSer
                     });
                     var temp_money = 0;
                     if ($scope.memberInfo != null && $scope.memberInfo != "undefined") {
-                        temp_money = (commonService.getYuan(money) * (commonService.getDiscountConvert($scope.memberInfo.discount) / 10.0)).toFixed(0);
-                    } else {
-                        temp_money = commonService.getYuan(money);
-                    }
+						temp_money = money*$scope.memberInfo.discount/100;
+						temp_money=Number(temp_money.toFixed(0));
+					}
+                    temp_money = commonService.getYuan(money);
                     $("#cunsumeMoney").val(temp_money);
                 };
                 //查询会员信息
