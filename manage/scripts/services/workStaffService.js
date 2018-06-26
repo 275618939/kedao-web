@@ -10,7 +10,7 @@ define(['services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getServerUrl() + "/business/waiter",
                             method: "put",
-                            data: "shopId=" + data.shopId + "&cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power
+                            data: "shopId=" + data.shopId + "&cellNumber=" + data.cellNumber + "&name=" + data.name + "&password=" + data.password + "&power=" + data.power + "&grade=" + data.grade
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
@@ -24,7 +24,7 @@ define(['services', 'services/commonService'],
                         $http({
                             url: "http://" + commonService.getServerUrl() + "/business/waiter",
                             method: "post",
-                            data: "id=" + data.id + "&name=" + data.name + "&shopId=" + data.shopId + "&power=" + data.power
+                            data: "id=" + data.id + "&name=" + data.name + "&shopId=" + data.shopId + "&power=" + data.power + "&grade=" + data.grade
                         }).success(function (data, status, headers, config) {
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {

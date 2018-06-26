@@ -214,6 +214,11 @@
                                 <input type="text" class="form-control" id="name" placeholder="请输入会员姓名"/>
                             </div>
                             <div class="form-group">
+                                <label>提成比例(%)</label>
+                                <input type="number" class="form-control" id="grade" value="100"
+                                       placeholder="请输入提成比例(%)"/>
+                            </div>
+                            <div class="form-group">
                                 <label>员工权限</label>
                                 <select class="form-control" ng-change="selectPowerAction()"
                                         ng-model="powerInfo"
@@ -271,6 +276,11 @@
                                         data-placeholder="选择店员权限">
                                     <option value="" selected="selected">选择店员权限</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label>提成比例(%)</label>
+                                <input type="number" class="form-control" id="updateGrade" value="100"
+                                       placeholder="请输入提成比例(%)"/>
                             </div>
                         </form>
 

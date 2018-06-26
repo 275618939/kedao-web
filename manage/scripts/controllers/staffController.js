@@ -21,6 +21,7 @@ define(['controllers', 'services/staffService', 'services/commonService', 'servi
                     var phone = $("#phone").val();
                     var password = $("#password").val();
                     var checkPassword = $("#checkPassword").val();
+                    var grade = $("#grade").val();
                     if (name.trim() == "" || name == null) {
                         alert("请输入店名！");
                         return;
@@ -34,6 +35,10 @@ define(['controllers', 'services/staffService', 'services/commonService', 'servi
                         alert("请输入正确的手机号!");
                         return;
                     }
+                    if (grade < 1 || grade > 100) {
+                        Ewin.alert("员工职级范围是1～100！");
+                        return;
+                    }
                     if (password.trim() == "" || password == null) {
                         alert("请输入密码！");
                         return;
@@ -44,7 +49,13 @@ define(['controllers', 'services/staffService', 'services/commonService', 'servi
                     }
                     var pass = phone + $.md5(phone + password);
                     pass = $.md5(pass);
-                    var data = {cellNumber: phone, name: name, password: pass, power: commonService.defaultClerkPower};
+                    var data = {
+                        grade: grade,
+                        cellNumber: phone,
+                        name: name,
+                        password: pass,
+                        power: commonService.defaultClerkPower
+                    };
                     var promise = staffService.staffCreate(data);
                     promise.then(function (data) {
                         if (data.state != 1) {
@@ -74,6 +85,7 @@ define(['controllers', 'services/staffService', 'services/commonService', 'servi
                     var name = $("#updateName").val();
                     var phone = $("#updatePhone").val();
                     var staffId = $("#staffId").val();
+                    var grade = $("#updateGrade").val();
                     if (name.trim() == "" || name == null) {
                         alert("员工名称不能为空！");
                         return;
@@ -87,7 +99,12 @@ define(['controllers', 'services/staffService', 'services/commonService', 'servi
                         alert("请输入正确的手机号!");
                         return;
                     }
+                    if (grade < 1 || grade > 100) {
+                        Ewin.alert("员工职级范围是1～100！");
+                        return;
+                    }
                     var data = {
+                        grade: grade,
                         id: staffId,
                         cellNumber: phone,
                         name: name
