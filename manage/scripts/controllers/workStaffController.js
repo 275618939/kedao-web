@@ -37,6 +37,7 @@ define(['controllers', 'services/workStaffService', 'services/commonService', 's
                     var phone = $("#phone").val();
                     var password = $("#password").val();
                     var checkPassword = $("#checkPassword").val();
+                    var grade = $("#grade").val();
                     if (name.trim() == "" || name == null) {
                          Ewin.alert("请输入员工姓名！");
                         return;
@@ -66,8 +67,13 @@ define(['controllers', 'services/workStaffService', 'services/commonService', 's
                          Ewin.alert("请选择员工权限！");
                         return;
                     }
+                    if (grade < 1 || grade > 100) {
+                        Ewin.alert("员工职级范围是1～100！");
+                        return;
+                    }
                     var pass = $.md5(phone + password);
                     var data = {
+                        grade: grade,
                         shopId: $scope.shopItemInfo,
                         cellNumber: phone,
                         name: name,
@@ -103,6 +109,7 @@ define(['controllers', 'services/workStaffService', 'services/commonService', 's
                     var name = $("#updateName").val();
                     //var phone = $("#updatePhone").val();
                     var staffId = $("#staffId").val();
+                    var grade = $("#updateGrade").val();
                     if (name.trim() == "" || name == null) {
                          Ewin.alert("员工名称不能为空！");
                         return;
@@ -124,7 +131,12 @@ define(['controllers', 'services/workStaffService', 'services/commonService', 's
                          Ewin.alert("请选择店员权限!");
                         return;
                     }
+                    if (grade < 1 || grade > 100) {
+                        Ewin.alert("员工职级范围是1～100！");
+                        return;
+                    }
                     var data = {
+                        grade: grade,
                         id: staffId,
                         shopId: $scope.shopItemInfo,
                         power: $scope.powerInfo,
