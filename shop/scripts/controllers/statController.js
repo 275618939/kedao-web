@@ -76,11 +76,13 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                 $scope.dataLen = -1;
                 $scope.statType = 0;//0:充值，1:消费
                 $scope.statTypeInfo = "充值";
+                $scope.statTypeState = 0;
                 $scope.statStatus = {"show": false};
                 //查询店月充值信息
                 $scope.onQueryMonthShopChargeStatInfo = function () {
                     $scope.statType = 0;
                     $scope.statTypeInfo = "充值";
+                    $scope.statTypeState = 0;
                     $scope.statStatus = {"show": false};
                     var promise = statService.querysShopMonthChargeStatInfo($scope.currentPage);
                     promise.then(function (data) {
@@ -96,6 +98,7 @@ define(['controllers/controllers', 'services/commonService', 'services/statServi
                 $scope.onQueryMonthShopConsumeStatInfo = function () {
                     $scope.statType = 1;
                     $scope.statTypeInfo = "消费";
+                    $scope.statTypeState = 1;
                     $scope.statStatus = {"show": true};
                     var promise = statService.querysShopMonthConsumeStatInfo($scope.currentPage);
                     promise.then(function (data) {

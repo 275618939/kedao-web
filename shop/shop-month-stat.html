@@ -159,7 +159,9 @@
                         <th>微信{{statTypeInfo}}</th>
                         <th>POS机{{statTypeInfo}}</th>
                         <th>其它{{statTypeInfo}}</th>
-                        <th>余额{{statTypeInfo}}</th>
+                        <div ng-if="statTypeState">
+                            <th>余额{{statTypeInfo}}</th>
+                        </div>
                         <th>赠送金额</th>
                         <th>统计日期</th>
                     </tr>
@@ -173,7 +175,9 @@
                         <td ng-bind="item.money[3]|MoneyFilters"></td>
                         <td ng-bind="item.money[4]|MoneyFilters"></td>
                         <td ng-bind="item.money[5]|MoneyFilters"></td>
-                        <td ng-bind="item.money[6]|MoneyFilters"></td>
+                        <div ng-if="statTypeState">
+                            <td ng-bind="item.money[6]|MoneyFilters"></td>
+                        </div>
                         <td ng-bind="item.given|MoneyFilters"></td>
                         <td ng-bind="item.createdTime"></td>
                     </tr>

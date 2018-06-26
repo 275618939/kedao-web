@@ -156,7 +156,9 @@
                         <th>微信{{statTypeInfo}}</th>
                         <th>POS机{{statTypeInfo}}</th>
                         <th>其它{{statTypeInfo}}</th>
-                        <th>余额{{statTypeInfo}}</th>
+                        <div ng-if="statStatus">
+                            <th>余额{{statTypeInfo}}</th>
+                        </div>
                         <!--<div ng-show="statStatus">-->
                         <!--<th>{{statTypeInfo}}余额</th>-->
                         <!--</div>-->
@@ -174,7 +176,9 @@
                         <td ng-bind="item.money[3]|MoneyFilters"></td>
                         <td ng-bind="item.money[4]|MoneyFilters"></td>
                         <td ng-bind="item.money[5]|MoneyFilters"></td>
-                        <td ng-bind="item.money[6]|MoneyFilters"></td>
+                        <div ng-if="statStatus">
+                            <td ng-bind="item.money[6]|MoneyFilters"></td>
+                        </div>
                         <!--<div ng-show="statStatus">-->
                         <!--<td ng-bind="item.charge|MoneyFilters"></td>-->
                         <!--</div>-->
