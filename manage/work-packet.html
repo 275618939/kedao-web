@@ -140,7 +140,8 @@
                             <th>折扣率</th>
                             <th>充值金额</th>
                             <th>赠送金额</th>
-                            <th>提成</th>
+                            <th>发型师提成(%)</th>
+                            <th>助理提成(%)</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -150,12 +151,13 @@
                             <td ng-bind="item.discount|DiscountFilters"></td>
                             <td ng-bind="item.money|MoneyFilters"></td>
                             <td ng-bind="item.given|MoneyFilters"></td>
-                            <td ng-bind="item.retain|MoneyFilters"></td>
+                            <td ng-bind="item.majorRetain"></td>
+                            <td ng-bind="item.minorRetain"></td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-warning" ng-click=onUpdateQuery(item)> 修改
                                     </button>
-                                 <!--   <button type="button" class="btn btn-warning">删除</button>-->
+                                    <!--   <button type="button" class="btn btn-warning">删除</button>-->
                                 </div>
                                 <!--            <a href="hair-packet-update.html?id={{item.id}}&name={{item.name}}&discount={{item.discount}}&money={{item.money}}&given={{item.given}}&retain={{item.retain}}">详情</a>-->
                             </td>
@@ -204,9 +206,14 @@
                                            placeholder="请输入消费赠送金额"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>会员卡提成</label>
-                                    <input type="number" class="form-control" id="retain"
-                                           placeholder="请输入消费赠送金额"/>
+                                    <label>发型师提成(%)</label>
+                                    <input type="number" class="form-control" id="majorRetain"
+                                           placeholder="请输入发型师提成"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>助理提成(%)</label>
+                                    <input type="number" class="form-control" id="minorRetain"
+                                           placeholder="请输入助理提成"/>
                                 </div>
                             </form>
 
@@ -259,9 +266,13 @@
                                            placeholder="请输入消费赠送金额"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>会员卡提成</label>
-                                    <input type="number" class="form-control" id="packetRetain"
-                                           placeholder="请输入消费赠送金额"/>
+                                    <label>发型师提成(%)</label>
+                                    <input type="number" class="form-control" id="packetMajorRetain"
+                                           placeholder="请输入发型师提成"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>助理提成(%)</label>
+                                    <input type="number" class="form-control" id="packetMinorRetain"/>
                                 </div>
                             </form>
 

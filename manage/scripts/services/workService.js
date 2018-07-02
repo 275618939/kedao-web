@@ -60,7 +60,7 @@ define(['services', 'services/commonService'],
                     userCreate: function (data) {
                         var deferred = $q.defer();
                         $http({
-                            url: "http://" + commonService.getServerUrl() + "/business/worker/register",
+                            url: "http://" + commonService.getServerUrl() + "/business/worker/registerShop",
                             method: "post",
                             data: "account=" + data.account + "&verify=" + data.verify + "&password=" + data.password
                         }).success(function (data, status, headers, config) {

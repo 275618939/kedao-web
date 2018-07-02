@@ -147,8 +147,8 @@ define(['services'],
                     //返回服务器请求地址
                     getServerUrl: function () {
                         //return window.location.host;
-                        //return "101.200.176.217";
-                        return "manage.aiyunzhou.com";
+                        return "101.200.176.217";
+                        // return "manage.aiyunzhou.com";
                     }
                     ,
                     //返回app服务器请求地址

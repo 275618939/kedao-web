@@ -59,6 +59,7 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     if (isNaN(minorRetain) || minorRetain == null) {
                         minorRetain = 0;
                     }
+
                     var data = {
                         name: name,
                         discount: commonService.getDiscount(discount),
@@ -87,17 +88,20 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     $("#packetDiscount").val(commonService.getDiscountConvert(data.discount));
                     $("#packetMoney").val(commonService.getYuan(data.money));
                     $("#packetGiven").val(commonService.getYuan(data.given));
-                    $("#packetMajorRetain").val(commonService.getYuan(data.majorRetain));
-                    $("#packetMinorRetain").val(commonService.getYuan(data.minorRetain));
+                    $("#packetMajorRetain").val(data.majorRetain);
+                    $("#packetMinorRetain").val(data.minorRetain);
                     $("#packetId").val(data.id);
+
                 }
                 //更新会员卡
                 $scope.onUpdate = function (data) {
+
                     var name = $("#packetName").val();
                     var discount = $("#packetDiscount").val();
                     var money = $("#packetMoney").val();
                     var given = $("#packetGiven").val();
-                    var retain = $("#packetRetain").val();
+                    var packetMajorRetain = $("#packetMajorRetain").val();
+                    var packetMinorRetain = $("#packetMinorRetain").val();
                     var packetId = $("#packetId").val();
                     if (packetId == null) {
                         Ewin.alert("请选择一个会员卡！");
@@ -117,13 +121,11 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                     if (isNaN(given)) {
                         given = 0;
                     }
-                    if (isNaN(discount) || discount > 100 || discount < 0) {
-                        Ewin.alert("请输入正确的提成！");
-                        return;
+                    if (isNaN(packetMajorRetain) || packetMajorRetain == null) {
+                        packetMajorRetain = 0;
                     }
-
-                    if (isNaN(retain) || retain == null || retain.trim().length <= 0) {
-                        retain = 0;
+                    if (isNaN(packetMinorRetain) || packetMinorRetain == null) {
+                        packetMinorRetain = 0;
                     }
                     var info = {
                         id: packetId,
@@ -131,7 +133,8 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                         discount: commonService.getDiscount(discount),
                         money: commonService.getFen(money),
                         given: parseInt(commonService.getFen(given)),
-                        retain: parseInt(commonService.getFen(retain))
+                        majorRetain: packetMajorRetain,
+                        minorRetain: packetMinorRetain
                     };
                     Ewin.confirm({message: "确认要修改吗？"}).on(function (e) {
                         if (!e) {
