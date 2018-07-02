@@ -147,8 +147,8 @@ define(['services'],
                     //返回服务器请求地址
                     getServerUrl: function () {
                         //return window.location.host;
-                        return "101.200.176.217";
-                        // return "manage.aiyunzhou.com";
+                        // return "101.200.176.217";
+                        return "manage.aiyunzhou.com";
                     }
                     ,
                     //返回app服务器请求地址
@@ -229,15 +229,15 @@ define(['services'],
                         if (money < 0) return null;
                         var data = "";
 
-                        var dot=money % 10;				 //子
+                        var dot = money % 10;				 //子
                         money /= 10;
-                        if(dot>0)data=String.fromCharCode(dot+0x30);
-                        if(dot>0)data = '.' + data;
+                        if (dot > 0) data = String.fromCharCode(dot + 0x30);
+                        if (dot > 0) data = '.' + data;
 
-                        do{
+                        do {
                             data = String.fromCharCode(money % 10 + 0x30) + data;
                             money /= 10;
-                        }while (money > 0.99999999999)
+                        } while (money > 0.99999999999)
 
                         return data;
                     }
@@ -276,18 +276,18 @@ define(['services'],
 
                         if (money < 0) return null;
                         var data = "";
-                        var fen=money % 10;				 //分
+                        var fen = money % 10;				 //分
                         money /= 10;
-                        var jiao=money % 10;				 //角
+                        var jiao = money % 10;				 //角
                         money /= 10;
-                        if(fen>0)data=String.fromCharCode(fen+0x30);
-                        if(jiao>0)data=String.fromCharCode(jiao+0x30)+data;
-                        if(fen>0||jiao>0)data = '.' + data;
+                        if (fen > 0) data = String.fromCharCode(fen + 0x30);
+                        if (jiao > 0) data = String.fromCharCode(jiao + 0x30) + data;
+                        if (fen > 0 || jiao > 0) data = '.' + data;
 
-                        do{
+                        do {
                             data = String.fromCharCode(money % 10 + 0x30) + data;
                             money /= 10;
-                        }while (money > 0.99999999999)
+                        } while (money > 0.99999999999)
 
                         return data;
                     }
