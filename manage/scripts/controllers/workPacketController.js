@@ -65,8 +65,8 @@ define(['controllers', 'services/workPacketService', 'services/commonService', '
                         discount: commonService.getDiscount(discount),
                         money: commonService.getFen(money),
                         given: commonService.getFen(given),
-                        majorRetain: commonService.getFen(majorRetain),
-                        minorRetain: commonService.getFen(minorRetain)
+                        majorRetain: majorRetain,
+                        minorRetain: minorRetain
                     };
                     var promise = packetService.packetCreate(data);
                     promise.then(function (data) {
